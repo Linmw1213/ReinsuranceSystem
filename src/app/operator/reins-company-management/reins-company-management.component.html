@@ -1,0 +1,288 @@
+<div class="container-fluid" [formGroup]="companyForm">
+  <div class="ui-n-3" *ngIf="delete">
+    <div class="alert alert-success" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="delete=false"><span
+          aria-hidden="true">&times;</span></button>
+      <strong>已删除!</strong>
+    </div>
+  </div>
+
+  <div class="ui-n-3" *ngIf="modifyAlert">
+    <div class="alert alert-success" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="modifyAlert=false"><span
+          aria-hidden="true">&times;</span></button>
+      <strong>修改成功!</strong>
+    </div>
+  </div>
+
+  <!--查询、添加按钮-->
+  <div class="search">
+    <div class="search_input">
+      <input type="text" formControlName="companyName" placeholder="请输入公司名称查询">
+      <p-message severity="error" text="Field is required"
+        *ngIf="!companyForm.controls['companyName'].valid&&companyForm.controls['companyName'].dirty"></p-message>
+    </div>
+    <div class="search_button">
+      <button type="button" pButton class="ui-button-raised pButton" [disabled]="companyForm.get('companyName').invalid"
+        (click)="searchBtnOnClick()">查询</button>
+      <button type="button" label="添加" style="margin-left:10px" (click)="addBtnOnClick()">添加</button>
+    </div>
+
+  </div>
+
+  <!--所有公司信息-->
+  <div class="row content" style="margin-top: 10px;">
+    <div class="index">
+      <p-table [columns]="cols" [value]="companyMsg" dataKey="companyCode" [paginator]="true" [rows]="20" class="table">
+        <ng-template pTemplate="header" let-columns>
+          <tr class="tr_one">
+            <th style="width: 3em"></th>
+            <!-- <th *ngFor="let col of columns">
+              {{col.header}}
+            </th> -->
+            <th style="width:5%">公司代码</th>
+            <th style="width:12%">公司名称</th>
+            <th style="width:12%">公司地址</th>
+            <th style="width:8%">联系人</th>
+            <th style="width:8%">联系电话</th>
+            <th style="width:12%">结算账户</th>
+            <th style="width:8%">操作</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-rowIndex let-expanded="expanded" let-columns="columns">
+          <tr class="tr_two">
+            <td>
+              <a href="#" [pRowToggler]="rowData">
+                <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+              </a>
+            </td>
+            <td *ngFor="let col of columns">
+              {{rowData[col.field]}}
+            </td>
+            <td>
+              <a href="javascript:void(0)" class="add">
+                <span label="修改" class="ui-button-info" (click)="modifyBtnOnClick(rowIndex)">修改</span>
+              </a>
+              |
+              <a href="javascript:void(0)" class="delete">
+                <span label="删除" class="ui-button-danger" (click)="deleteBtnOnClick(rowIndex)">删除</span>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+          <tr class="tr_two">
+            <td [attr.colspan]="columns.length + 1">
+              <div class="row">
+                <div class="col-xs-5">
+                  <b>公司代码:</b> {{rowData.companyCode}}
+                  <br>
+                  <b>公司名称:</b> {{rowData.companyName}}
+                  <br>
+                  <b>公司地址:</b> {{rowData.companyAddress}}
+                  <br>
+                  <b>公司电话:</b> {{rowData.companyPhone}}
+                  <br>
+                  <b>公司邮箱:</b> {{rowData.companyEmail}}
+                  <br>
+                  <b>结算账号:</b> {{rowData.bankAccount}}
+                </div>
+                <div class="col-xs-5">
+                  <b>联系人:</b> {{rowData.linkMan}}
+                  <br>
+                  <b>联系电话:</b> {{rowData.linkPhone}}
+                  <br>
+                  <b>所在部门:</b> {{rowData.department}}
+                  <br>
+                  <b>所任职位:</b> {{rowData.duty}}
+                  <br>
+                  <b>银行名称:</b> {{rowData.bankName}}
+                  <br>
+                  <b>结算币种:</b> {{rowData.currency}}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+  </div>
+
+  <!--查询公司信息-->
+  <div class="ui-n-24">
+    <p-dialog header="查询结果" [(visible)]="searchDialog" [modal]="true" [style]="{width: '700px', height: '1000px'}"
+      [maximizable]="true">
+      <div class="ui-n-24" style="text-align:center;">
+        <h4>公司基本信息</h4>
+        <div class="col-md-3">
+          <label>公司代码</label>
+          <input type="text" class="form-control" formControlName="companyCode">
+        </div>
+        <div class="col-md-3">
+          <label>公司名称</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-md-5">
+          <label>公司地址</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label>公司邮箱</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-md-10" style="margin-top:10px;">
+          <h4>联系人信息</h4>
+          <p-table>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>序号</th>
+                <th>联系人</th>
+                <th>部门</th>
+                <th>职务</th>
+                <th>邮箱</th>
+                <th>联系电话</th>
+                <th>操作</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+              <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="col-md-10" style="margin-top:10px;">
+          <h4>结算账户信息</h4>
+          <p-table>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>序号</th>
+                <th>银行账户</th>
+                <th>银行名称</th>
+                <th>结算币种</th>
+                <th>所属支行</th>
+                <th>操作</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+              <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+      <!-- <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="searchDialog=false" label="确定"></button>
+        <button type="button" pButton icon="pi pi-times" (click)="searchDialog=false" label="取消"
+          class="ui-button-secondary"></button>
+      </p-footer> -->
+    </p-dialog>
+  </div>
+
+  <!--修改公司信息-->
+  <div class="ui-n-24 Add" *ngIf="modifyDialog" formArrayName="modifyArr">
+    <div class="ui-n-24 content" *ngFor="let arr of companyForm.get('modifyArr').controls; let i=index"
+      [formGroupName]="i">
+      <p-dialog header="修改公司信息" [(visible)]="modifyDialog" [modal]="true" [style]="{width: '1000px', height: '1000px'}"
+        [maximizable]="true">
+        <div class="ui-n-24 index">
+          <div class="col-md-10 Add_mian">
+            <p-card subheader="公司基本信息" [style]="{width: '100%',height: 'auto'}">
+              <div class="col-md-3">
+                <label>公司代码</label>
+                <input type="text" class="form-control" formControlName="modifyCompanyCode">
+              </div>
+              <div class="col-md-4">
+                <label>公司名称</label>
+                <input type="text" class="form-control" formControlName="modifyCompanyName">
+              </div>
+              <div class="col-md-5">
+                <label>公司地址</label>
+                <input type="text" class="form-control" formControlName="modifyCompanyAddress">
+              </div>
+              <div class="col-md-3">
+                <label>公司电话</label>
+                <input type="text" class="form-control" formControlName="modifyCompanyPhone">
+              </div>
+              <div class="col-md-3">
+                <label>公司邮箱</label>
+                <input type="text" class="form-control" formControlName="modifyCompanyEmail">
+              </div>
+            </p-card>
+          </div>
+
+          <div class="col-md-10 Add_mian">
+            <p-card subheader="联系人基本信息" [style]="{width: '100%',height: 'auto'}">
+              <div class="col-md-3">
+                <label>姓名</label>
+                <input type="text" class="form-control" formControlName="modifyLinkMan">
+              </div>
+              <div class="col-md-3">
+                <label>所属部门</label>
+                <input type="text" class="form-control" formControlName="modifyDepartment">
+              </div>
+              <div class="col-md-3">
+                <label>所任职位</label>
+                <input type="text" class="form-control" formControlName="modifyDuty">
+              </div>
+              <div class="col-md-3">
+                <label>联系电话</label>
+                <input type="text" class="form-control" formControlName="modifyLinkPhone">
+              </div>
+            </p-card>
+          </div>
+
+          <div class="col-md-10 Add_mian">
+            <p-card subheader="公司结算账户信息" [style]="{width: '100%',height: 'auto'}">
+              <div class="col-md-3">
+                <label>账号</label>
+                <input type="text" class="form-control" formControlName="modifyBankAccount">
+              </div>
+              <div class="col-md-3">
+                <label>银行名称</label>
+                <input type="text" class="form-control" formControlName="modifyBankName">
+              </div>
+              <div class="col-md-3">
+                <label>结算币种</label>
+                <input type="text" class="form-control" formControlName="modifyCurrency">
+              </div>
+            </p-card>
+          </div>
+        </div>
+        <p-footer>
+          <button type="button" pButton [disabled]="companyForm.get('modifyArr').invalid" (click)="saveModify()"
+            label="确定"></button>
+          <button type="button" pButton (click)="modifyDialog=false" label="取消" class="ui-button-secondary"></button>
+        </p-footer>
+      </p-dialog>
+    </div>
+  </div>
+
+  <!--删除公司信息-->
+
+</div>

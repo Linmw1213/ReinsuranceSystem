@@ -1,0 +1,93 @@
+<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="10">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4">
+          <!-- <button pButton type="button" label="新增" icon="pi pi-plus"></button> -->
+          <p-dropdown [options]="cities1" [showClear]="true" placeholder="请选择合同类型"></p-dropdown>
+        </div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+          <div style="position:relative">
+            <input type="search" pInputText placeholder="请输入合同编号搜索" (keyup)="dv.filter($event.target.value)">
+          </div>
+        </div>
+        <div class="ui-g-6 ui-md-4" style="text-align:right">
+          <button pButton type="button" label="新增" icon="pi pi-plus"></button>
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-contract pTemplate="listItem">
+    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+      <div class="ui-g-12 ui-md-8 contract-details">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-6">合同编号: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{contract.contractId}}</b></div>
+
+          <div class="ui-g-2 ui-sm-6">合同名称: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{contract.contractName}}</b></div>
+
+          <div class="ui-g-2 ui-sm-6">分入公司: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{contract.companyName}}</b></div>
+
+          <div class="ui-g-2 ui-sm-6">合同类型: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{contract.contractType}}</b></div>
+
+          <div class="ui-g-2 ui-sm-6">是否为临分件: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{contract.linfenType}}</b></div>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 search-icon">
+        <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
+        <button pButton type="button" icon="pi pi-pencil" (click)="selectContract($event, contract)"></button>
+        <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
+          (click)="selectContract($event, contract)"></button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template let-contract pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel [header]="contract.contractId" [style]="{'text-align':'center'}">
+
+        <div class="ui-g-12" style="text-align:center">
+          <!-- <img src="assets/showcase/images/demo/contract/{{selectContract.brand}}.png"> -->
+        </div>
+        <div class="contract-detail">
+          <div class="ui-n-3">
+            <b> 合同名称：</b>
+            {{contract.contractName}}
+          </div>
+          <div class="ui-n-3">
+            <b>合同类型：</b>
+            {{ contract.contractType}}
+          </div>
+        </div>
+        <hr class="ui-widget-content" style="border-top:0">
+        <button pButton type="button" icon="pi pi-search" (click)="selectContract($event, contract)"
+          style="margin-top:0"></button>
+      </p-panel>
+    </div>
+  </ng-template>
+</p-dataView>
+
+<p-dialog header="合同详细信息" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: '225px'}" (onAfterHide)="onDialogHide()">
+  <div class="ui-g" *ngIf="selectedContract">
+    <div class="ui-g-12" style="text-align:center">
+      <!-- <img src="assets/showcase/images/demo/contract/{{selectContract.brand}}.png"> -->
+    </div>
+    <div class="ui-g-4">合同编号: </div>
+    <div class="ui-g-8">{{selectedContract.contractId}}</div>
+
+    <div class="ui-g-4">合同名称: </div>
+    <div class="ui-g-8">{{selectedContract.contractName}}</div>
+
+    <div class="ui-g-4">分入公司: </div>
+    <div class="ui-g-8">{{selectedContract.companyName}}</div>
+
+    <div class="ui-g-4">合同类型: </div>
+    <div class="ui-g-8">{{selectedContract.contractType}}</div>
+  </div>
+</p-dialog>
