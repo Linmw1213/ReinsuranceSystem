@@ -1,76 +1,80 @@
-<div class="ui-n-24 index" [formGroup]="addForm">
+<div class="ui-n-24" [formGroup]="addForm" style="overflow: hidden">
   <i class="pi pi-angle-left" (click)="return()" style="cursor: pointer;font-size: 3em"></i>
-  <div class="col-md-15 Add_mian">
+  <div class="ui-n-24">
     <p-card subheader="公司基本信息" [style]="{width: '100%',height: 'auto'}">
-      <div class="col-md-3">
-        <label>公司代码</label>
-        <input type="text" class="form-control" formControlName="companyCode">
-        <p-message severity="error" text="此项必填"
-          *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty"></p-message>
-      </div>
-      <div class="col-md-4">
-        <label>公司名称</label>
-        <input type="text" class="form-control" formControlName="companyName">
-      </div>
-      <div class="col-md-5">
-        <label>公司地址</label>
-        <input type="text" class="form-control" formControlName="companyAddress">
-      </div>
-      <div class="col-md-3">
-        <label>公司电话</label>
-        <input type="text" class="form-control" formControlName="companyPhone">
-      </div>
-      <div class="col-md-3">
-        <label>公司邮箱</label>
-        <input type="text" class="form-control" formControlName="companyEmail">
+      <div class="row">
+        <div class="col-md-3">
+          <label>公司代码</label>
+          <input type="text" class="form-control" formControlName="companyCode">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty"></p-message>
+        </div>
+        <div class="col-md-4">
+          <label>公司名称</label>
+          <input type="text" class="form-control" formControlName="companyName">
+        </div>
+        <div class="col-md-5">
+          <label>公司地址</label>
+          <input type="text" class="form-control" formControlName="companyAddress">
+        </div>
+        <div class="col-md-3">
+          <label>公司电话</label>
+          <input type="text" class="form-control" formControlName="companyPhone">
+        </div>
+        <div class="col-md-3">
+          <label>公司邮箱</label>
+          <input type="text" class="form-control" formControlName="companyEmail">
+        </div>
       </div>
     </p-card>
   </div>
-
-  <div class="col-md-15 Add_mian">
+  <div class="ui-n-24">
     <p-card subheader="联系人基本信息" [style]="{width: '100%',height: 'auto'}">
-      <div class="col-md-3">
-        <label>姓名</label>
-        <input type="text" class="form-control" formControlName="linkMan">
-      </div>
-      <div class="col-md-3">
-        <label>所在部门</label>
-        <input type="text" class="form-control" formControlName="department">
-      </div>
-      <div class="col-md-3">
-        <label>所任职位</label>
-        <input type="text" class="form-control" formControlName="duty">
-      </div>
-      <div class="col-md-3">
-        <label>联系电话</label>
-        <input type="text" class="form-control" formControlName="linkPhone">
-      </div>
-      <div class="col-md-3">
-        <label>邮箱</label>
-        <input type="text" class="form-control" formControlName="linkEmail">
-      </div>
-    </p-card>
-  </div>
-
-  <div class="col-md-15 Add_mian">
-    <p-card subheader="公司结算账户信息" [style]="{width: '100%',height: 'auto'}">
-      <div class="col-md-3">
-        <label>账号</label>
-        <input type="text" class="form-control" formControlName="bankAccount">
-      </div>
-      <div class="col-md-3">
-        <label>银行名称</label>
-        <input type="text" class="form-control" formControlName="bankName">
-      </div>
-      <div class="col-md-3">
-        <label>结算币种</label>
-        <input type="text" class="form-control" formControlName="currency">
+      <div class="row">
+        <div class="col-md-3">
+          <label>姓名</label>
+          <input type="text" class="form-control" formControlName="linkMan">
+        </div>
+        <div class="col-md-3">
+          <label>所在部门</label>
+          <input type="text" class="form-control" formControlName="department">
+        </div>
+        <div class="col-md-3">
+          <label>所任职位</label>
+          <input type="text" class="form-control" formControlName="duty">
+        </div>
+        <div class="col-md-3">
+          <label>联系电话</label>
+          <input type="text" class="form-control" formControlName="linkPhone">
+        </div>
+        <div class="col-md-3">
+          <label>邮箱</label>
+          <input type="text" class="form-control" formControlName="linkEmail">
+        </div>
       </div>
     </p-card>
   </div>
-  <div class="col-md-15 Add_mian">
-    <button type="submit" pButton label="提交" [disabled]=" addForm.invalid"></button>
-    <button type="reset" pButton label="取消" class="ui-button-secondary"></button>
+  <div class="ui-n-24">
+    <p-card subheader="结算账户" [style]="{width: '100%',height: 'auto'}">
+      <div class="row">
+        <div class="col-md-3">
+          <label>账号</label>
+          <input type="text" class="form-control" formControlName="bankAccount">
+        </div>
+        <div class="col-md-3">
+          <label>银行名称</label>
+          <input type="text" class="form-control" formControlName="bankName">
+        </div>
+        <div class="col-md-3">
+          <label>结算币种</label>
+          <input type="text" class="form-control" formControlName="currency">
+        </div>
+      </div>
+      <div class="col-md-15 col-md-offset-5" style="margin-top:20px;">
+        <button type="submit" pButton label="提交" [disabled]="addForm.invalid"></button>
+        <button type="reset" pButton label="取消" class="ui-button-secondary"></button>
+      </div>
+    </p-card>
   </div>
 
 </div>
