@@ -1,5 +1,5 @@
 <div class="ui-n-24" [formGroup]="addForm" style="overflow: hidden">
-  <i class="pi pi-angle-left" (click)="return()" style="cursor: pointer;font-size: 3em"></i>
+  <i class="pi pi-angle-left" pTooltip="返回" (click)="return()" style="cursor: pointer;font-size: 3em"></i>
   <div class="ui-n-24">
     <p-card subheader="公司基本信息" [style]="{width: '100%',height: 'auto'}">
       <div class="row">
@@ -70,11 +70,12 @@
           <input type="text" class="form-control" formControlName="currency">
         </div>
       </div>
-      <div class="col-md-15 col-md-offset-5" style="margin-top:20px;">
-        <button type="submit" pButton label="提交" [disabled]="addForm.invalid"></button>
-        <button type="reset" pButton label="取消" class="ui-button-secondary"></button>
-      </div>
+      <p-footer>
+        <div class="col-md-15 col-md-offset-5" style="margin-top:20px;">
+          <button type="submit" pButton label="提交" [disabled]="addForm.invalid"></button>
+          <button type="reset" pButton label="取消" class="ui-button-secondary"></button>
+        </div>
+      </p-footer>
     </p-card>
   </div>
-
 </div>

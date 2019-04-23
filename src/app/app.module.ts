@@ -23,6 +23,7 @@ import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
+import { TooltipModule } from 'primeng/tooltip';
 
 /**native components */
 import { AppComponent } from './app.component';
@@ -80,7 +81,8 @@ import { UserInfoManagementComponent } from './admin/user-info-management/user-i
     DropdownModule,
     PanelModule,
     ChartModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    TooltipModule
 
   ],
   providers: [],

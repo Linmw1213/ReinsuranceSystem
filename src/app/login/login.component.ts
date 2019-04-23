@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
+import { CompanyService } from '../service/company.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,11 @@ export class LoginComponent implements OnInit {
   cities: SelectItem[];
   // username : '0';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private service: CompanyService, private router: Router) {
     this.cities = [
-      { label: 'Select City', value: '1'},
+      { label: 'Select City', value: '1' },
     ];
-   }
+  }
 
   ngOnInit() {
     this.createForm();
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   btnOnClick() {
+    this.service.test(this.loginform.get('username').value);
     if (this.operator && this.loginform.valid) {
       this.router.navigateByUrl('operatorIndex');
     } else {

@@ -75,31 +75,31 @@
           <tr class="tr_two">
             <td [attr.colspan]="columns.length + 1">
               <div class="row">
-                <div class="col-xs-5">
-                  <b>公司代码:</b> {{rowData.companyCode}}
+                <div class="col-xs-5 col-md-offset-2" style="text-align:left">
+                  公司代码: {{rowData.companyCode}}
                   <br>
-                  <b>公司名称:</b> {{rowData.companyName}}
+                  公司名称: {{rowData.companyName}}
                   <br>
-                  <b>公司地址:</b> {{rowData.companyAddress}}
+                  公司地址: {{rowData.companyAddress}}
                   <br>
-                  <b>公司电话:</b> {{rowData.companyPhone}}
+                  公司电话: {{rowData.companyPhone}}
                   <br>
-                  <b>公司邮箱:</b> {{rowData.companyEmail}}
+                  公司邮箱: {{rowData.companyEmail}}
                   <br>
-                  <b>结算账号:</b> {{rowData.bankAccount}}
+                  结算账号: {{rowData.bankAccount}}
                 </div>
-                <div class="col-xs-5">
-                  <b>联系人:</b> {{rowData.linkMan}}
+                <div class="col-xs-5" style="text-align:left">
+                  联系人: {{rowData.linkMan}}
                   <br>
-                  <b>联系电话:</b> {{rowData.linkPhone}}
+                  联系电话: {{rowData.linkPhone}}
                   <br>
-                  <b>所在部门:</b> {{rowData.department}}
+                  所在部门: {{rowData.department}}
                   <br>
-                  <b>所任职位:</b> {{rowData.duty}}
+                  所任职位: {{rowData.duty}}
                   <br>
-                  <b>银行名称:</b> {{rowData.bankName}}
+                  银行名称: {{rowData.bankName}}
                   <br>
-                  <b>结算币种:</b> {{rowData.currency}}
+                  结算币种: {{rowData.currency}}
                 </div>
               </div>
             </td>
@@ -205,14 +205,13 @@
   </div>
 
   <!--修改公司信息-->
-  <div class="ui-n-24 Add" *ngIf="modifyDialog" formArrayName="modifyArr">
-    <div class="ui-n-24 content" *ngFor="let arr of companyForm.get('modifyArr').controls; let i=index"
-      [formGroupName]="i">
+  <div class="ui-n-24" *ngIf="modifyDialog" formArrayName="modifyArr">
+    <div class="ui-n-24" *ngFor="let arr of companyForm.get('modifyArr').controls; let i=index" [formGroupName]="i">
       <p-dialog header="修改公司信息" [(visible)]="modifyDialog" [modal]="true" [style]="{width: '1000px', height: '1000px'}"
         [maximizable]="true">
-        <div class="ui-n-24 index">
-          <div class="col-md-10 Add_mian">
-            <p-card subheader="公司基本信息" [style]="{width: '100%',height: 'auto'}">
+        <div class="ui-n-24">
+          <p-card subheader="公司基本信息" [style]="{width: '100%',height: 'auto'}">
+            <div class="row">
               <div class="col-md-3">
                 <label>公司代码</label>
                 <input type="text" class="form-control" formControlName="modifyCompanyCode">
@@ -233,11 +232,12 @@
                 <label>公司邮箱</label>
                 <input type="text" class="form-control" formControlName="modifyCompanyEmail">
               </div>
-            </p-card>
-          </div>
-
-          <div class="col-md-10 Add_mian">
-            <p-card subheader="联系人基本信息" [style]="{width: '100%',height: 'auto'}">
+            </div>
+          </p-card>
+        </div>
+        <div class="ui-n-24">
+          <p-card subheader="联系人基本信息" [style]="{width: '100%',height: 'auto'}">
+            <div class="row">
               <div class="col-md-3">
                 <label>姓名</label>
                 <input type="text" class="form-control" formControlName="modifyLinkMan">
@@ -254,11 +254,12 @@
                 <label>联系电话</label>
                 <input type="text" class="form-control" formControlName="modifyLinkPhone">
               </div>
-            </p-card>
-          </div>
-
-          <div class="col-md-10 Add_mian">
-            <p-card subheader="公司结算账户信息" [style]="{width: '100%',height: 'auto'}">
+            </div>
+          </p-card>
+        </div>
+        <div class="ui-n-24">
+          <p-card subheader="结算账户" [style]="{width: '100%',height: 'auto'}">
+            <div class="row">
               <div class="col-md-3">
                 <label>账号</label>
                 <input type="text" class="form-control" formControlName="modifyBankAccount">
@@ -271,8 +272,8 @@
                 <label>结算币种</label>
                 <input type="text" class="form-control" formControlName="modifyCurrency">
               </div>
-            </p-card>
-          </div>
+            </div>
+          </p-card>
         </div>
         <p-footer>
           <button type="button" pButton [disabled]="companyForm.get('modifyArr').invalid" (click)="saveModify()"
