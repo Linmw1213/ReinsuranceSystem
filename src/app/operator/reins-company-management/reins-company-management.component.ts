@@ -83,7 +83,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
 
   setCols() {
     this.cols = [
-      { field: 'companyCode', header: '公司代码' },
+      { field: 'companyId', header: '公司代码' },
       { field: 'companyName', header: '公司名称' },
       { field: 'companyAddress', header: '公司地址' },
       { field: 'linkMan', header: '联系人' },

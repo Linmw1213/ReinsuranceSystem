@@ -1,27 +1,43 @@
 <div class="container" [formGroup]="loginform" id="Login">
-    <div class="row">
-        <div style="background-image: url(../../../../assets/img/tou.png);position: absolute;left: 80px;top: -87px;width: 97px;height: 92px;"></div>
-        <div style="background-image: url(../../../../assets/img/hand.png);width: 30px;height: 20px;position: absolute;top: -12px;left: 30px;"></div>
-        <div style="background-image: url(../../../../assets/img/hand.png);width: 30px;height: 20px;position: absolute;top: -12px;left: 200px;"></div>
-        <div class="main" style="width:100%;display:block;">
-            <h1 class="Title"><small>Login</small></h1>
-            <div class="UserName">
-                <input type="text" formControlName="username" class="form-control" placeholder="Username">
-                <!-- [(ngModel)]="username" (ngModelChange)="check(event)" -->
-                <div class="Usererror">
-                    <p severity="error" text="username is required" *ngIf="!loginform.controls['username'].valid&&loginform.controls['username'].dirty">username is required</p>
-                </div>
-            </div>
-            <div class="PassWord">
-                <input type="password" formControlName="password" class="form-control" placeholder="password">
-                <div class="PassWorderror">
-                    <p severity="error" text="loginform.controls['password'].errors['required'] ? 'Password is required' : loginform.controls['password'].errors['minlength'] ? 'Must be longer than 6 characters' : ''" *ngIf="!loginform.controls['password'].valid&&loginform.controls['password'].dirty">Incorrect password format</p>
-                </div>
-            </div>
-
-            <div class="Submit">
-                <button type="button" class="btn btn-primary btn-lg btn-block" (click)="btnOnClick()">Log On</button>
-            </div>
-        </div>
+  <div class="row">
+    <div
+      style="background-image: url(../../../../assets/img/tou.png);position: absolute;left: 80px;top: -87px;width: 97px;height: 92px;">
     </div>
+    <div
+      style="background-image: url(../../../../assets/img/hand.png);width: 30px;height: 20px;position: absolute;top: -12px;left: 30px;">
+    </div>
+    <div
+      style="background-image: url(../../../../assets/img/hand.png);width: 30px;height: 20px;position: absolute;top: -12px;left: 200px;">
+    </div>
+    <div class="main" style="width:100%;display:block;">
+      <h1 class="Title"><small>Login</small></h1>
+      <div class="UserName">
+        <input type="text" formControlName="username" class="form-control" placeholder="Username">
+        <div class="Usererror">
+          <p-message severity="error"
+            [text]="loginform.controls['username'].errors['required'] ? '账号不能为空' : 
+            loginform.controls['username'].errors['minlength'] ? '账号不能小于6个字符' : 
+            loginform.controls['username'].errors['maxlength'] ? '账号不能大于20个字符' :''"
+            *ngIf="!loginform.controls['username'].valid&&loginform.controls['username'].dirty">
+          </p-message>
+        </div>
+      </div>
+      <div class="PassWord">
+        <input type="password" formControlName="password" class="form-control" placeholder="password">
+        <div class="PassWorderror">
+          <p-message severity="error"
+            [text]="loginform.controls['password'].errors['required'] ? '密码不能为空' : 
+            loginform.controls['password'].errors['minlength'] ? '密码不能小于6个字符' : 
+            loginform.controls['password'].errors['maxlength'] ? '密码不能大于20个字符' :''"
+            *ngIf="!loginform.controls['password'].valid&&loginform.controls['password'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+
+      <div class="Submit">
+        <button type="button" class="btn btn-primary btn-lg btn-block" (click)="btnOnClick()">Log On</button>
+      </div>
+    </div>
+  </div>
 </div>

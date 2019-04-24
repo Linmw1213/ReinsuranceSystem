@@ -7,23 +7,39 @@
           <label>公司代码</label>
           <input type="text" class="form-control" formControlName="companyCode">
           <p-message severity="error" text="此项必填"
-            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty"></p-message>
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
         </div>
         <div class="col-md-4">
           <label>公司名称</label>
           <input type="text" class="form-control" formControlName="companyName">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+          </p-message>
         </div>
         <div class="col-md-5">
           <label>公司地址</label>
           <input type="text" class="form-control" formControlName="companyAddress">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyAddress'].valid&&addForm.controls['companyAddress'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
-          <label>公司电话</label>
+          <label>公司固话</label>
           <input type="text" class="form-control" formControlName="companyPhone">
+          <p-message severity="error" 
+          [text]="addForm.controls['companyPhone'].errors['required'] ? '固话不能为空' : 
+          addForm.controls['companyPhone'].errors['pattern'] ? '固话格式不正确' : 
+          ''"
+            *ngIf="!addForm.controls['companyPhone'].valid&&addForm.controls['companyPhone'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>公司邮箱</label>
           <input type="text" class="form-control" formControlName="companyEmail">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyEmail'].valid&&addForm.controls['companyEmail'].dirty">
+          </p-message>
         </div>
       </div>
     </p-card>
@@ -34,22 +50,37 @@
         <div class="col-md-3">
           <label>姓名</label>
           <input type="text" class="form-control" formControlName="linkMan">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['linkMan'].valid&&addForm.controls['linkMan'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>所在部门</label>
           <input type="text" class="form-control" formControlName="department">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['department'].valid&&addForm.controls['department'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>所任职位</label>
           <input type="text" class="form-control" formControlName="duty">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['duty'].valid&&addForm.controls['duty'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>联系电话</label>
           <input type="text" class="form-control" formControlName="linkPhone">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['linkPhone'].valid&&addForm.controls['linkPhone'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>邮箱</label>
           <input type="text" class="form-control" formControlName="linkEmail">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
         </div>
       </div>
     </p-card>
@@ -60,14 +91,23 @@
         <div class="col-md-3">
           <label>账号</label>
           <input type="text" class="form-control" formControlName="bankAccount">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>银行名称</label>
           <input type="text" class="form-control" formControlName="bankName">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
         </div>
         <div class="col-md-3">
           <label>结算币种</label>
           <input type="text" class="form-control" formControlName="currency">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
         </div>
       </div>
       <p-footer>

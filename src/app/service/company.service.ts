@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Company } from '../VO/company';
-import { Header } from 'primeng/components/common/shared';
+import { transform } from 'typescript';
+import { transformAll } from '@angular/compiler/src/render3/r3_ast';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' })
@@ -12,21 +13,28 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CompanyService {
-  url = "http://localhost:8080/api/test";
-  header = new HttpHeaders({ 'content-type': 'application/json' });
+  url = "http://localhost:8080/";
+  private customersUrl = 'http://localhost:8080/api/test';
+  header = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' });
   constructor(private http: HttpClient) { }
 
   getCompanyMessages(): Observable<Company[]> {
     return this.http.get<Company[]>('/assets/mock-data/company.json');
-    // return this.http.get<Company[]>('http://localhost:8080/api/test');
   }
 
   test(username: String) {
-     this.http.post(this.url, username, { headers: this.header, responseType: 'text'})
-    .subscribe(data => {
-      console.log('username:' + data);
-    });
-    return false;
+
+    const body = { username: username };
+     
+
+    this.http.post(this.customersUrl, username,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }),
+        responseType: 'text'
+      }).subscribe(data => {
+        console.log('username:' + data);
+      });
 
   }
+
 }

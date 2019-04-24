@@ -1,0 +1,26 @@
+.col-md-3 p-message {
+    position: absolute;
+    bottom: 0;
+    height: calc(2.25rem + 2px);
+    right: calc(15px + .75rem);
+    line-height: calc(2.25rem + 2px);
+    color: #c74141;
+}
+
+.col-md-4 p-message {
+    position: absolute;
+    bottom: 0;
+    height: calc(2.25rem + 2px);
+    right: calc(15px + .75rem);
+    line-height: calc(2.25rem + 2px);
+    color: #c74141;
+}
+
+.col-md-5 p-message {
+    position: absolute;
+    bottom: 0;
+    height: calc(2.25rem + 2px);
+    right: calc(15px + .75rem);
+    line-height: calc(2.25rem + 2px);
+    color: #c74141;
+}

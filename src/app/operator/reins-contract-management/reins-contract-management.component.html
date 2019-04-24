@@ -1,4 +1,4 @@
-<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="10">
+<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="5">
   <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-g">
@@ -28,7 +28,7 @@
           <div class="ui-g-2 ui-sm-6">合同名称: </div>
           <div class="ui-g-10 ui-sm-6"><b>{{contract.contractName}}</b></div>
 
-          <div class="ui-g-2 ui-sm-6">分入公司: </div>
+          <div class="ui-g-2 ui-sm-6">再保公司: </div>
           <div class="ui-g-10 ui-sm-6"><b>{{contract.companyName}}</b></div>
 
           <div class="ui-g-2 ui-sm-6">合同类型: </div>
@@ -36,6 +36,7 @@
 
           <div class="ui-g-2 ui-sm-6">是否为临分件: </div>
           <div class="ui-g-10 ui-sm-6"><b>{{contract.linfenType}}</b></div>
+
         </div>
       </div>
 
@@ -50,10 +51,6 @@
   <ng-template let-contract pTemplate="gridItem">
     <div style="padding:.5em" class="ui-g-12 ui-md-3">
       <p-panel [header]="contract.contractId" [style]="{'text-align':'center'}">
-
-        <div class="ui-g-12" style="text-align:center">
-          <!-- <img src="assets/showcase/images/demo/contract/{{selectContract.brand}}.png"> -->
-        </div>
         <div class="contract-detail">
           <div class="ui-n-3">
             <b> 合同名称：</b>
@@ -73,7 +70,7 @@
 </p-dataView>
 
 <p-dialog header="合同详细信息" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
-  [style]="{width: '225px'}" (onAfterHide)="onDialogHide()">
+  [style]="{width: 'auto'}" (onAfterHide)="onDialogHide()">
   <div class="ui-g" *ngIf="selectedContract">
     <div class="ui-g-12" style="text-align:center">
       <!-- <img src="assets/showcase/images/demo/contract/{{selectContract.brand}}.png"> -->
@@ -89,5 +86,21 @@
 
     <div class="ui-g-4">合同类型: </div>
     <div class="ui-g-8">{{selectedContract.contractType}}</div>
+
+    
+    <div class="ui-g-2 ui-sm-6">再保险种: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.reinsType}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同状态: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.contractStatus}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同备注: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.description}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同起期: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.beginDate}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同止期: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.endDate}}</b></div>
   </div>
 </p-dialog>

@@ -22,13 +22,21 @@ export class AddReinsCompanyComponent implements OnInit {
       companyCode: ['', Validators.required],
       companyName: ['', Validators.required],
       companyAddress: ['', Validators.required],
-      companyPhone: ['', Validators.required],
-      companyEmail: ['', Validators.required],
+      companyPhone: ['',Validators.compose(
+        [Validators.required, Validators.pattern('/^1\d{10}$/')]
+        )],
+      companyEmail: ['',Validators.compose(
+        [Validators.required, Validators.email]
+        )],
       linkMan: ['', Validators.required],
       department: ['', Validators.required],
       duty: ['', Validators.required],
-      linkPhone:  ['', Validators.required],
-      linkEmail: ['', Validators.required],
+      linkPhone: ['', Validators.compose(
+        [Validators.required, Validators.pattern('/^(13|14|15|17|18)[0-9]{9}/')]
+        )],
+      linkEmail: ['', Validators.compose(
+        [Validators.required, Validators.email]
+        )],
       bankAccount: ['', Validators.required],
       bankName: ['', Validators.required],
       currency: ['', Validators.required]

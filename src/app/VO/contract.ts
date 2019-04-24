@@ -3,6 +3,7 @@ export interface Contract {
     contractName: string;
     companyName: string;
     contractType: string;
+    reinsType: string;
     linfenType: string;
     beginDate: string;
     endDate: string;

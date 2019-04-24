@@ -30,30 +30,24 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.loginform = this.fb.group({
-      'username': new FormControl('', Validators.required),
-      'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+      'username': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])),
+      'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])),
       'role': new FormControl(''),
     });
     // console.log('测试')
   }
 
   btnOnClick() {
-    this.service.test(this.loginform.get('username').value);
+    let username = this.loginform.get('username').value
     if (this.operator && this.loginform.valid) {
-      this.router.navigateByUrl('operatorIndex');
-    } else {
-      this.errorDialog = true;
-    }
+      if (username === 'zhangsan'){
+        this.router.navigateByUrl('operatorIndex');
+      } else if(username === 'lisi1213') {
+        this.router.navigateByUrl('adminIndex');
+      } else {
+        console.log('error username');
+      }
+    } 
   }
 
-  // check(){
-  //   const numReg = /^\d{6}$/;
-  //   console.log(this.username )
-  //   if(this.username){
-  //   }else if(numReg.test(this.username)){
-  //     console.log('账号格式不正确')
-  //   }else{
-  //     console.log('正确')
-  //   }
-  // }
 }
