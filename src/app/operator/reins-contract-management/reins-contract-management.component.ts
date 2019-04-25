@@ -23,6 +23,12 @@ export class ReinsContractManagementComponent implements OnInit {
   sortOrder: number;
   modifyDialog = false;
 
+  quotaAshore = false;
+  surplus = false;
+  contractTypeList: SelectItem[];
+  companyList: SelectItem[];
+  reinsTypeList: SelectItem[];
+
   constructor(private fb: FormBuilder, private service: ContractService, private router: Router) {
     this.cities1 = [
       { label: '成数分保合同', value: 'contractType' },
@@ -34,14 +40,30 @@ export class ReinsContractManagementComponent implements OnInit {
   ngOnInit() {
     this.createForm();
     this.getAllContracts();
+    this.dropdownList();
   }
 
   //创建响应式表单
   createForm() {
     this.contractForm = this.fb.group({
-      contractType: [''],
-      contractName: new FormControl('', Validators.required),
-      contractArr: new FormArray([this.createFormArray()]),
+      contractId: ['', Validators.required],
+      contractName: ['', Validators.required],
+      companyName: ['', Validators.required],
+      contractType: ['', Validators.required],
+      reinsType: ['', Validators.required],
+      signDate: ['', Validators.required],
+      beginDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      description: [''],
+      contractStatus: [''],
+
+      retention: [''],
+      split_amount: [''],
+      ceiling_top: [''],
+      line_no: [''],
+      contract_limit: [''],
+      risk_unit: [''],
+      // contractArr: new FormArray([this.createFormArray()]),
     });
 
   }
@@ -104,8 +126,43 @@ export class ReinsContractManagementComponent implements OnInit {
     this.modifyDialog = true;
   }
 
+   /**  公司列表；合同类型：成数/溢额；险种； */
+   dropdownList() {
+    this.companyList = [
+      { label: '友邦资讯科技有限公司', value: '1000' },
+      { label: '人寿再保险公司', value: '1001' },
+    ];
+
+    this.contractTypeList = [
+      { label: '成数再保险', value: 'type01' },
+      { label: '溢额再保险', value: 'type02' },
+    ];
+
+    this.reinsTypeList = [
+      { label: '人身险 ', value: 'body' },
+      { label: '健康险', value: 'health' },
+    ]
+  }
+
+  /** 选择成数分保/溢额分保 */
+  contractTypeOnChange() {
+    const value = this.contractForm.get('contractType').value;
+    if (value === 'type01') {
+      this.quotaAshore = true;
+      this.surplus = false;
+    } else if (value === 'type02') {
+      this.surplus = true;
+      this.quotaAshore = false;
+    } else {
+      this.quotaAshore = false;
+      this.surplus = false;
+    }
+  }
+
   addBtnOnClick() {
     this.router.navigateByUrl('addContract');
   }
+
+
 
 }
