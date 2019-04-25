@@ -24,7 +24,7 @@
     </div>
     <div class="search_button">
       <button type="button" pButton class="ui-button-raised pButton" [disabled]="companyForm.get('companyName').invalid"
-        (click)="searchBtnOnClick()">查询</button>
+        (click)="getCompanyById()">查询</button>
       <button type="button" label="添加" style="margin-left:10px" (click)="addBtnOnClick()">添加</button>
     </div>
 
@@ -283,7 +283,5 @@
       </p-dialog>
     </div>
   </div>
-
-  <!--删除公司信息-->
 
 </div>

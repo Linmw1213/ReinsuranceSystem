@@ -1,10 +1,12 @@
-<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="5">
+<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="5"
+  [sortField]="sortField" [sortOrder]="sortOrder">
   <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-g">
         <div class="ui-g-12 ui-md-4">
           <!-- <button pButton type="button" label="新增" icon="pi pi-plus"></button> -->
-          <p-dropdown [options]="cities1" [showClear]="true" placeholder="请选择合同类型"></p-dropdown>
+          <p-dropdown [options]="cities1" [showClear]="true" placeholder="请选择合同类型" [(ngModel)]="sortKey" (onChange)="onSortChange($event)">
+          </p-dropdown>
         </div>
         <div class="ui-g-6 ui-md-4 filter-container">
           <div style="position:relative">
@@ -12,7 +14,7 @@
           </div>
         </div>
         <div class="ui-g-6 ui-md-4" style="text-align:right">
-          <button pButton type="button" label="新增" icon="pi pi-plus"></button>
+          <button pButton type="button" label="新增" icon="pi pi-plus" (click)="addBtnOnClick()"></button>
           <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         </div>
       </div>
@@ -44,7 +46,7 @@
         <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
         <button pButton type="button" icon="pi pi-pencil" (click)="selectContract($event, contract)"></button>
         <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
-          (click)="selectContract($event, contract)"></button>
+          (click)="delete($event, contract)"></button>
       </div>
     </div>
   </ng-template>
@@ -87,7 +89,7 @@
     <div class="ui-g-4">合同类型: </div>
     <div class="ui-g-8">{{selectedContract.contractType}}</div>
 
-    
+
     <div class="ui-g-2 ui-sm-6">再保险种: </div>
     <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.reinsType}}</b></div>
 

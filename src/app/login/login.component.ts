@@ -3,6 +3,7 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 import { CompanyService } from '../service/company.service';
+import { TestService } from '../service/test.service';
 
 @Component({
   selector: 'app-login',
@@ -14,18 +15,14 @@ export class LoginComponent implements OnInit {
   loginform: FormGroup;
   operator: boolean = true;
   errorDialog: boolean = false;
-  cities: SelectItem[];
-  // username : '0';
 
-  constructor(private fb: FormBuilder, private service: CompanyService, private router: Router) {
-    this.cities = [
-      { label: 'Select City', value: '1' },
-    ];
+  constructor(private fb: FormBuilder, private service: TestService, private router: Router) {
+    
   }
 
   ngOnInit() {
     this.createForm();
-    // this.check();
+  
   }
 
   createForm() {
@@ -34,11 +31,12 @@ export class LoginComponent implements OnInit {
       'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])),
       'role': new FormControl(''),
     });
-    // console.log('测试')
+    
   }
 
   btnOnClick() {
-    let username = this.loginform.get('username').value
+    let username = this.loginform.get('username').value;
+    this.service.test(username);
     if (this.operator && this.loginform.valid) {
       if (username === 'zhangsan'){
         this.router.navigateByUrl('operatorIndex');

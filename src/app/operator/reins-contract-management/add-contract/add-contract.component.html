@@ -1,0 +1,77 @@
+<div class="ui-n-24" [formGroup]="addForm" style="overflow: hidden">
+  <i class="pi pi-angle-left" pTooltip="返回" (click)="return()" style="cursor: pointer;font-size: 3em"></i>
+  <div class="ui-n-24">
+    <p-card subheader="" [style]="{width: '100%',height: '100%'}">
+      <div class="row" style="margin-top:10px;">
+        <div class="col-md-2">
+          <label>合同编号</label>
+          <input type="text" class="form-control" formControlName="companyCode">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
+        </div>
+        <div class="col-md-2">
+          <label>合同名称</label>
+          <input type="text" class="form-control" formControlName="companyName">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+          </p-message>
+        </div>
+        <div class="col-md-2">
+          <label>再保公司</label>
+          <p-dropdown [options]="" [showClear]="true" placeholder="请选择再保公司"></p-dropdown>
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyAddress'].valid&&addForm.controls['companyAddress'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:20px">
+        <div class="col-md-2">
+          <label>当前状态</label>
+          <input type="text" class="form-control" formControlName="companyCode">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
+        </div>
+        <div class="col-md-2">
+          <label>签订日期</label>
+          <input type="text" class="form-control" formControlName="companyName">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+          </p-message>
+        </div>
+        <div class="col-md-2">
+          <label>终止日期</label>
+          <p-dropdown [options]="" [showClear]="true" placeholder="请选择再保公司"></p-dropdown>
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyAddress'].valid&&addForm.controls['companyAddress'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:20px">
+        <div class="col-md-2">
+          <label>当前状态</label>
+          <input type="text" class="form-control" formControlName="companyCode">
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+          </p-message>
+        </div>
+        <div class="col-md-3">
+          <label>签订日期</label>
+          <p-calendar yearRange="2000:2030" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+          <p-message severity="error" text="此项必填"
+            *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+          </p-message>
+        </div>
+        <div class="col-md-3">
+          <label>终止日期</label>
+          <p-calendar yearRange="2000:2030" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+        </div>
+      </div>
+
+    </p-card>
+  </div>
+
+</div>

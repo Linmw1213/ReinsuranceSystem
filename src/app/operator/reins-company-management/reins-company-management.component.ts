@@ -2,30 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from '../../VO/company'
 import { CompanyService } from 'src/app/service/company.service';
 import { Validators, FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { MessageService, DialogService } from 'primeng/api';
 
 @Component({
   selector: 'app-reins-company-management',
   templateUrl: './reins-company-management.component.html',
   styleUrls: ['./reins-company-management.component.css'],
-  animations: [
-    trigger('rowExpansionTrigger', [
-      state('void', style({
-        transform: 'translateX(-10%)',
-        opacity: 0
-      })),
-      state('active', style({
-        transform: 'translateX(0)',
-        opacity: 1
-      })),
-      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
-    ])
-  ]
+  providers: [DialogService, MessageService]
+
 })
 export class ReinsCompanyManagementComponent implements OnInit {
 
-  companyMsg: Company[] = [];
+  companyMsg: Company[];
+  searchCompany: Company;
+  // deleteCompany: Company;
   arr: any[] = [];
   companyForm: FormGroup;
   displayAddDialog = false;
@@ -35,7 +26,13 @@ export class ReinsCompanyManagementComponent implements OnInit {
   delete = false;
   modifyAlert = false;
 
-  constructor(private service: CompanyService, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    public dialogService: DialogService,
+    public messageService: MessageService,
+    private service: CompanyService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.createForm();
@@ -46,7 +43,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
   private createForm() {
     this.companyForm = this.fb.group({
       companyName: new FormControl('', Validators.required),
-      companyCode: new FormControl({ value: 'Nancy', disabled: true }),
+      companyCode: new FormControl(''),
       modifyArr: new FormArray(
         [this.createModifyFormArray()]
       ),
@@ -92,9 +89,18 @@ export class ReinsCompanyManagementComponent implements OnInit {
     ];
   }
 
-  // 根据公司代码/名字查询公司信息
-  searchByInput() {
-    this.companyForm.get('companyName').value;
+  /** get company by id  */
+  getCompanyById() {
+    const id = this.companyForm.get('companyCode').value;
+    if (this.companyForm.get('companyName').valid) {
+      this.searchDialog = true;
+    }
+    this.service.getCompanyById(id).subscribe((company) => {
+      this.searchCompany = company;
+      console.log('yuanshi:' + company);
+      console.log('search:' + this.searchCompany)
+      this.companyForm.get('companyCode').setValue(company.bankName);
+    });
   }
 
   // 添加公司信息
@@ -113,16 +119,10 @@ export class ReinsCompanyManagementComponent implements OnInit {
     this.router.navigateByUrl('addCompanyMsg');
   }
 
-  searchBtnOnClick() {
-    if (this.companyForm.get('companyName').valid) {
-      this.searchDialog = true;
-    }
-  }
-
   modifyBtnOnClick(index: any) {
     this.modifyDialog = true;
     const arr = this.companyForm.get('modifyArr') as FormArray;
-    arr.at(0).get('modifyCompanyCode').setValue(index.companyCode);
+    arr.at(0).get('modifyCompanyCode').setValue(index.companyId);
     arr.at(0).get('modifyCompanyName').setValue(index.companyName);
     arr.at(0).get('modifyCompanyAddress').setValue(index.companyAddress);
     arr.at(0).get('modifyCompanyEmail').setValue(index.companyEmail);
@@ -136,16 +136,22 @@ export class ReinsCompanyManagementComponent implements OnInit {
     arr.at(0).get('modifyCurrency').setValue(index.currency);
   }
 
-
-  deleteBtnOnClick(index: any) {
+  /** delete company */
+  deleteBtnOnClick(company: Company) {
     this.delete = true;
+    this.companyMsg = this.companyMsg.filter(c => c !== company);
+    this.service.deleteCompany(company);
   }
 
   saveModify() {
     this.modifyDialog = false;
     this.modifyAlert = true;
-    const arr = this.companyForm.get('modifyArr') as FormArray;
-    console.log('mArr:' + arr.at(0).get('modifyCompanyPhone').value);
+    const arr = this.companyForm.get('modifyArr') as FormArray; 
+    console.log('mArr:' + arr.at(0).get('modifyCompanyCode').value);
+    // this.searchCompany.companyPhone = arr.at(0).get('modifyCompanyPhone').value;
+    this.searchCompany = arr.value;
+    console.log('company:' + arr.value);
+
   }
 
   test() {

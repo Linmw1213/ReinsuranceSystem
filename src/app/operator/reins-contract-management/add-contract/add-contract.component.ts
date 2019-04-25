@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-reins-company',
-  templateUrl: './add-reins-company.component.html',
-  styleUrls: ['./add-reins-company.component.css']
+  selector: 'app-add-contract',
+  templateUrl: './add-contract.component.html',
+  styleUrls: ['./add-contract.component.css']
 })
-export class AddReinsCompanyComponent implements OnInit {
+export class AddContractComponent implements OnInit {
 
   addForm: FormGroup;
   constructor(private router: Router, private fb: FormBuilder) { }
@@ -47,8 +47,8 @@ export class AddReinsCompanyComponent implements OnInit {
   confirmBtnOnClick() {
   }
 
-  // 返回公司列表主页
+  // 返回合同列表主页
   return() {
-    this.router.navigateByUrl('ReinsCompanyManagement');
+    this.router.navigateByUrl('ReinsContractManagement');
   }
 }

@@ -1,6 +1,6 @@
 [
     {
-        "companyCode": "1000",
+        "companyId": "1000",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -12,7 +12,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1001",
+        "companyId": "1001",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -24,7 +24,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1002",
+        "companyId": "1002",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -36,7 +36,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1003",
+        "companyId": "1003",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -48,7 +48,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1004",
+        "companyId": "1004",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -60,7 +60,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1005",
+        "companyId": "1005",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -72,7 +72,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1006",
+        "companyId": "1006",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -84,7 +84,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1007",
+        "companyId": "1007",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -96,7 +96,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1008",
+        "companyId": "1008",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",
@@ -108,7 +108,7 @@
         "currency": "人民币"
     },
     {
-        "companyCode": "1009",
+        "companyId": "1009",
         "companyName": "友邦资讯科技有限公司",
         "companyAddress": "广州市越秀区东宝大厦",
         "linkMan": "Vincent",

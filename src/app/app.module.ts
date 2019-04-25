@@ -24,6 +24,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
 import { TooltipModule } from 'primeng/tooltip';
+import { CalendarModule } from 'primeng/calendar';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 /**native components */
 import { AppComponent } from './app.component';
@@ -39,6 +41,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { MenuLeftComponent } from './admin/menu-left/menu-left.component';
 import { UserInfoManagementComponent } from './admin/user-info-management/user-info-management.component';
+import { AddContractComponent } from './operator/reins-contract-management/add-contract/add-contract.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import { UserInfoManagementComponent } from './admin/user-info-management/user-i
     ReinsCalculationComponent,
     AdminComponent,
     MenuLeftComponent,
-    UserInfoManagementComponent
+    UserInfoManagementComponent,
+    AddContractComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +86,9 @@ import { UserInfoManagementComponent } from './admin/user-info-management/user-i
     PanelModule,
     ChartModule,
     AdminRoutingModule,
-    TooltipModule
+    TooltipModule,
+    CalendarModule,
+    DynamicDialogModule
 
   ],
   providers: [],

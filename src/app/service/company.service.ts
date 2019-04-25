@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Company } from '../VO/company';
-import { transform } from 'typescript';
-import { transformAll } from '@angular/compiler/src/render3/r3_ast';
+import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' })
@@ -14,27 +13,29 @@ const httpOptions = {
 })
 export class CompanyService {
   url = "http://localhost:8080/";
-  private customersUrl = 'http://localhost:8080/api/test';
+  companyUrl = '/assets/mock-data/company.json';
   header = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' });
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private messageService: MessageService) { }
 
   getCompanyMessages(): Observable<Company[]> {
-    return this.http.get<Company[]>('/assets/mock-data/company.json');
+    return this.http.get<Company[]>(this.companyUrl);
   }
 
-  test(username: String) {
-
-    const body = { username: username };
-     
-
-    this.http.post(this.customersUrl, username,
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }),
-        responseType: 'text'
-      }).subscribe(data => {
-        console.log('username:' + data);
-      });
-
+  /** Get: search Company by id */
+  getCompanyById(id: any): Observable<Company> {
+    const url = `${this.companyUrl}/${id}`;
+    return this.http.get<Company>(url);
   }
 
+  /** PUT: modify the Company on the server */
+  updateCompany(Company: Company): Observable<any> {
+    return this.http.put(this.companyUrl, Company, httpOptions);
+  }
+
+  /** delete the company from the server */
+  deleteCompany(Company: Company | string): Observable<Company> {
+    const id = typeof Company === 'string' ? Company : Company.companyId;
+    const url = `${this.companyUrl}/${id}`;
+    return this.http.delete<Company>(url, httpOptions)
+  }
 }
