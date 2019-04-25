@@ -21,6 +21,7 @@ export class ReinsContractManagementComponent implements OnInit {
   sortKey: string;
   sortField: string;
   sortOrder: number;
+  modifyDialog = false;
 
   constructor(private fb: FormBuilder, private service: ContractService, private router: Router) {
     this.cities1 = [
@@ -93,8 +94,14 @@ export class ReinsContractManagementComponent implements OnInit {
   }
 
   delete(event: Event, contract: Contract) {
-    this.contracts = this.contracts.filter(c=>c !== contract);
+    this.contracts = this.contracts.filter(c => c !== contract);
     this.service.deleteContract(contract);
+  }
+
+  modifyContract(event: Event, contract: Contract) {
+    this.selectedContract = contract;
+    event.preventDefault();
+    this.modifyDialog = true;
   }
 
   addBtnOnClick() {

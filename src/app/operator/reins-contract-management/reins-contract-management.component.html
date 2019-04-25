@@ -5,7 +5,8 @@
       <div class="ui-g">
         <div class="ui-g-12 ui-md-4">
           <!-- <button pButton type="button" label="新增" icon="pi pi-plus"></button> -->
-          <p-dropdown [options]="cities1" [showClear]="true" placeholder="请选择合同类型" [(ngModel)]="sortKey" (onChange)="onSortChange($event)">
+          <p-dropdown [options]="cities1" [showClear]="true" placeholder="请选择合同类型" [(ngModel)]="sortKey"
+            (onChange)="onSortChange($event)">
           </p-dropdown>
         </div>
         <div class="ui-g-6 ui-md-4 filter-container">
@@ -36,18 +37,16 @@
           <div class="ui-g-2 ui-sm-6">合同类型: </div>
           <div class="ui-g-10 ui-sm-6"><b>{{contract.contractType}}</b></div>
 
-          <div class="ui-g-2 ui-sm-6">是否为临分件: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{contract.linfenType}}</b></div>
-
         </div>
       </div>
 
       <div class="ui-g-12 ui-md-3 search-icon">
         <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
-        <button pButton type="button" icon="pi pi-pencil" (click)="selectContract($event, contract)"></button>
+        <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
         <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
           (click)="delete($event, contract)"></button>
       </div>
+     
     </div>
   </ng-template>
   <ng-template let-contract pTemplate="gridItem">
@@ -76,6 +75,41 @@
   <div class="ui-g" *ngIf="selectedContract">
     <div class="ui-g-12" style="text-align:center">
       <!-- <img src="assets/showcase/images/demo/contract/{{selectContract.brand}}.png"> -->
+    </div>
+    <div class="ui-g-4">合同编号: </div>
+    <div class="ui-g-8">{{selectedContract.contractId}}</div>
+
+    <div class="ui-g-4">合同名称: </div>
+    <div class="ui-g-8">{{selectedContract.contractName}}</div>
+
+    <div class="ui-g-4">分入公司: </div>
+    <div class="ui-g-8">{{selectedContract.companyName}}</div>
+
+    <div class="ui-g-4">合同类型: </div>
+    <div class="ui-g-8">{{selectedContract.contractType}}</div>
+
+
+    <div class="ui-g-2 ui-sm-6">再保险种: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.reinsType}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同状态: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.contractStatus}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同备注: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.description}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同起期: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.beginDate}}</b></div>
+
+    <div class="ui-g-2 ui-sm-6">合同止期: </div>
+    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.endDate}}</b></div>
+  </div>
+</p-dialog>
+
+<p-dialog header="修改合同信息" [(visible)]="modifyDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: '80%'}" (onAfterHide)="onDialogHide()">
+  <div class="ui-g" *ngIf="selectedContract">
+    <div class="ui-g-12" style="text-align:center">
     </div>
     <div class="ui-g-4">合同编号: </div>
     <div class="ui-g-8">{{selectedContract.contractId}}</div>

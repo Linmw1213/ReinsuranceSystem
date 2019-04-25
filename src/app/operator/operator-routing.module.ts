@@ -6,6 +6,7 @@ import { ReinsTypesManagemententComponent } from './reins-types-managementent/re
 import { AddReinsCompanyComponent } from './reins-company-management/add-reins-company/add-reins-company.component';
 import { ReinsCalculationComponent } from './reins-calculation/reins-calculation.component';
 import { AddContractComponent } from './reins-contract-management/add-contract/add-contract.component';
+import { ModifyContractComponent } from './reins-contract-management/modify-contract/modify-contract.component';
 
 const routes: Routes = [
   // 公司信息管理
@@ -15,6 +16,7 @@ const routes: Routes = [
   // 合同信息管理
   { path: 'ReinsContractManagement', component: ReinsContractManagementComponent },
   { path: 'addContract', component: AddContractComponent },  
+  { path: 'modifyContract', component: ModifyContractComponent },  
 
   // 险种信息管理
   { path: 'ReinsTypesManagement', component: ReinsTypesManagemententComponent },
