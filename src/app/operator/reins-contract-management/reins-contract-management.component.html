@@ -1,21 +1,16 @@
-<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="5"
-  [sortField]="sortField" [sortOrder]="sortOrder">
+<p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="5">
   <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-g">
         <div class="ui-g-12 ui-md-4">
-          <!-- <button pButton type="button" label="新增" icon="pi pi-plus"></button> -->
-          <p-dropdown [options]="cities1" [showClear]="true" placeholder="请选择合同类型" [(ngModel)]="sortKey"
-            (onChange)="onSortChange($event)">
-          </p-dropdown>
+          <button pButton type="button" label="新增" icon="pi pi-plus" (click)="addBtnOnClick()"></button>
         </div>
-        <div class="ui-g-6 ui-md-4 filter-container">
+        <div class="ui-g-6 ui-md-4 filter-container" style="text-align:center">
           <div style="position:relative">
             <input type="search" pInputText placeholder="请输入合同编号搜索" (keyup)="dv.filter($event.target.value)">
           </div>
         </div>
         <div class="ui-g-6 ui-md-4" style="text-align:right">
-          <button pButton type="button" label="新增" icon="pi pi-plus" (click)="addBtnOnClick()"></button>
           <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         </div>
       </div>
@@ -46,7 +41,7 @@
         <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
           (click)="delete($event, contract)"></button>
       </div>
-     
+
     </div>
   </ng-template>
   <ng-template let-contract pTemplate="gridItem">

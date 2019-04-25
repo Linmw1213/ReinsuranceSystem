@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Contract } from 'src/app/VO/contract';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-add-contract',
@@ -9,47 +11,79 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddContractComponent implements OnInit {
 
-  addForm: FormGroup;
-  chengshu = false;
+  addContractForm: FormGroup;
+  quotaAshore = false;
+  surplus = false;
+  contractTypeList: SelectItem[];
+  companyList: SelectItem[];
+  reinsTypeList: SelectItem[];
+
   constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
+    this.dropdownList();
   }
 
   // 响应式表单
   private createForm() {
-    this.addForm = this.fb.group({
-      companyCode: ['', Validators.required],
+    this.addContractForm = this.fb.group({
+      contractId: ['', Validators.required],
+      contractName: ['', Validators.required],
       companyName: ['', Validators.required],
-      companyAddress: ['', Validators.required],
-      companyPhone: ['', Validators.compose(
-        [Validators.required, Validators.pattern('/^1\d{10}$/')]
-      )],
-      companyEmail: ['', Validators.compose(
-        [Validators.required, Validators.email]
-      )],
-      linkMan: ['', Validators.required],
-      department: ['', Validators.required],
-      duty: ['', Validators.required],
-      linkPhone: ['', Validators.compose(
-        [Validators.required, Validators.pattern('/^(13|14|15|17|18)[0-9]{9}/')]
-      )],
-      linkEmail: ['', Validators.compose(
-        [Validators.required, Validators.email]
-      )],
-      bankAccount: ['', Validators.required],
-      bankName: ['', Validators.required],
-      currency: ['', Validators.required]
+      contractType: ['', Validators.required],
+      reinsType: ['', Validators.required],
+      signDate: ['', Validators.required],
+      beginDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      description: [''],
+      contractStatus: [''],
+
+      retention: [''],
+      split_amount: [''],
+      ceiling_top: [''],
+      line_no: [''],
+      contract_limit: [''],
+      risk_unit: ['']
     });
   }
 
-  // 保存并提交
-  confirmBtnOnClick() {
-  }
-
   // 返回合同列表主页
-  return() {
+  return(name: string) {
     this.router.navigateByUrl('ReinsContractManagement');
   }
+
+  /**  公司列表；合同类型：成数/溢额；险种； */
+  dropdownList() {
+    this.companyList = [
+      { label: '友邦资讯科技有限公司', value: '1000' },
+      { label: '人寿再保险公司', value: '1001' },
+    ];
+
+    this.contractTypeList = [
+      { label: '成数再保险', value: 'type01' },
+      { label: '溢额再保险', value: 'type02' },
+    ];
+
+    this.reinsTypeList = [
+      { label: '人身险 ', value: 'body' },
+      { label: '健康险', value: 'health' },
+    ]
+  }
+
+  /** 选择成数分保/溢额分保 */
+  contractTypeOnChange() {
+    const value = this.addContractForm.get('contractType').value;
+    if (value === 'type01') {
+      this.quotaAshore = true;
+      this.surplus = false;
+    } else if (value === 'type02') {
+      this.surplus = true;
+      this.quotaAshore = false;
+    } else {
+      this.quotaAshore = false;
+      this.surplus = false;
+    }
+  }
+  
 }

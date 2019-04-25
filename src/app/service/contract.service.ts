@@ -23,6 +23,10 @@ export class ContractService {
     return this.http.post<Contract>(this.ContractesUrl, contract, httpOptions);
   }
 
+  modifyContract(contract: Contract): Observable<Contract> {
+    return this.http.put<Contract>(this.ContractesUrl, contract, httpOptions);
+  }
+
   deleteContract(Contract: Contract | string): Observable<Contract> {
     const id = typeof Contract === 'string' ? Contract : Contract.contractId;
     const url = `${this.ContractesUrl}/${id}`;

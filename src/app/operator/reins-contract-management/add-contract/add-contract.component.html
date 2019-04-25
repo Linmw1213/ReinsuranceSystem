@@ -1,146 +1,143 @@
-<div [formGroup]="addForm" style="overflow: hidden">
+<div [formGroup]="addContractForm">
   <i class="pi pi-angle-left" pTooltip="返回" (click)="return()" style="cursor: pointer;font-size: 3em"></i>
   <div class="ui-g">
-    <div class="ui-g-2">
-    </div>
+    <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>合同编号</h4>
-      <input type="text" pInputText formControlName="companyCode">
+      <input type="text" pInputText formControlName="contractId">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+        *ngIf="!addContractForm.controls['contractId'].valid&&addContractForm.controls['contractId'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
       <h4>签订日期</h4>
-      <p-calendar yearRange="2000:2019" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+      <p-calendar formControlName="signDate" yearRange="2000:2019" [yearNavigator]="true" [touchUI]="true"></p-calendar>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['signDate'].valid&&addContractForm.controls['companyName'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
-
       <h4>再保公司</h4>
-      <p-dropdown [options]="" [showClear]="true" placeholder="请选择再保公司"></p-dropdown>
+      <p-dropdown formControlName="companyName" [options]="companyList" placeholder="请选择再保公司"></p-dropdown>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyAddress'].valid&&addForm.controls['companyAddress'].dirty">
+        *ngIf="!addContractForm.controls['companyName'].valid&&addContractForm.controls['companyName'].dirty">
       </p-message>
     </div>
   </div>
   <div class="ui-g">
-    <div class="ui-g-2">
-    </div>
+    <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>合同名称</h4>
-      <input type="text" pInputText formControlName="companyName">
+      <input type="text" pInputText formControlName="contractName">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['contractName'].valid&&addContractForm.controls['contractName'].dirty">
       </p-message>
-
     </div>
     <div class="ui-g-3">
       <h4>生效日期</h4>
-      <p-calendar yearRange="2000:2019" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+      <p-calendar formControlName="beginDate" yearRange="2000:2019" [yearNavigator]="true" [touchUI]="true">
+      </p-calendar>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['beginDate'].valid&&addContractForm.controls['beginDate'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
       <h4>险种类型</h4>
-      <p-dropdown [options]="" [style]="{'width:':'100%'}" [showClear]="true" placeholder="请选择险种"></p-dropdown>
+      <p-dropdown formControlName="reinsType" [options]="reinsTypeList" placeholder="请选择险种">
+      </p-dropdown>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyAddress'].valid&&addForm.controls['companyAddress'].dirty">
+        *ngIf="!addContractForm.controls['reinsType'].valid&&addContractForm.controls['reinsType'].dirty">
       </p-message>
-
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>当前状态</h4>
-      <input type="text" pInputText formControlName="companyCode">
+      <input type="text" pInputText formControlName="contractStatus">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+        *ngIf="!addContractForm.controls['contractStatus'].valid&&addContractForm.controls['contractStatus'].dirty">
       </p-message>
-
     </div>
     <div class="ui-g-3">
       <h4>结束日期</h4>
-      <p-calendar yearRange="2000:2030" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+      <p-calendar formControlName="endDate" yearRange="2000:2030" [yearNavigator]="true" [touchUI]="true"></p-calendar>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['endDate'].valid&&addContractForm.controls['endDate'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
-      <h4>合同类型</h4>
-      <p-dropdown [options]="" [style]="{'width:':'100%'}" [showClear]="true" placeholder="请选择再保公司"></p-dropdown>
+      <h4>分保类型</h4>
+      <p-dropdown formControlName="contractType" [options]="contractTypeList" placeholder="请选择分保类型" 
+      (onChange)="contractTypeOnChange()">
+      </p-dropdown>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['contractType'].valid&&addContractForm.controls['contractType'].dirty">
       </p-message>
     </div>
   </div>
-  <div class="ui-g" *ngIf="chengshu">
+  <div class="ui-g" *ngIf="quotaAshore">
     <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>自留部分</h4>
-      <input type="text" pInputText formControlName="companyCode">
+      <input type="text" pInputText formControlName="retention">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+        *ngIf="!addContractForm.controls['retention'].valid&&addContractForm.controls['retention'].dirty">
       </p-message>
-
     </div>
     <div class="ui-g-3">
       <h4>分出部分</h4>
-      <p-calendar yearRange="2000:2030" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+      <input type="text" pInputText formControlName="split_amount">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['split_amount'].valid&&addContractForm.controls['split_amount'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
       <h4>最高限额</h4>
-      <p-dropdown [options]="" [style]="{'width:':'100%'}" [showClear]="true" placeholder="请选择再保公司"></p-dropdown>
+      <p-dropdown [options]="" placeholder="请选择再保公司"></p-dropdown>
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['ceiling_top'].valid&&addContractForm.controls['ceiling_top'].dirty">
       </p-message>
     </div>
   </div>
-  <div class="ui-g" *ngIf="chengshu">
+
+  <div class="ui-g" *ngIf="surplus">
     <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>合约限额</h4>
-      <input type="text" pInputText formControlName="companyCode">
+      <input type="text" pInputText formControlName="contract_limit">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+        *ngIf="!addContractForm.controls['contract_limit'].valid&&addContractForm.controls['contract_limit'].dirty">
       </p-message>
-
     </div>
     <div class="ui-g-3">
       <h4>自留部分</h4>
-      <p-calendar yearRange="2000:2030" [yearNavigator]="true" [touchUI]="true"></p-calendar>
+      <input type="text" pInputText formControlName="risk_unit">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['risk_unit'].valid&&addContractForm.controls['risk_unit'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
       <h4>线数</h4>
-      <p-dropdown [options]="" [style]="{'width:':'100%'}" [showClear]="true" placeholder="请选择再保公司"></p-dropdown>
+      <input type="text" pInputText formControlName="line_no">
       <p-message severity="error" text="此项必填"
-        *ngIf="!addForm.controls['companyName'].valid&&addForm.controls['companyName'].dirty">
+        *ngIf="!addContractForm.controls['line_no'].valid&&addContractForm.controls['line_no'].dirty">
       </p-message>
     </div>
   </div>
+
   <div class="ui-g" style="margin-top:10px;">
     <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>合同备注:</h4>
-      <textarea rows="3" cols="100" pInputTextarea></textarea>
+      <textarea formControlName="description" rows="3" cols="100" pInputTextarea></textarea>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-2"></div>
     <div class="ui-g-3"></div>
     <div class="ui-g-3">
-      <button pButton type="submit" label="提交" disabled="true" class="ui-button-rounded"
-        [style]="{'width':'100%;'}"></button>
+      <button pButton type="submit" label="提交" [disabled]="addContractForm.invalid" class="ui-button-rounded"></button>
       <button pButton type="reset" label="取消" class="ui-button-rounded ui-button-secondary"></button>
     </div>
   </div>

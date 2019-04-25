@@ -5,6 +5,7 @@ export interface Contract {
     contractType: string;
     reinsType: string;
     linfenType: string;
+    signDate: string;
     beginDate: string;
     endDate: string;
     description: string;
