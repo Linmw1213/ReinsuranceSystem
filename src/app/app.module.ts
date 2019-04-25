@@ -4,11 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-/**native routings */
+/** native routings */
 import { AppRoutingModule } from './app-routing.module';
 import { OperatorRoutingModule } from './operator/operator-routing.module';
+import { AdminRoutingModule } from './admin/admin-routing.module';
 
-/**primeng modules*/
+/** primeng modules */
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -26,8 +27,9 @@ import { ChartModule } from 'primeng/chart';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
-/**native components */
+/** native components */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { OperatorComponent } from './operator/operator.component';
@@ -38,7 +40,6 @@ import { NavLeftComponent } from './operator/layout/nav-left/nav-left.component'
 import { AddReinsCompanyComponent } from './operator/reins-company-management/add-reins-company/add-reins-company.component';
 import { ReinsCalculationComponent } from './operator/reins-calculation/reins-calculation.component';
 import { AdminComponent } from './admin/admin.component';
-import { AdminRoutingModule } from './admin/admin-routing.module';
 import { MenuLeftComponent } from './admin/menu-left/menu-left.component';
 import { UserInfoManagementComponent } from './admin/user-info-management/user-info-management.component';
 import { AddContractComponent } from './operator/reins-contract-management/add-contract/add-contract.component';
@@ -71,6 +72,7 @@ import { ModifyContractComponent } from './operator/reins-contract-management/mo
     /**routing modules */
     AppRoutingModule,
     OperatorRoutingModule,
+    AdminRoutingModule,
 
     /**primeng modules */
     InputTextModule,
@@ -87,10 +89,10 @@ import { ModifyContractComponent } from './operator/reins-contract-management/mo
     DropdownModule,
     PanelModule,
     ChartModule,
-    AdminRoutingModule,
     TooltipModule,
     CalendarModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    InputTextareaModule
 
   ],
   providers: [],
