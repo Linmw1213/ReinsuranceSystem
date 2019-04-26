@@ -4,12 +4,27 @@ import { CompanyService } from 'src/app/service/company.service';
 import { Validators, FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, DialogService } from 'primeng/api';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TestService } from 'src/app/service/test.service';
 
 @Component({
   selector: 'app-reins-company-management',
   templateUrl: './reins-company-management.component.html',
   styleUrls: ['./reins-company-management.component.css'],
-  providers: [DialogService, MessageService]
+  providers: [DialogService, MessageService],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
 
 })
 export class ReinsCompanyManagementComponent implements OnInit {
@@ -31,7 +46,8 @@ export class ReinsCompanyManagementComponent implements OnInit {
     public messageService: MessageService,
     private service: CompanyService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private testService: TestService
   ) { }
 
   ngOnInit() {
@@ -42,11 +58,14 @@ export class ReinsCompanyManagementComponent implements OnInit {
 
   private createForm() {
     this.companyForm = this.fb.group({
-      companyName: new FormControl('', Validators.required),
+      companyId: new FormControl('', Validators.required),
       companyCode: new FormControl(''),
       modifyArr: new FormArray(
         [this.createModifyFormArray()]
       ),
+      searchArr: new FormArray(
+        [this.createSearchFormArray()]
+      )
     });
   }
 
@@ -66,6 +85,25 @@ export class ReinsCompanyManagementComponent implements OnInit {
       modifyCurrency: ['', Validators.required],
     });
   }
+
+  private createSearchFormArray() {
+    return this.fb.group({
+      searchCompanyId: [''],
+      searchCompanyName: [''],
+      searchCompanyAddress: [''],
+      searchCompanyPhone: [''],
+      searchCompanyEmail: [''],
+      searchLinkMan: [''],
+      searchDepartment: [''],
+      searchDuty: [''],
+      searchLinkPhone: [''],
+      searchLinkEmail: [''],
+      searchBankAccount: [''],
+      searchBankName: [''],
+      searchCurrency: [''],
+    });
+  }
+
 
   getFormArray() {
     return this.companyForm.get('Arr') as FormArray;
@@ -91,16 +129,15 @@ export class ReinsCompanyManagementComponent implements OnInit {
 
   /** get company by id  */
   getCompanyById() {
-    const id = this.companyForm.get('companyCode').value;
-    if (this.companyForm.get('companyName').valid) {
+    const id = this.companyForm.get('companyId').value;
+    if (this.companyForm.get('companyId').valid) {
       this.searchDialog = true;
+      this.service.getCompanyById(id).subscribe((company) => {
+        this.searchCompany = company;
+        this.companyForm.get('companyCode').setValue(company.companyName);
+      });
     }
-    this.service.getCompanyById(id).subscribe((company) => {
-      this.searchCompany = company;
-      console.log('yuanshi:' + company);
-      console.log('search:' + this.searchCompany)
-      this.companyForm.get('companyCode').setValue(company.bankName);
-    });
+    // console.log(this.searchCompany.companyId);
   }
 
   // 添加公司信息
@@ -122,7 +159,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
   modifyBtnOnClick(index: any) {
     this.modifyDialog = true;
     const arr = this.companyForm.get('modifyArr') as FormArray;
-    arr.at(0).get('modifyCompanyCode').setValue(index.companyId);
+    arr.at(0).get('modifyCompanyId').setValue(index.companyId);
     arr.at(0).get('modifyCompanyName').setValue(index.companyName);
     arr.at(0).get('modifyCompanyAddress').setValue(index.companyAddress);
     arr.at(0).get('modifyCompanyEmail').setValue(index.companyEmail);
@@ -146,7 +183,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
   saveModify() {
     this.modifyDialog = false;
     this.modifyAlert = true;
-    const arr = this.companyForm.get('modifyArr') as FormArray; 
+    const arr = this.companyForm.get('modifyArr') as FormArray;
     console.log('mArr:' + arr.at(0).get('modifyCompanyCode').value);
     // this.searchCompany.companyPhone = arr.at(0).get('modifyCompanyPhone').value;
     this.searchCompany = arr.value;

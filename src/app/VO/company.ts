@@ -8,6 +8,7 @@ export interface Company {
     department: string;
     duty: string;
     linkPhone: string;
+    linkEmail: string;
     bankAccount: string;
     bankName: string;
     currency: string;

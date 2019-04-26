@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 import { CompanyService } from '../service/company.service';
 import { TestService } from '../service/test.service';
+import { Company } from '../VO/company';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginform: FormGroup;
   operator: boolean = true;
   errorDialog: boolean = false;
+  company: Company;
 
   constructor(private fb: FormBuilder, private service: TestService, private router: Router) {
     
@@ -36,7 +38,13 @@ export class LoginComponent implements OnInit {
 
   btnOnClick() {
     let username = this.loginform.get('username').value;
-    this.service.test(username);
+    this.service.test('1001').subscribe(
+      (data)=>{
+        this.company = data;
+        console.log(data.currency);
+        console.log(this.company.bankName);
+      }
+      );
     if (this.operator && this.loginform.valid) {
       if (username === 'zhangsan'){
         this.router.navigateByUrl('operatorIndex');

@@ -18,12 +18,12 @@
   <!--查询、添加按钮-->
   <div class="search">
     <div class="search_input">
-      <input type="text" formControlName="companyName" placeholder="请输入公司名称查询">
+      <input type="text" formControlName="companyId" placeholder="请输入公司编号查询">
       <p-message severity="error" text="Field is required"
-        *ngIf="!companyForm.controls['companyName'].valid&&companyForm.controls['companyName'].dirty"></p-message>
+        *ngIf="!companyForm.controls['companyId'].valid&&companyForm.controls['companyId'].dirty"></p-message>
     </div>
     <div class="search_button">
-      <button type="button" pButton class="ui-button-raised pButton" [disabled]="companyForm.get('companyName').invalid"
+      <button type="button" pButton class="ui-button-raised pButton" [disabled]="companyForm.get('companyId').invalid"
         (click)="getCompanyById()">查询</button>
       <button type="button" label="添加" style="margin-left:10px" (click)="addBtnOnClick()">添加</button>
     </div>
@@ -33,13 +33,10 @@
   <!--所有公司信息-->
   <div class="row content" style="margin-top: 10px;">
     <div class="index">
-      <p-table [columns]="cols" [value]="companyMsg" dataKey="companyCode" [paginator]="true" [rows]="20" class="table">
+      <p-table [columns]="cols" [value]="companyMsg" dataKey="companyId" [paginator]="true" [rows]="20" class="table">
         <ng-template pTemplate="header" let-columns>
           <tr class="tr_one">
             <th style="width: 3em"></th>
-            <!-- <th *ngFor="let col of columns">
-              {{col.header}}
-            </th> -->
             <th style="width:5%">公司代码</th>
             <th style="width:12%">公司名称</th>
             <th style="width:12%">公司地址</th>
@@ -115,26 +112,54 @@
     <p-dialog header="查询结果" [(visible)]="searchDialog" [modal]="true" [style]="{width: '700px', height: '1000px'}"
       [maximizable]="true">
       <div class="ui-n-24" style="text-align:center;">
-        <h4>公司基本信息</h4>
-        <div class="col-md-3">
-          <label>公司代码</label>
-          <input type="text" class="form-control" formControlName="companyCode">
-        </div>
-        <div class="col-md-3">
-          <label>公司名称</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="col-md-5">
-          <label>公司地址</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="col-md-3">
-          <label>公司邮箱</label>
-          <input type="text" class="form-control">
-        </div>
+        <!-- <div class="col-md-10" style="margin-top:10px;">
+          <h4>公司基本信息</h4>
+          <p-table [value]="searchCompany">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>公司代码</th>
+                <th>公司名称</th>
+                <th>公司地址</th>
+                <th>公司电话</th>
+                <th>公司邮箱</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+              <tr>
+                <td>{{searchCompany.companyId}}</td>
+                <td>{{searchCompany.companyName}}</td>
+                <td>{{searchCompany.companyAddress}}</td>
+                <td>{{searchCompany.companyPhone}}</td>
+                <td>{{searchCompany.companyEmail}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div> -->
         <div class="col-md-10" style="margin-top:10px;">
           <h4>联系人信息</h4>
-          <p-table>
+          <!-- <div *ngFor="let item of userModel.get('detailInfoModel').controls as FormArray; let i = index" [formGroupName]="i">
+
+          </div> -->
+          <table class="table table-bordered">
+            <tr>
+              <th>序号</th>
+              <th>联系人</th>
+              <th>部门</th>
+              <th>职务</th>
+              <th>邮箱</th>
+              <th>联系电话</th>
+            </tr>
+            <tr>
+              <td>{{companyForm.get('companyCode').value}}</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            
+          </table>
+          <p-table [value]="searchArr">
             <ng-template pTemplate="header">
               <tr>
                 <th>序号</th>
@@ -143,23 +168,16 @@
                 <th>职务</th>
                 <th>邮箱</th>
                 <th>联系电话</th>
-                <th>操作</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body">
               <tr>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </ng-template>
           </p-table>
@@ -169,12 +187,10 @@
           <p-table>
             <ng-template pTemplate="header">
               <tr>
-                <th>序号</th>
                 <th>银行账户</th>
                 <th>银行名称</th>
                 <th>结算币种</th>
                 <th>所属支行</th>
-                <th>操作</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body">
@@ -196,11 +212,6 @@
           </p-table>
         </div>
       </div>
-      <!-- <p-footer>
-        <button type="button" pButton icon="pi pi-check" (click)="searchDialog=false" label="确定"></button>
-        <button type="button" pButton icon="pi pi-times" (click)="searchDialog=false" label="取消"
-          class="ui-button-secondary"></button>
-      </p-footer> -->
     </p-dialog>
   </div>
 

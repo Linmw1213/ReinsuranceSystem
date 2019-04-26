@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Company } from '../VO/company';
 
 @Injectable({
   providedIn: 'root'
@@ -7,21 +9,11 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class TestService {
 
   private customersUrl = 'http://localhost:8080/api/test';
-  
+
   constructor(private http: HttpClient) { }
 
-  test(username: String) {
-
-    const body = { username: username };
-     
-
-    this.http.post(this.customersUrl, username,
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' }),
-        responseType: 'text'
-      }).subscribe(data => {
-        console.log('username:' + data);
-      });
-
+  test(id: any): Observable<Company> {
+    return this.http.get<Company>(`${this.customersUrl}/${id}`);
   }
+
 }

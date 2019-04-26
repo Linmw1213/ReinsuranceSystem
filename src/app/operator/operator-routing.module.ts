@@ -7,6 +7,8 @@ import { AddReinsCompanyComponent } from './reins-company-management/add-reins-c
 import { ReinsCalculationComponent } from './reins-calculation/reins-calculation.component';
 import { AddContractComponent } from './reins-contract-management/add-contract/add-contract.component';
 import { ModifyContractComponent } from './reins-contract-management/modify-contract/modify-contract.component';
+import { ReinsClaimManagementComponent } from './reins-claim-management/reins-claim-management.component';
+import { SystemManagementeComponent } from './system-managemente/system-managemente.component';
 
 const routes: Routes = [
   // 公司信息管理
@@ -24,9 +26,11 @@ const routes: Routes = [
   // 再保计算
   { path: 'ReinsCalculation', component: ReinsCalculationComponent },
 
-  // 账单管理
+  // 理赔管理
+  { path: 'ReinsClaimManagement', component: ReinsClaimManagementComponent },
 
   // 系统设置
+  { path: 'SystemManagement', component: SystemManagementeComponent },
 ];
 
 

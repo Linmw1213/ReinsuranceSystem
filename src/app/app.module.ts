@@ -44,6 +44,8 @@ import { MenuLeftComponent } from './admin/menu-left/menu-left.component';
 import { UserInfoManagementComponent } from './admin/user-info-management/user-info-management.component';
 import { AddContractComponent } from './operator/reins-contract-management/add-contract/add-contract.component';
 import { ModifyContractComponent } from './operator/reins-contract-management/modify-contract/modify-contract.component';
+import { ReinsClaimManagementComponent } from './operator/reins-claim-management/reins-claim-management.component';
+import { SystemManagementeComponent } from './operator/system-managemente/system-managemente.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { ModifyContractComponent } from './operator/reins-contract-management/mo
     MenuLeftComponent,
     UserInfoManagementComponent,
     AddContractComponent,
-    ModifyContractComponent
+    ModifyContractComponent,
+    ReinsClaimManagementComponent,
+    SystemManagementeComponent
   ],
   imports: [
     BrowserModule,
