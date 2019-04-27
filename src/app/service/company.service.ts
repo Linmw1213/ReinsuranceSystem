@@ -15,6 +15,8 @@ export class CompanyService {
   mockDataURL = '/assets/mock-data/company.json';
   companyURL = 'http://localhost:8080/company';
   company = 'http://localhost:8080/company/getById';
+  deleteUrl = 'http://localhost:8080/company/deleteById';
+  modifyUrl = 'http://localhost:8080/company/modifyById';
   header = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' });
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -28,14 +30,19 @@ export class CompanyService {
   }
 
   /** PUT: modify the Company on the server */
-  updateCompany(Company: Company): Observable<Company> {
-    return this.http.put<Company>(this.mockDataURL, Company, httpOptions);
+  updateCompany(company: Company): Observable<any> {
+    // const url = `${this.modifyUrl}/${companyId}`;
+    return this.http.put<Company>(this.modifyUrl, company, httpOptions);
   }
 
   /** delete the company from the server */
-  deleteCompany(Company: Company | string): Observable<Company> {
-    const id = typeof Company === 'string' ? Company : Company.companyId;
-    const url = `${this.mockDataURL}/${id}`;
-    return this.http.delete<Company>(url, httpOptions)
+  deleteCompany(companyId: any): Observable<any> {
+    const url = `${this.deleteUrl}/${companyId}`;
+    return this.http.delete(url,httpOptions);
+  }
+
+  /** add company massage */
+  addCompany(company: Company): Observable<any> {
+    return this.http.post<Company>(this.companyURL+'/add',company);
   }
 }

@@ -5,9 +5,9 @@
       <div class="row">
         <div class="col-md-3">
           <label>公司代码</label>
-          <input type="text" class="form-control" formControlName="companyCode">
+          <input type="text" class="form-control" formControlName="companyId">
           <p-message severity="error" text="此项必填"
-            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+            *ngIf="!addForm.controls['companyId'].valid&&addForm.controls['companyId'].dirty">
           </p-message>
         </div>
         <div class="col-md-4">
@@ -79,7 +79,7 @@
           <label>邮箱</label>
           <input type="text" class="form-control" formControlName="linkEmail">
           <p-message severity="error" text="此项必填"
-            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+            *ngIf="!addForm.controls['linkEmail'].valid&&addForm.controls['linkEmail'].dirty">
           </p-message>
         </div>
       </div>
@@ -92,27 +92,27 @@
           <label>账号</label>
           <input type="text" class="form-control" formControlName="bankAccount">
           <p-message severity="error" text="此项必填"
-            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+            *ngIf="!addForm.controls['bankAccount'].valid&&addForm.controls['bankAccount'].dirty">
           </p-message>
         </div>
         <div class="col-md-3">
           <label>银行名称</label>
           <input type="text" class="form-control" formControlName="bankName">
           <p-message severity="error" text="此项必填"
-            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+            *ngIf="!addForm.controls['bankName'].valid&&addForm.controls['bankName'].dirty">
           </p-message>
         </div>
         <div class="col-md-3">
           <label>结算币种</label>
           <input type="text" class="form-control" formControlName="currency">
           <p-message severity="error" text="此项必填"
-            *ngIf="!addForm.controls['companyCode'].valid&&addForm.controls['companyCode'].dirty">
+            *ngIf="!addForm.controls['currency'].valid&&addForm.controls['currency'].dirty">
           </p-message>
         </div>
       </div>
       <p-footer>
         <div class="col-md-15 col-md-offset-5" style="margin-top:20px;">
-          <button type="submit" pButton label="提交" [disabled]="addForm.invalid"></button>
+          <button type="submit" pButton label="提交" [disabled]="addForm.invalid" (click)="confirmBtnOnClick()"></button>
           <button type="reset" pButton label="取消" class="ui-button-secondary"></button>
         </div>
       </p-footer>

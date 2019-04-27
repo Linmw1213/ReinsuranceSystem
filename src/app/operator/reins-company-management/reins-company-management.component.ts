@@ -40,6 +40,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
   cols: any[];
   delete = false;
   modifyAlert = false;
+  modifyIndex: any;
 
   constructor(
     public dialogService: DialogService,
@@ -63,31 +64,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
       modifyArr: new FormArray(
         [this.createModifyFormArray()]
       ),
-      searchArr: new FormArray(
-        [this.createSearchFormArray()]
-      )
-    });
-  }
 
-  private createModifyFormArray() {
-    return this.fb.group({
-      modifyCompanyCode: ['', Validators.required],
-      modifyCompanyName: ['', Validators.required],
-      modifyCompanyAddress: ['', Validators.required],
-      modifyCompanyPhone: ['', Validators.required],
-      modifyCompanyEmail: ['', Validators.required],
-      modifyLinkMan: ['', Validators.required],
-      modifyDepartment: ['', Validators.required],
-      modifyDuty: ['', Validators.required],
-      modifyLinkPhone: ['', Validators.required],
-      modifyBankAccount: ['', Validators.required],
-      modifyBankName: ['', Validators.required],
-      modifyCurrency: ['', Validators.required],
-    });
-  }
-
-  private createSearchFormArray() {
-    return this.fb.group({
       searchCompanyId: [''],
       searchCompanyName: [''],
       searchCompanyAddress: [''],
@@ -104,6 +81,22 @@ export class ReinsCompanyManagementComponent implements OnInit {
     });
   }
 
+  private createModifyFormArray() {
+    return this.fb.group({
+      modifyCompanyId: ['', Validators.required],
+      modifyCompanyName: ['', Validators.required],
+      modifyCompanyAddress: ['', Validators.required],
+      modifyCompanyPhone: ['', Validators.required],
+      modifyCompanyEmail: ['', Validators.required],
+      modifyLinkMan: ['', Validators.required],
+      modifyDepartment: ['', Validators.required],
+      modifyDuty: ['', Validators.required],
+      modifyLinkPhone: ['', Validators.required],
+      modifyBankAccount: ['', Validators.required],
+      modifyBankName: ['', Validators.required],
+      modifyCurrency: ['', Validators.required],
+    });
+  }
 
   getFormArray() {
     return this.companyForm.get('Arr') as FormArray;
@@ -133,11 +126,22 @@ export class ReinsCompanyManagementComponent implements OnInit {
     if (this.companyForm.get('companyId').valid) {
       this.searchDialog = true;
       this.service.getCompanyById(id).subscribe((company) => {
-        this.searchCompany = company;
-        this.companyForm.get('companyCode').setValue(company.companyName);
+
+        this.companyForm.get('searchCompanyId').setValue(company.companyId);
+        this.companyForm.get('searchCompanyName').setValue(company.companyName);
+        this.companyForm.get('searchCompanyAddress').setValue(company.companyAddress);
+        this.companyForm.get('searchCompanyPhone').setValue(company.companyPhone);
+        this.companyForm.get('searchCompanyEmail').setValue(company.companyEmail);
+        this.companyForm.get('searchLinkMan').setValue(company.linkMan);
+        this.companyForm.get('searchLinkPhone').setValue(company.linkPhone);
+        this.companyForm.get('searchLinkEmail').setValue(company.linkEmail);
+        this.companyForm.get('searchDuty').setValue(company.duty);
+        this.companyForm.get('searchDepartment').setValue(company.department);
+        this.companyForm.get('searchBankAccount').setValue(company.bankAccount);
+        this.companyForm.get('searchBankName').setValue(company.bankName);
+        this.companyForm.get('searchCurrency').setValue(company.currency);
       });
     }
-    // console.log(this.searchCompany.companyId);
   }
 
   // 添加公司信息
@@ -156,28 +160,62 @@ export class ReinsCompanyManagementComponent implements OnInit {
     this.router.navigateByUrl('addCompanyMsg');
   }
 
-  modifyBtnOnClick(index: any) {
+  modifyBtnOnClick(rowData: any) {
+    this.modifyIndex = rowData;
     this.modifyDialog = true;
     const arr = this.companyForm.get('modifyArr') as FormArray;
-    arr.at(0).get('modifyCompanyId').setValue(index.companyId);
-    arr.at(0).get('modifyCompanyName').setValue(index.companyName);
-    arr.at(0).get('modifyCompanyAddress').setValue(index.companyAddress);
-    arr.at(0).get('modifyCompanyEmail').setValue(index.companyEmail);
-    arr.at(0).get('modifyCompanyPhone').setValue(index.companyPhone);
-    arr.at(0).get('modifyLinkMan').setValue(index.linkMan);
-    arr.at(0).get('modifyLinkPhone').setValue(index.linkPhone);
-    arr.at(0).get('modifyDepartment').setValue(index.department);
-    arr.at(0).get('modifyDuty').setValue(index.duty);
-    arr.at(0).get('modifyBankAccount').setValue(index.bankAccount);
-    arr.at(0).get('modifyBankName').setValue(index.bankName);
-    arr.at(0).get('modifyCurrency').setValue(index.currency);
+    arr.at(0).get('modifyCompanyId').setValue(rowData.companyId);
+    arr.at(0).get('modifyCompanyName').setValue(rowData.companyName);
+    arr.at(0).get('modifyCompanyAddress').setValue(rowData.companyAddress);
+    arr.at(0).get('modifyCompanyEmail').setValue(rowData.companyEmail);
+    arr.at(0).get('modifyCompanyPhone').setValue(rowData.companyPhone);
+    arr.at(0).get('modifyLinkMan').setValue(rowData.linkMan);
+    arr.at(0).get('modifyLinkPhone').setValue(rowData.linkPhone);
+    arr.at(0).get('modifyDepartment').setValue(rowData.department);
+    arr.at(0).get('modifyDuty').setValue(rowData.duty);
+    arr.at(0).get('modifyBankAccount').setValue(rowData.bankAccount);
+    arr.at(0).get('modifyBankName').setValue(rowData.bankName);
+    arr.at(0).get('modifyCurrency').setValue(rowData.currency);
+  }
+
+  savaCompany() {
+    this.modifyDialog = false;
+    this.modifyAlert = true;
+
+    const arr = this.companyForm.get('modifyArr') as FormArray;    
+    const companyId = this.modifyIndex.companyId;
+    const company: Company = {
+      companyId: arr.at(0).get('modifyCompanyId').value,
+      companyName: arr.at(0).get('modifyCompanyName').value,
+      companyAddress: arr.at(0).get('modifyCompanyAddress').value,
+      companyPhone: arr.at(0).get('modifyCompanyPhone').value,
+      companyEmail: arr.at(0).get('modifyCompanyEmail').value,
+      linkMan: arr.at(0).get('modifyLinkMan').value,
+      department: arr.at(0).get('modifyDepartment').value,
+      duty: arr.at(0).get('modifyDuty').value,
+      linkPhone: arr.at(0).get('modifyLinkPhone').value,
+      linkEmail: '1209215924@qq.com',
+      bankAccount: arr.at(0).get('modifyBankAccount').value,
+      bankName: arr.at(0).get('modifyBankName').value,
+      currency: arr.at(0).get('modifyCurrency').value,
+    };
+
+    this.service.updateCompany(company).subscribe(
+      (data) => {
+        console.log('修改成功'+data);
+      }
+    );
   }
 
   /** delete company */
   deleteBtnOnClick(company: Company) {
     this.delete = true;
     this.companyMsg = this.companyMsg.filter(c => c !== company);
-    this.service.deleteCompany(company);
+    this.service.deleteCompany(company.companyId).subscribe(
+      (data) => {
+        console.log(data);
+      }
+    );
   }
 
   saveModify() {
@@ -185,7 +223,6 @@ export class ReinsCompanyManagementComponent implements OnInit {
     this.modifyAlert = true;
     const arr = this.companyForm.get('modifyArr') as FormArray;
     console.log('mArr:' + arr.at(0).get('modifyCompanyCode').value);
-    // this.searchCompany.companyPhone = arr.at(0).get('modifyCompanyPhone').value;
     this.searchCompany = arr.value;
     console.log('company:' + arr.value);
 

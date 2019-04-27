@@ -112,104 +112,60 @@
     <p-dialog header="查询结果" [(visible)]="searchDialog" [modal]="true" [style]="{width: '700px', height: '1000px'}"
       [maximizable]="true">
       <div class="ui-n-24" style="text-align:center;">
-        <!-- <div class="col-md-10" style="margin-top:10px;">
-          <h4>公司基本信息</h4>
-          <p-table [value]="searchCompany">
-            <ng-template pTemplate="header">
-              <tr>
-                <th>公司代码</th>
-                <th>公司名称</th>
-                <th>公司地址</th>
-                <th>公司电话</th>
-                <th>公司邮箱</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body">
-              <tr>
-                <td>{{searchCompany.companyId}}</td>
-                <td>{{searchCompany.companyName}}</td>
-                <td>{{searchCompany.companyAddress}}</td>
-                <td>{{searchCompany.companyPhone}}</td>
-                <td>{{searchCompany.companyEmail}}</td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </div> -->
-        <div class="col-md-10" style="margin-top:10px;">
-          <h4>联系人信息</h4>
-          <!-- <div *ngFor="let item of userModel.get('detailInfoModel').controls as FormArray; let i = index" [formGroupName]="i">
 
-          </div> -->
+        <div class="col-md-10" style="margin-top:10px;">
+          <h4>公司基本信息</h4>
           <table class="table table-bordered">
             <tr>
-              <th>序号</th>
+              <th>公司编号</th>
+              <th>公司名称</th>
+              <th>公司地址</th>
+              <th>公司邮箱</th>
+              <th>公司电话</th>
+            </tr>
+            <tr>
+              <td>{{companyForm.get('searchCompanyId').value}}</td>
+              <td>{{companyForm.get('searchCompanyName').value}}</td>
+              <td>{{companyForm.get('searchCompanyAddress').value}}</td>
+              <td>{{companyForm.get('searchCompanyEmail').value}}</td>
+              <td>{{companyForm.get('searchCompanyPhone').value}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-md-10" style="margin-top:10px;">
+          <h4>公司联系人信息</h4>
+          <table class="table table-bordered">
+            <tr>
               <th>联系人</th>
-              <th>部门</th>
-              <th>职务</th>
-              <th>邮箱</th>
+              <th>所在部门</th>
+              <th>所任职位</th>
+              <th>联系邮箱</th>
               <th>联系电话</th>
             </tr>
             <tr>
-              <td>{{companyForm.get('companyCode').value}}</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
+              <td>{{companyForm.get('searchLinkMan').value}}</td>
+              <td>{{companyForm.get('searchDepartment').value}}</td>
+              <td>{{companyForm.get('searchDuty').value}}</td>
+              <td>{{companyForm.get('searchLinkEmail').value}}</td>
+              <td>{{companyForm.get('searchLinkPhone').value}}</td>
             </tr>
-            
           </table>
-          <p-table [value]="searchArr">
-            <ng-template pTemplate="header">
-              <tr>
-                <th>序号</th>
-                <th>联系人</th>
-                <th>部门</th>
-                <th>职务</th>
-                <th>邮箱</th>
-                <th>联系电话</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body">
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </ng-template>
-          </p-table>
         </div>
         <div class="col-md-10" style="margin-top:10px;">
           <h4>结算账户信息</h4>
-          <p-table>
-            <ng-template pTemplate="header">
-              <tr>
-                <th>银行账户</th>
-                <th>银行名称</th>
-                <th>结算币种</th>
-                <th>所属支行</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body">
-              <tr>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
+          <table class="table table-bordered">
+            <tr>
+              <th>银行账户</th>
+              <th>银行名称</th>
+              <th>结算币种</th>
+            </tr>
+            <tr>
+              <td>{{companyForm.get('searchBankAccount').value}}</td>
+              <td>{{companyForm.get('searchBankName').value}}</td>
+              <td>{{companyForm.get('searchCurrency').value}}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </p-dialog>
@@ -225,7 +181,7 @@
             <div class="row">
               <div class="col-md-3">
                 <label>公司代码</label>
-                <input type="text" class="form-control" formControlName="modifyCompanyCode">
+                <input type="text" class="form-control" formControlName="modifyCompanyId">
               </div>
               <div class="col-md-4">
                 <label>公司名称</label>
@@ -287,7 +243,7 @@
           </p-card>
         </div>
         <p-footer>
-          <button type="button" pButton [disabled]="companyForm.get('modifyArr').invalid" (click)="saveModify()"
+          <button type="button" pButton [disabled]="companyForm.get('modifyArr').invalid" (click)="savaCompany()"
             label="确定"></button>
           <button type="button" pButton (click)="modifyDialog=false" label="取消" class="ui-button-secondary"></button>
         </p-footer>
