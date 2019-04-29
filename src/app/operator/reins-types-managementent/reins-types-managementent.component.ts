@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ReinsTypeService } from 'src/app/service/reins-type.service';
+import { ReinsType } from 'src/app/VO/reinsType';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reins-types-managementent',
@@ -7,39 +10,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReinsTypesManagemententComponent implements OnInit {
 
-  data: any;
-  constructor() { }
+  reinsTypes: ReinsType[];
+  cols: any[];
+  addReinsTypeForm: FormGroup;
+  constructor(private reinsTypeService: ReinsTypeService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.setData();
+    this.getAllReinsType();
+    this.setCols();
+    this.craeteForm();
   }
 
-  setData() {
-    this.data = {
-      datasets: [{
-        data: [
-          11,
-          16,
-          7,
-          3,
-          14
-        ],
-        backgroundColor: [
-          "#FF6384",
-          "#4BC0C0",
-          "#FFCE56",
-          "#E7E9ED",
-          "#36A2EB"
-        ],
-        label: 'My dataset'
-      }],
-      labels: [
-        "Red",
-        "Green",
-        "Yellow",
-        "Grey",
-        "Blue"
-      ]
-    }
+  craeteForm() {
+    this.addReinsTypeForm = this.fb.group({
+      reinsTypeName: '',
+      description: ''
+    })
   }
+
+  getAllReinsType() {
+    this.reinsTypeService.getReinsTypes().subscribe(
+      (data) => {
+        this.reinsTypes = data;
+        console.log(data);
+      }
+    );
+  }
+
+  setCols() {
+    this.cols = [
+      { field: 'typeId', header: '险种代码' },
+      { field: 'typeName', header: '险种名称' },
+      // { field: 'description', header: '备注' },
+      { field: 'modifyTime', header: '操作时间' },
+      { field: 'operatorName', header: '操作员' },
+      // { field: 'operatorId', header: '操作员编号' }
+    ];
+  }
+
+  editReinsType(rowData: any) {
+    console.log('type' + rowData.typeId);
+  }
+
+  deleteReinsType(rowData: any) {
+
+  }
+
+  addReinsType() {
+  }
+
 }

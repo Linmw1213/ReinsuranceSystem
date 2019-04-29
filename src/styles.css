@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* reins-contract-management.component.css */
+
+.list p-message div {
+    height: 38px;
+    line-height: 38px;
+    background: content-box!important;
+    padding: 0 15px;
+}
+
+.list p-message div span {
+    color: #db3333 !important;
+}
+
+.list p-dropdown {
+    width: calc(100% - 80px);
+}
+
+.list p-dropdown .ui-dropdown {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #D2D2D2;
+}
+
+.list p-dropdown .ui-dropdown label {
+    display: flex;
+    height: 100%;
+    padding: 0 10px;
+    align-items: center;
+}
+
+.list p-calendar {
+    width: calc(100% - 80px);
+}
+
+.list p-calendar span {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.list p-calendar span input {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #D2D2D2;
+}
+
+
+/* reins-contract-management.component.css */

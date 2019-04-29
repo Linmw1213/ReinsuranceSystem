@@ -1,0 +1,47 @@
+[{
+    "typeId": "type01",
+    "typeName": "人身险",
+    "typeStatus": "待审核",
+    "description": "合同描述内容",
+    "modifyTime": "2010/01/01",
+    "operatorName": "张三",
+    "operatorId": "1001"
+  },
+  {
+    "typeId": "type02",
+    "typeName": "人身险",
+    "typeStatus": "待审核",
+    "description": "合同描述内容",
+    "modifyTime": "2010/01/01",
+    "operatorName": "张三",
+    "operatorId": "1001"
+  },
+  {
+    "typeId": "type03",
+    "typeName": "人身险",
+    "typeStatus": "已审核",
+    "description": "合同描述内容",
+    "modifyTime": "2010/01/01",
+    "operatorName": "张三",
+    "operatorId": "1001"
+  },
+  {
+    "typeId": "type04",
+    "typeName": "健康险",
+    "typeStatus": "待审核",
+    "description": "合同描述内容",
+    "modifyTime": "2010/01/01",
+    "operatorName": "张三",
+    "operatorId": "1001"
+  },
+  {
+    "typeId": "type05",
+    "typeName": "人身险",
+    "typeStatus": "待审核",
+    "description": "合同描述内容",
+    "modifyTime": "2010/01/01",
+    "operatorName": "张三",
+    "operatorId": "1001"
+  }
+
+]

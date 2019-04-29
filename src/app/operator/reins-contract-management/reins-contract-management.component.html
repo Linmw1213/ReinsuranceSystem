@@ -1,260 +1,276 @@
 <p-dataView #dv filterBy="contractId" [value]="contracts" [paginator]="true" paginatorPosition="both" [rows]="8">
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <div class="ui-g">
-        <div class="ui-g-12 ui-md-4">
-          <button pButton type="button" label="新增" icon="pi pi-plus" (click)="addBtnOnClick()"></button>
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <button pButton type="button" label="新增" icon="pi pi-plus" (click)="addBtnOnClick()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container" style="text-align:center">
+                    <div style="position:relative">
+                        <input type="search" pInputText placeholder="请输入合同编号搜索" (keyup)="dv.filter($event.target.value)">
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-md-4" style="text-align:right">
+                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+            </div>
         </div>
-        <div class="ui-g-6 ui-md-4 filter-container" style="text-align:center">
-          <div style="position:relative">
-            <input type="search" pInputText placeholder="请输入合同编号搜索" (keyup)="dv.filter($event.target.value)">
-          </div>
+    </p-header>
+    <ng-template let-contract pTemplate="listItem">
+
+        <div class="ui-g list" style="border-bottom: 1px solid #d9d9d9;display: flex;justify-content: space-between;">
+            <div class="ui-g-12 contract-details">
+                <!-- ui-md-8  -->
+                <div class="ui-g" style="display:flex;flex-direction:column;">
+                    <div class="four-Twenty_seven">
+                        <p>合同编号</p>
+                        <p>合同名称</p>
+                        <p>再保公司</p>
+                        <p>合同类型</p>
+                        <p>操作</p>
+                    </div>
+                    <div class="four-Twenty_seven">
+                        <p><b>{{contract.contractId}}</b></p>
+                        <p><b>{{contract.contractName}}</b></p>
+                        <p><b>{{contract.companyName}}</b></p>
+                        <p><b>{{contract.contractType}}</b></p>
+                        <div class="ui-g-12 ui-md-3 search-icon">
+                            <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
+                            <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
+                            <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="delete($event, contract)"></button>
+                        </div>
+                    </div>
+                    <!-- <div class="ui-g-2 ui-sm-6">合同编号: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contract.contractId}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">合同名称: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contract.contractName}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">再保公司: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contract.companyName}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">合同类型: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contract.contractType}}</b></div> -->
+
+                </div>
+            </div>
+
+            <!-- <div class="ui-g-12 ui-md-3 search-icon">
+                <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
+                <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
+                <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="delete($event, contract)"></button>
+            </div> -->
+
         </div>
-        <div class="ui-g-6 ui-md-4" style="text-align:right">
-          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </div>
-      </div>
-    </div>
-  </p-header>
-  <ng-template let-contract pTemplate="listItem">
-    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
-      <div class="ui-g-12 ui-md-8 contract-details">
-        <div class="ui-g">
-          <div class="ui-g-2 ui-sm-6">合同编号: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{contract.contractId}}</b></div>
-
-          <div class="ui-g-2 ui-sm-6">合同名称: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{contract.contractName}}</b></div>
-
-          <div class="ui-g-2 ui-sm-6">再保公司: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{contract.companyName}}</b></div>
-
-          <div class="ui-g-2 ui-sm-6">合同类型: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{contract.contractType}}</b></div>
-
-        </div>
-      </div>
-
-      <div class="ui-g-12 ui-md-3 search-icon">
-        <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
-        <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
-        <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
-          (click)="delete($event, contract)"></button>
-      </div>
-
-    </div>
-  </ng-template>
-  <ng-template let-contract pTemplate="gridItem">
-    <div style="padding:.5em" class="ui-g-12 ui-md-3">
-      <p-panel [header]="contract.contractId" [style]="{'text-align':'left'}">
-        <div class="contract-detail">
-          <div class="ui-n-3">
-            <b> 合同名称：</b>
-            {{contract.contractName}}
-          </div>
-          <div class="ui-n-3">
-            <b>合同类型：</b>
-            {{ contract.contractType}}
-          </div>
-          <div class="ui-n-3">
-            <b>再保公司：</b>
-            {{ contract.companyName}}
-          </div>
-        </div>
-        <hr class="ui-widget-content" style="border-top:0">
-        <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
-        <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
-        <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
-          (click)="delete($event, contract)"></button>
-        <!-- <button pButton type="button" icon="pi pi-search" (click)="selectContract($event, contract)"
+    </ng-template>
+    <ng-template let-contract pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="contract.contractId" [style]="{'text-align':'left'}">
+                <div class="contract-detail">
+                    <div class="ui-n-3">
+                        <p> 合同名称：</p>
+                        <p>{{contract.contractName}}</p>
+                    </div>
+                    <div class="ui-n-3">
+                        <p>合同类型：</p>
+                        <p>{{ contract.contractType}}</p>
+                    </div>
+                    <div class="ui-n-3">
+                        <p>再保公司：</p>
+                        <p>{{ contract.companyName}}</p>
+                    </div>
+                </div>
+                <!-- <hr class="ui-widget-content" style="border-top:0"> -->
+                <div class="button">
+                    <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
+                    <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
+                    <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="delete($event, contract)"></button>
+                </div>
+                <!-- <button pButton type="button" icon="pi pi-search" (click)="selectContract($event, contract)"
           style="margin-top:0"></button> -->
-      </p-panel>
-    </div>
-  </ng-template>
+            </p-panel>
+        </div>
+    </ng-template>
 </p-dataView>
 
-<p-dialog header="合同详细信息" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
-  [style]="{width: 'auto'}" (onAfterHide)="onDialogHide()">
-  <div class="ui-g" *ngIf="selectedContract">
-    <div class="ui-g-12" style="text-align:center">
+<p-dialog header="合同详细信息" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: 'auto'}" (onAfterHide)="onDialogHide()">
+    <div class="ui-g four_Twenty-eight" *ngIf="selectedContract">
+        <!-- <div class="ui-g-12" style="text-align:center">
+        </div>
+        <div class="ui-g-1 ui-sm-6">合同编号: </div>
+        <div class="ui-g-11 ui-sm-6">{{selectedContract.contractId}}</div>
+
+        <div class="ui-g-1 ui-sm-6">合同名称: </div>
+        <div class="ui-g-11 ui-sm-6">{{selectedContract.contractName}}</div>
+
+        <div class="ui-g-1 ui-sm-6">分入公司: </div>
+        <div class="ui-g-11 ui-sm-6">{{selectedContract.companyName}}</div>
+
+        <div class="ui-g-1 ui-sm-6">合同类型: </div>
+        <div class="ui-g-11 ui-sm-6">{{selectedContract.contractType}}</div>
+
+
+        <div class="ui-g-1 ui-sm-6">再保险种: </div>
+        <div class="ui-g-11 ui-sm-6"><b>{{selectedContract.reinsType}}</b></div>
+
+        <div class="ui-g-1 ui-sm-6">合同状态: </div>
+        <div class="ui-g-11 ui-sm-6"><b>{{selectedContract.contractStatus}}</b></div>
+
+        <div class="ui-g-1 ui-sm-6">合同备注: </div>
+        <div class="ui-g-11 ui-sm-6"><b>{{selectedContract.description}}</b></div>
+
+        <div class="ui-g-1 ui-sm-6">合同起期: </div>
+        <div class="ui-g-11 ui-sm-6"><b>{{selectedContract.beginDate}}</b></div>
+
+        <div class="ui-g-1 ui-sm-6">合同止期: </div>
+        <div class="ui-g-11 ui-sm-6"><b>{{selectedContract.endDate}}</b></div> -->
+        <div class="list">
+            <span>合同编号:</span>
+            <input type="text" value="{{selectedContract.contractId}}">
+        </div>
+        <div class="list">
+            <span>合同名称:</span>
+            <input type="text" value="{{selectedContract.contractName}}">
+        </div>
+        <div class="list">
+            <span>分入公司:</span>
+            <input type="text" value="{{selectedContract.companyName}}">
+        </div>
+        <div class="list">
+            <span>合同类型:</span>
+            <input type="text" value="{{selectedContract.contractType}}">
+        </div>
+        <div class="list">
+            <span>再保险种:</span>
+            <input type="text" value="{{selectedContract.reinsType}}">
+        </div>
+        <div class="list">
+            <span>合同状态:</span>
+            <input type="text" value="{{selectedContract.contractStatus}}">
+        </div>
+        <div class="list">
+            <span>合同备注:</span>
+            <input type="text" value="{{selectedContract.description}}">
+        </div>
+        <div class="list">
+            <span>合同起期:</span>
+            <input type="text" value="{{selectedContract.beginDate}}">
+        </div>
+        <div class="list">
+            <span>合同止期:</span>
+            <input type="text" value="{{selectedContract.endDate}}">
+        </div>
     </div>
-    <div class="ui-g-4">合同编号: </div>
-    <div class="ui-g-8">{{selectedContract.contractId}}</div>
-
-    <div class="ui-g-4">合同名称: </div>
-    <div class="ui-g-8">{{selectedContract.contractName}}</div>
-
-    <div class="ui-g-4">分入公司: </div>
-    <div class="ui-g-8">{{selectedContract.companyName}}</div>
-
-    <div class="ui-g-4">合同类型: </div>
-    <div class="ui-g-8">{{selectedContract.contractType}}</div>
-
-
-    <div class="ui-g-2 ui-sm-6">再保险种: </div>
-    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.reinsType}}</b></div>
-
-    <div class="ui-g-2 ui-sm-6">合同状态: </div>
-    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.contractStatus}}</b></div>
-
-    <div class="ui-g-2 ui-sm-6">合同备注: </div>
-    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.description}}</b></div>
-
-    <div class="ui-g-2 ui-sm-6">合同起期: </div>
-    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.beginDate}}</b></div>
-
-    <div class="ui-g-2 ui-sm-6">合同止期: </div>
-    <div class="ui-g-10 ui-sm-6"><b>{{selectedContract.endDate}}</b></div>
-  </div>
 </p-dialog>
 
 <!-- 修改合同 -->
-<p-dialog header="修改合同信息" [(visible)]="modifyDialog" [responsive]="true" showEffect="fade" [style]="{width: 'auto'}"
-  [modal]="true" (onAfterHide)="onDialogHide()">
-  <div class="ui-g" *ngIf="selectedContract">
-    <div [formGroup]="contractForm">
-      <div class="ui-g">
-        <div class="ui-g-3">
-          <h4>合同编号</h4>
-          <input type="text" pInputText formControlName="contractId">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['contractId'].valid&&contractForm.controls['contractId'].dirty">
-          </p-message>
+<p-dialog class="hkr" header="修改合同信息" [(visible)]="modifyDialog" [responsive]="true" showEffect="fade" [style]="{width: 'auto',height:'80%',overflow:'auto'}" [modal]="true" (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedContract">
+        <div [formGroup]="contractForm" class="four_Twenty-eight update">
+            <div class="list">
+                <p class="main">合同编号</p>
+                <input value="{{selectedContract.contractId}}" type="text" pInputText formControlName="contractId" required="required" title="请输入4位及以上的字符" autofocus="autofocus">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['contractId'].valid&&contractForm.controls['contractId'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>合同名称</p>
+                <input value="{{selectedContract.contractName}}" type="text" pInputText formControlName="contractName">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['contractName'].valid&&contractForm.controls['contractName'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>当前状态</p>
+                <input value="{{selectedContract.contractStatus}}" type="text" pInputText formControlName="contractStatus">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['contractStatus'].valid&&contractForm.controls['contractStatus'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>险种类型</p>
+                <p-dropdown formControlName="reinsType" [options]="reinsTypeList" placeholder="请选择险种">
+                </p-dropdown>
+                <p-message style="position: relative;" severity="error" text="此项必填" *ngIf="!contractForm.controls['reinsType'].valid&&contractForm.controls['reinsType'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>再保公司</p>
+                <p-dropdown formControlName="companyName" [options]="companyList" placeholder="请选择再保公司"></p-dropdown>
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['companyName'].valid&&contractForm.controls['companyName'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>分保类型</p>
+                <p-dropdown formControlName="contractType" [options]="contractTypeList" placeholder="请选择分保类型" (onChange)="contractTypeOnChange()">
+                </p-dropdown>
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['contractType'].valid&&contractForm.controls['contractType'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>签订日期</p>
+                <p-calendar formControlName="signDate" yearRange="2000:2019" [yearNavigator]="true">
+                </p-calendar>
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['signDate'].valid&&contractForm.controls['companyName'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>生效日期</p>
+                <p-calendar formControlName="beginDate" yearRange="2000:2019" [yearNavigator]="true">
+                </p-calendar>
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['beginDate'].valid&&contractForm.controls['beginDate'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>结束日期</p>
+                <p-calendar formControlName="endDate" yearRange="2000:2030" [yearNavigator]="true">
+                </p-calendar>
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['endDate'].valid&&contractForm.controls['endDate'].dirty">
+                </p-message>
+            </div>
+            <div class="list" *ngIf="surplus">
+                <p>合约限额</p>
+                <input type="text" pInputText formControlName="contract_limit">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['contract_limit'].valid&&contractForm.controls['contract_limit'].dirty">
+                </p-message>
+            </div>
+            <div class="list" *ngIf="quotaAshore">
+                <p>自留部分</p>
+                <input type="text" pInputText formControlName="retention">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['retention'].valid&&contractForm.controls['retention'].dirty">
+                </p-message>
+            </div>
+            <div class="list" *ngIf="surplus">
+                <p>线数</p>
+                <input type="text" pInputText formControlName="line_no">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['line_no'].valid&&contractForm.controls['line_no'].dirty">
+                </p-message>
+            </div>
+            <div class="list" *ngIf="quotaAshore">
+                <p>分出部分</p>
+                <input type="text" pInputText formControlName="split_amount">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['split_amount'].valid&&contractForm.controls['split_amount'].dirty">
+                </p-message>
+            </div>
+            <div class="list" *ngIf="surplus">
+                <p>自留部分</p>
+                <input type="text" pInputText formControlName="risk_unit">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['risk_unit'].valid&&contractForm.controls['risk_unit'].dirty">
+                </p-message>
+            </div>
+            <div class="list" *ngIf="quotaAshore">
+                <p>最高限额</p>
+                <input type="text" pInputText formControlName="ceiling_top">
+                <p-message severity="error" text="此项必填" *ngIf="!contractForm.controls['ceiling_top'].valid&&contractForm.controls['ceiling_top'].dirty">
+                </p-message>
+            </div>
+            <div class="list">
+                <p>合同备注:</p>
+                <textarea formControlName="description" rows="3" cols="100" pInputTextarea value="{{selectedContract.description}}"></textarea>
+            </div>
+            <div class="ui-g-5"></div>
+            <div class="ui-g-3" style="width:100%;text-align:center;">
+                <button pButton type="submit" label="提交" (click)="modifyDialog=false" [disabled]="contractForm.invalid" class="ui-button-rounded"></button>
+                <button pButton type="reset" label="取消" (click)="modifyDialog=false" class="ui-button-rounded ui-button-secondary"></button>
+            </div>
         </div>
-        <div class="ui-g-3">
-          <h4>签订日期</h4>
-          <p-calendar formControlName="signDate" yearRange="2000:2019" [yearNavigator]="true">
-          </p-calendar>
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['signDate'].valid&&contractForm.controls['companyName'].dirty">
-          </p-message>
-        </div>
-        <div class="ui-g-3">
-          <h4>再保公司</h4>
-          <p-dropdown formControlName="companyName" [options]="companyList" placeholder="请选择再保公司"></p-dropdown>
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['companyName'].valid&&contractForm.controls['companyName'].dirty">
-          </p-message>
-        </div>
-
-        <div class="ui-g-3" *ngIf="quotaAshore">
-          <h4>自留部分</h4>
-          <input type="text" pInputText formControlName="retention">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['retention'].valid&&contractForm.controls['retention'].dirty">
-          </p-message>
-        </div>
-
-        <div class="ui-g-3" *ngIf="surplus">
-          <h4>合约限额</h4>
-          <input type="text" pInputText formControlName="contract_limit">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['contract_limit'].valid&&contractForm.controls['contract_limit'].dirty">
-          </p-message>
-        </div>
-      </div>
-
-
-      <div class="ui-g">
-        <div class="ui-g-3">
-          <h4>合同名称</h4>
-          <input type="text" pInputText formControlName="contractName">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['contractName'].valid&&contractForm.controls['contractName'].dirty">
-          </p-message>
-        </div>
-        <div class="ui-g-3">
-          <h4>生效日期</h4>
-          <p-calendar formControlName="beginDate" yearRange="2000:2019" [yearNavigator]="true">
-          </p-calendar>
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['beginDate'].valid&&contractForm.controls['beginDate'].dirty">
-          </p-message>
-        </div>
-        <div class="ui-g-3">
-          <h4>险种类型</h4>
-          <p-dropdown formControlName="reinsType" [options]="reinsTypeList" placeholder="请选择险种">
-          </p-dropdown>
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['reinsType'].valid&&contractForm.controls['reinsType'].dirty">
-          </p-message>
-        </div>
-
-        <div class="ui-g-3" *ngIf="quotaAshore">
-          <h4>分出部分</h4>
-          <input type="text" pInputText formControlName="split_amount">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['split_amount'].valid&&contractForm.controls['split_amount'].dirty">
-          </p-message>
-        </div>
-
-        <div class="ui-g-3" *ngIf="surplus">
-          <h4>自留部分</h4>
-          <input type="text" pInputText formControlName="risk_unit">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['risk_unit'].valid&&contractForm.controls['risk_unit'].dirty">
-          </p-message>
-        </div>
-      </div>
-      <div class="ui-g">
-        <div class="ui-g-3">
-          <h4>当前状态</h4>
-          <input type="text" pInputText formControlName="contractStatus">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['contractStatus'].valid&&contractForm.controls['contractStatus'].dirty">
-          </p-message>
-        </div>
-        <div class="ui-g-3">
-          <h4>结束日期</h4>
-          <p-calendar formControlName="endDate" yearRange="2000:2030" [yearNavigator]="true">
-          </p-calendar>
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['endDate'].valid&&contractForm.controls['endDate'].dirty">
-          </p-message>
-        </div>
-        <div class="ui-g-3">
-          <h4>分保类型</h4>
-          <p-dropdown formControlName="contractType" [options]="contractTypeList" placeholder="请选择分保类型"
-            (onChange)="contractTypeOnChange()">
-          </p-dropdown>
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['contractType'].valid&&contractForm.controls['contractType'].dirty">
-          </p-message>
-        </div>
-
-        <div class="ui-g-3" *ngIf="quotaAshore">
-          <h4>最高限额</h4>
-          <input type="text" pInputText formControlName="ceiling_top">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['ceiling_top'].valid&&contractForm.controls['ceiling_top'].dirty">
-          </p-message>
-        </div>
-
-        <div class="ui-g-3" *ngIf="surplus">
-          <h4>线数</h4>
-          <input type="text" pInputText formControlName="line_no">
-          <p-message severity="error" text="此项必填"
-            *ngIf="!contractForm.controls['line_no'].valid&&contractForm.controls['line_no'].dirty">
-          </p-message>
-        </div>
-      </div>
-
-      <div class="ui-g" style="margin-top:10px;">
-        <div class="ui-g-3">
-          <h4>合同备注:</h4>
-          <textarea formControlName="description" rows="3" cols="100" pInputTextarea></textarea>
-        </div>
-      </div>
-      <div class="ui-g">
-        <div class="ui-g-5"></div>
-        <div class="ui-g-3">
-          <button pButton type="submit" label="提交" (click)="modifyDialog=false" [disabled]="contractForm.invalid"
-            class="ui-button-rounded"></button>
-          <button pButton type="reset" label="取消" (click)="modifyDialog=false"
-            class="ui-button-rounded ui-button-secondary"></button>
-        </div>
-      </div>
     </div>
-
-  </div>
 </p-dialog>

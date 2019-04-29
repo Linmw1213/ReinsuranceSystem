@@ -1,0 +1,136 @@
+.search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contract-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.contract-detail .ui-n-3 {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    padding: 1em 0;
+    display: flex;
+    justify-content: center;
+}
+
+.button button {
+    margin: 0 .5em;
+}
+
+.four-Twenty_seven {
+    display: flex;
+    align-items: center;
+}
+
+.four-Twenty_seven:first-child {
+    background: #f5f6fa;
+}
+
+.four-Twenty_seven p,
+.four-Twenty_seven .search-icon {
+    width: 20%;
+    text-align: center;
+}
+
+.four-Twenty_seven .search-icon button {
+    margin: 0 .2em;
+}
+
+.list:first-child .contract-details .ui-g .four-Twenty_seven:first-child {
+    display: flex;
+}
+
+.list .contract-details .ui-g .four-Twenty_seven:first-child {
+    display: none;
+}
+
+.four_Twenty-eight {
+    display: flex;
+    flex-direction: column;
+}
+
+.four_Twenty-eight .list {
+    display: flex;
+    padding: 5px 0;
+    position: relative;
+}
+
+.four_Twenty-eight .list p,
+.four_Twenty-eight .list span {
+    /* font-size: 16px; */
+    /* line-height: 20px; */
+    color: #000;
+    /* padding: 9px 15px; */
+    line-height: 38px;
+    padding: 0;
+    width: 80px;
+    text-align: center;
+}
+
+.four_Twenty-eight .list input {
+    padding: 0 15px;
+    line-height: 38px;
+    flex: auto;
+    height: 38px;
+    width: calc(100% - 100px);
+    display: block;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 1px solid #D2D2D2;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+p-dialog {}
+
+p-dialog div:first-child {
+    width: 800px;
+    min-width: 600px;
+}
+
+.update {
+    width: auto !important;
+    min-width: 600px;
+}
+
+.update .list {
+    width: auto !important;
+    min-width: 600px;
+}
+
+.update .list .main:after {
+    content: '*';
+    color: red;
+    position: absolute;
+    margin-left: 2px;
+}
+
+p-message {
+    position: absolute;
+    height: 38px;
+    right: 0;
+}
+
+p-message .ui-message-error {
+    height: 38px;
+    line-height: 38px;
+    background: content-box!important;
+    padding: 0 15px;
+}
+
+p-message .ui-message span {
+    color: #db3333;
+}
+
+p-dropdown .ui-dropdown {
+    height: 100%;
+}

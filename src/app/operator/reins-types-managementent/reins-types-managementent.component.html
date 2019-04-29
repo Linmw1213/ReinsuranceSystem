@@ -1,5 +1,33 @@
-<div class="ui-g ui-fluid">
-  <div class="ui-g">
-
-  </div>
-</div>
+<p-table #dt [columns]="cols" [value]="reinsTypes" [paginator]="true" [rows]="10">
+  <ng-template pTemplate="caption">
+    <div style="text-align: center">
+      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+      <input icon="pi pi-search" type="text" pInputText size="50" placeholder="全局搜索"
+        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+      <th>操作</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+      <td>
+        <i class="pi pi-pencil" (click)="editReinsType(rowData)"></i>
+        <i class="pi pi-trash" (click)="deleteReinsType(rowData)"></i>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="addReinsType()" label="Add"></button>
+    </div>
+  </ng-template>
+</p-table>
