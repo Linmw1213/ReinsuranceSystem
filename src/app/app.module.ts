@@ -28,6 +28,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TabViewModule } from 'primeng/tabview';
 
 /** native components */
 import { AppComponent } from './app.component';
@@ -45,7 +46,9 @@ import { UserInfoManagementComponent } from './admin/user-info-management/user-i
 import { AddContractComponent } from './operator/reins-contract-management/add-contract/add-contract.component';
 import { ModifyContractComponent } from './operator/reins-contract-management/modify-contract/modify-contract.component';
 import { ReinsClaimManagementComponent } from './operator/reins-claim-management/reins-claim-management.component';
-import { SystemManagementeComponent } from './operator/system-managemente/system-managemente.component';
+import { SystemManagementComponent } from './operator/system-management/system-management.component';
+import { UserInfoComponent } from './operator/system-management/user-info/user-info.component';
+import { UpdatePasswordComponent } from './operator/system-management/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { SystemManagementeComponent } from './operator/system-managemente/system
     AddContractComponent,
     ModifyContractComponent,
     ReinsClaimManagementComponent,
-    SystemManagementeComponent
+    SystemManagementComponent,
+    UserInfoComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +101,8 @@ import { SystemManagementeComponent } from './operator/system-managemente/system
     TooltipModule,
     CalendarModule,
     DynamicDialogModule,
-    InputTextareaModule
+    InputTextareaModule,
+    TabViewModule
 
   ],
   providers: [],

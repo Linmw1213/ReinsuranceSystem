@@ -8,7 +8,9 @@ import { ReinsCalculationComponent } from './reins-calculation/reins-calculation
 import { AddContractComponent } from './reins-contract-management/add-contract/add-contract.component';
 import { ModifyContractComponent } from './reins-contract-management/modify-contract/modify-contract.component';
 import { ReinsClaimManagementComponent } from './reins-claim-management/reins-claim-management.component';
-import { SystemManagementeComponent } from './system-managemente/system-managemente.component';
+import { SystemManagementComponent } from './system-management/system-management.component';
+import { UserInfoComponent } from './system-management/user-info/user-info.component';
+import { UpdatePasswordComponent } from './system-management/update-password/update-password.component';
 
 const routes: Routes = [
   // 公司信息管理
@@ -30,7 +32,10 @@ const routes: Routes = [
   { path: 'ReinsClaimManagement', component: ReinsClaimManagementComponent },
 
   // 系统设置
-  { path: 'SystemManagement', component: SystemManagementeComponent },
+  { path: 'SystemManagement', component: SystemManagementComponent },
+  { path: 'userInfo', component: UserInfoComponent },
+  { path: 'updatePassword', component: UpdatePasswordComponent },
+
 ];
 
 

@@ -21,6 +21,7 @@ export class AddReinsCompanyComponent implements OnInit {
   // 响应式表单
   private createForm() {
     this.addForm = this.fb.group({
+      id: [''],
       companyId: ['', Validators.required],
       companyName: ['', Validators.required],
       companyAddress: ['', Validators.required],
@@ -48,6 +49,7 @@ export class AddReinsCompanyComponent implements OnInit {
   // 保存并提交
   confirmBtnOnClick() {
     const company: Company = {
+      id: 1,
       companyId: this.addForm.get('companyId').value,
       companyName: this.addForm.get('companyName').value,
       companyAddress: this.addForm.get('companyAddress').value,

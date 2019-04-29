@@ -41,7 +41,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
   delete = false;
   modifyAlert = false;
   modifyIndex: any;
-
+  notFound: false;
   constructor(
     public dialogService: DialogService,
     public messageService: MessageService,
@@ -126,7 +126,6 @@ export class ReinsCompanyManagementComponent implements OnInit {
     if (this.companyForm.get('companyId').valid) {
       this.searchDialog = true;
       this.service.getCompanyById(id).subscribe((company) => {
-
         this.companyForm.get('searchCompanyId').setValue(company.companyId);
         this.companyForm.get('searchCompanyName').setValue(company.companyName);
         this.companyForm.get('searchCompanyAddress').setValue(company.companyAddress);
@@ -182,9 +181,10 @@ export class ReinsCompanyManagementComponent implements OnInit {
     this.modifyDialog = false;
     this.modifyAlert = true;
 
-    const arr = this.companyForm.get('modifyArr') as FormArray;    
-    const companyId = this.modifyIndex.companyId;
+    const arr = this.companyForm.get('modifyArr') as FormArray;
+    const id = this.modifyIndex.id;
     const company: Company = {
+      id: id,
       companyId: arr.at(0).get('modifyCompanyId').value,
       companyName: arr.at(0).get('modifyCompanyName').value,
       companyAddress: arr.at(0).get('modifyCompanyAddress').value,
@@ -202,7 +202,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
 
     this.service.updateCompany(company).subscribe(
       (data) => {
-        console.log('修改成功'+data);
+        console.log('修改成功' + data);
       }
     );
   }
