@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Company } from '../VO/company';
-import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' })
@@ -18,7 +17,7 @@ export class CompanyService {
   deleteUrl = 'http://localhost:8080/company/deleteById';
   modifyUrl = 'http://localhost:8080/company/modifyById';
   header = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' });
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient) { }
 
   getCompanyMessages(): Observable<Company[]> {
     return this.http.get<Company[]>(this.companyURL + '/getAll');

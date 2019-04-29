@@ -69,7 +69,7 @@ import { UpdatePasswordComponent } from './operator/system-management/update-pas
     ReinsClaimManagementComponent,
     SystemManagementComponent,
     UserInfoComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
   ],
   imports: [
     BrowserModule,

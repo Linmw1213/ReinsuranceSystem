@@ -12,7 +12,9 @@ export class ReinsTypesManagemententComponent implements OnInit {
 
   reinsTypes: ReinsType[];
   cols: any[];
-  addReinsTypeForm: FormGroup;
+  reinsTypeForm: FormGroup;
+  addDialog = false;
+  editDialog = false;
   constructor(private reinsTypeService: ReinsTypeService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -22,12 +24,13 @@ export class ReinsTypesManagemententComponent implements OnInit {
   }
 
   craeteForm() {
-    this.addReinsTypeForm = this.fb.group({
+    this.reinsTypeForm = this.fb.group({
       reinsTypeName: '',
       description: ''
     })
   }
 
+  // 获取所有险种
   getAllReinsType() {
     this.reinsTypeService.getReinsTypes().subscribe(
       (data) => {
@@ -37,6 +40,7 @@ export class ReinsTypesManagemententComponent implements OnInit {
     );
   }
 
+  // 设置表格头、值
   setCols() {
     this.cols = [
       { field: 'typeId', header: '险种代码' },
@@ -48,15 +52,42 @@ export class ReinsTypesManagemententComponent implements OnInit {
     ];
   }
 
-  editReinsType(rowData: any) {
+  // 修改险种
+  editReinsTypeById(rowData: any) {
     console.log('type' + rowData.typeId);
+    this.editDialog = true;
   }
 
-  deleteReinsType(rowData: any) {
-
+  // 删除险种
+  deleteReinsType(event: Event,rowData: any) {
+    this.reinsTypes = this.reinsTypes.filter(reinstype => reinstype !== rowData);
+    this.reinsTypeService.deleteReinsType(rowData).subscribe();
   }
 
+  // 添加险种
   addReinsType() {
+    this.addDialog = true;
   }
+
+  // 提交添加的内容
+  submitAddMessage() {
+    const reinsType: ReinsType = {
+      typeId: '1',
+      typeName: this.reinsTypeForm.get('reinsTypeName').value,
+      description: this.reinsTypeForm.get('description').value,
+      modifyTime: '2019/12/13',
+      typeStatus: '待审核',
+      operatorName: '李白',
+      operatorId: '1001',
+    }
+    this.reinsTypes.push(reinsType);
+    // this.addDialog = false;
+    // this.reinsTypeService.addReinsType(reinsType).subscribe(
+    //   (data) =>{
+    //     this.reinsTypes.push(reinsType);
+    //     console.log('data:' + data); 
+    //   });
+  }
+
 
 }

@@ -20,8 +20,8 @@
         {{rowData[col.field]}}
       </td>
       <td>
-        <i class="pi pi-pencil" (click)="editReinsType(rowData)"></i>
-        <i class="pi pi-trash" (click)="deleteReinsType(rowData)"></i>
+        <i style="cursor: pointer;" class="pi pi-pencil" (click)="editReinsType(rowData)"></i>
+        <i style="cursor: pointer;" class="pi pi-trash" (click)="deleteReinsType($event,rowData)"></i>
       </td>
     </tr>
   </ng-template>
@@ -31,3 +31,26 @@
     </div>
   </ng-template>
 </p-table>
+
+<div [formGroup]="reinsTypeForm">
+
+  <!-- 新增险种 -->
+  <p-dialog header="录入新险种" [(visible)]="addDialog" [modal]="true" [responsive]="true" [style]="{width: '500px'}">
+    <div class="ui-n-24">
+      <div class="ui-n-24">
+        <h4>险种名称</h4>
+        <input type="text" pInputText formControlName="reinsTypeName">
+      </div>
+      <div class="ui-n-24" style="margin-top:10px">
+        <h4>备注信息</h4>
+        <textarea rows="3" cols="20" pInputTextarea formControlName="description"></textarea>
+      </div>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="submitAddMessage()" label="提交"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="addDialog=false" label="取消"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </p-dialog>
+
+</div>

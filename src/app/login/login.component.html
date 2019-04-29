@@ -12,7 +12,7 @@
     <div class="main" style="width:100%;display:block;">
       <h1 class="Title"><small>Login</small></h1>
       <div class="UserName">
-        <input type="text" formControlName="username" class="form-control" placeholder="Username">
+        <input type="text" formControlName="username" class="form-control" placeholder="用户名(由字母、数字、下划线组成)">
         <div class="Usererror">
           <p-message severity="error"
             [text]="loginform.controls['username'].errors['required'] ? '账号不能为空' : 
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="PassWord">
-        <input type="password" formControlName="password" class="form-control" placeholder="password">
+        <input type="password" formControlName="password" class="form-control" placeholder="密码(由字母、数字、下划线组成)">
         <div class="PassWorderror">
           <p-message severity="error"
             [text]="loginform.controls['password'].errors['required'] ? '密码不能为空' : 
