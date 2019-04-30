@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { ReinsCalculationService } from 'src/app/service/reins-calculation.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ReinsCaculation } from 'src/app/VO/reinsCaculation';
 
 @Component({
   selector: 'app-reins-calculation',
@@ -14,7 +13,7 @@ export class ReinsCalculationComponent implements OnInit {
   data: any;
   contractId: SelectItem[];
   reinsCalculationForm: FormGroup;
-  reinsCaculation: ReinsCaculation;
+  // reinsCaculation: ReinsCaculation;
 
   constructor(private service: ReinsCalculationService, private fb: FormBuilder) { }
 
