@@ -1,3 +1,38 @@
-<p>
-  user-info works!
-</p>
+<div class="ui-fluid" [formGroup]="userForm">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-4">
+        编号
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="userId"/>
+      </div>
+
+      <div class="ui-g-4">
+        用户名
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="username"/>
+      </div>
+
+      <div class="ui-g-4">
+        邮箱
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="userEmail"/>
+      </div>
+
+      <div class="ui-g-4">
+        联系电话
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="userPhone"/>
+      </div>
+
+      <div class="ui-g-4"></div>
+      <div class="ui-g-8">
+        <button pButton label="提交修改" type="button" [disabled]="userForm.invalid"></button>
+      </div>
+    </div>
+  </div>
+</div>

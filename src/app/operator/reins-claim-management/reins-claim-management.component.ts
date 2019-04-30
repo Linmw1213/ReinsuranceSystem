@@ -56,6 +56,26 @@ export class ReinsClaimManagementComponent implements OnInit {
     this.reinsClaimArr = this.reinsClaimArr.filter(reinsClaim => reinsClaim !== rowData);
   }
 
+  submitAddMsg() {
+    const reinsClaim: ReinsClaim = {
+      claimId: '',
+      contractId: this.reinsClaimForm.get('contractId').value,
+      contractName: this.reinsClaimForm.get('contractName').value,
+      contractType: this.reinsClaimForm.get('contractName').value,
+      companyName: this.reinsClaimForm.get('contractName').value,
+      bankAccount: this.reinsClaimForm.get('contractName').value,
+      bankName: this.reinsClaimForm.get('contractName').value,
+      currency: this.reinsClaimForm.get('contractName').value,
+      claimAmount: this.reinsClaimForm.get('contractName').value,
+      description: this.reinsClaimForm.get('contractName').value,
+      modifyTime: '',
+      claimTime: '',
+      claimStatus: '',
+      operatorName: '',
+      operatorId: '',
+    }
+  }
+
   setCols() {
     this.cols = [
       { field: 'claimId', header: '理赔号' },
@@ -109,6 +129,6 @@ export class ReinsClaimManagementComponent implements OnInit {
       { label: 'jhto2g2', value: 'yie' },
       { label: 'jhto2g2', value: 'yie' },
     ];
-  //  this.contractId[0] = { label: 'jhto2g2', value: 'chengshu' }
+    //  this.contractId[0] = { label: 'jhto2g2', value: 'chengshu' }
   }
 }

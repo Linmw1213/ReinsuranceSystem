@@ -6,7 +6,7 @@ export interface ReinsClaim {
     companyName: any;
     bankAccount: string;
     bankName: string;
-    currency: string;
+    currency: any;
     claimAmount: any;
     description: string;
     modifyTime: any;
