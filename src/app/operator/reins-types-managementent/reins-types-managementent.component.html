@@ -53,4 +53,31 @@
     </p-footer>
   </p-dialog>
 
+  <!-- 修改险种 -->
+  <p-dialog header="修改险种" [(visible)]="modifyDialog" [modal]="true" [responsive]="true" [style]="{width: '500px'}">
+    <div class="ui-n-24">
+      <div class="ui-n-24">
+        <h4>险种编号</h4>
+        <input type="text" pInputText formControlName="reinsTypeId">
+      </div>
+      <div class="ui-n-24">
+        <h4>险种名称</h4>
+        <input type="text" pInputText formControlName="reinsTypeName">
+      </div>
+      <div class="ui-n-24" style="margin-top:10px">
+        <h4>备注信息</h4>
+        <textarea rows="3" cols="20" pInputTextarea formControlName="description"></textarea>
+      </div>
+      <div class="ui-n-24" style="margin-top:10px">
+        <h4>当前状态</h4>
+        <input type="text" pInputText formControlName="typeStatus">
+      </div>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="submitModifyMessage()" label="提交"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="submitModifyMessage()" label="取消"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </p-dialog>
+
 </div>

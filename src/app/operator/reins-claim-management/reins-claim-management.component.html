@@ -1,31 +1,72 @@
-<div class="ui-g-12 ui-g-nopad">
+<div class="ui-g-24 ui-g-nopad">
   <div class="ui-g">
-    <div class="ui-g-12 ui-md-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet, orci nec dictum
-      convallis, ligula mauris vestibulum turpis, nec varius tortor quam at diam. Nullam a viverra nibh. In tincidunt
-      tempor lectus quis vulputate. Pellentesque nec dui aliquam, lobortis est in, lobortis ante</div>
-    <div class="ui-g-12 ui-md-4">Maecenas vel nisi aliquet, vulputate tortor id, laoreet massa. Maecenas mattis
-      tristique bibendum. Suspendisse vel mi dictum, vestibulum lacus quis, pulvinar quam. Proin vulputate, nibh at
-      finibus varius, leo eros lacinia elit, nec blandit odio tellus a justo. Donec nec ex auctor, tristique nulla nec,
-      rutrum sapien.</div>
-    <div class="ui-g-12 ui-md-4">Proin efficitur in leo eget ornare. Nam vestibulum neque sed velit sagittis sodales.
-      Sed scelerisque hendrerit magna a hendrerit. Cras tempor sem at justo pharetra convallis. Curabitur vel sodales
-      purus. Vestibulum interdum facilisis nulla imperdiet suscipit. Quisque lectus felis, condimentum eget hendrerit
-      sit amet.</div>
+    <div class="ui-g-24 ui-md-12">
+        <p-table #dt [columns]="cols" [value]="reinsClaimArr" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="caption">
+              <div style="text-align: center">
+                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                <input icon="pi pi-search" type="text" pInputText size="50" placeholder="全局搜索"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+                <th>操作</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns">
+                  {{rowData[col.field]}}
+                </td>
+                <td>
+                  <i style="cursor: pointer;" class="pi pi-trash" (click)="delete($event,rowData)"></i>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+    </div>
   </div>
 
-  <div class="ui-g">
-    <!-- <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div>
-    <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div>
-    <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div>
-    <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div> -->
+  <div class="ui-g" [formGroup]="reinsClaimForm">
+    <div class="ui-g-12 ui-md-6">
+      <p-card subheader="新增理赔件" styleClass="ui-card-shadow">
+        <p-steps [model]="items"></p-steps>
+
+        <label>合同编号</label>       
+        <p-dropdown [options]="contractId" formControlNam="contractId" placeholder="请选择合同编号"></p-dropdown>
+       
+        <label>合同名称</label>
+        <input type="text" pInputText formControlNam="contractName">
+
+        <label>合同类型</label>
+        <input type="text" pInputText formControlNam="contractName">
+       
+        <label>再保公司</label>        
+        <input type="text" pInputText formControlNam="contractName">
+
+        <label>结算账户</label>
+        <input type="text" pInputText formControlNam="contractName">
+
+        <label>结算币种</label>
+        <input type="text" pInputText formControlNam="contractName">
+
+        <label>理赔金额</label>
+        <input type="text" pInputText formControlNam="contractName">
+
+        <label>当前状态</label>
+        <input type="text" pInputText formControlNam="contractName">
+        <button pButton label="提交" type="button"></button>
+      </p-card>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <p-card subheader="进展一览处" styleClass="ui-card-shadow">
+        <p-chart type="pie" [data]="data"></p-chart>
+      </p-card>
+    </div>
   </div>
 
-  <div class="ui-g">
-    <div class="ui-g-12 ui-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien facilisis,
-      commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque neque orci,
-      ullamcorper vitae ligula quis, dignissim euismod augue.</div>
-    <div class="ui-g-12 ui-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas. Lorem ipsum
-      dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat dapibus. Aliquam pretium leo
-      et egestas luctus. Nunc facilisis gravida tellus.</div>
-  </div>
 </div>

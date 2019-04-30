@@ -19,12 +19,17 @@ export class ReinsTypeService {
   }
 
   addReinsType(reinsType: ReinsType): Observable<ReinsType> {
-    return this.httpClient.post<ReinsType>(this.reinsTypeURL,reinsType);
+    return this.httpClient.post<ReinsType>(this.reinsTypeURL, reinsType);
   }
 
-  deleteReinsType(reinsType: ReinsType| string): Observable<ReinsType> {
+  deleteReinsType(reinsType: ReinsType | string): Observable<ReinsType> {
     const id = typeof reinsType === 'string' ? reinsType : reinsType.typeId;
     const url = `${this.reinsTypeURL}/${id}`;
     return this.httpClient.delete<ReinsType>(url, httpOptions);
+  }
+
+  modiifyReinsType(reinsType: ReinsType): Observable<ReinsType> {
+
+    return this.httpClient.put<ReinsType>(`${this.reinsTypeURL}/${reinsType.typeId}`, reinsType);
   }
 }

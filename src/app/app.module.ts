@@ -29,6 +29,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
+import { StepsModule } from 'primeng/steps';
 
 /** native components */
 import { AppComponent } from './app.component';
@@ -102,7 +103,8 @@ import { UpdatePasswordComponent } from './operator/system-management/update-pas
     CalendarModule,
     DynamicDialogModule,
     InputTextareaModule,
-    TabViewModule
+    TabViewModule,
+    StepsModule
 
   ],
   providers: [],
