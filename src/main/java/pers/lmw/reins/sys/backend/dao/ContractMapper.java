@@ -35,4 +35,7 @@ public interface ContractMapper {
 	@Delete("delete from contract_msg where contractId=?")
 	public int deleteContract(@Param("contractId") String contractId);
 	
+	@Select("select count(*) from contract_msg where companyName=?")
+	public int countContract(@Param("companyName")String companyName);
+	
 }
