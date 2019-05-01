@@ -24,18 +24,16 @@ public interface CompanyMapper {
 	@Select("select * from company_msg where companyId=#{companyId}")
 	public Company getCompanyById(@Param("companyId") String companyId);
 
-	@Delete("delete * from company_msg where companyId=#{companyId}")
+	@Delete("delete from company_msg where companyId=#{companyId}")
 	public int deleteCompanyById(@Param("companyId") String companyId);
 
-	@Insert("insert into company_msg(companyId,companyName,companyAddress,companyEmail,companyPhone,"
-			+ "linkMan,linkPhone,linkEmail,department,duty,bankAccount,bankName,currency) "
-			+ "values(#{companyId},#{companyName},#{companyAddress},#{companyEmail},#{companyPhone,},"
+	@Insert("insert into company_msg(companyId,companyName,companyAddress,companyEmail,companyPhone,linkMan,linkPhone,linkEmail,department,duty,bankAccount,bankName,currency) "
+			+ "values(#{companyId},#{companyName},#{companyAddress},#{companyEmail},#{companyPhone},"
 			+ "#{linkMan},#{linkPhone},#{linkEmail},#{department},#{duty},#{bankAccount},#{bankName},#{currency})")
 	public int addCompany(Company company);
 
 	// 修改公司信息
-	@Update("update company_msg set companyId=#{companyId},companyName=#{companyName},companyPhone=#{companyPhone},companyEmail=#{companyEmail},companyAddress=#{companyAddress}"
-			+ "linkMan=#{linkMan},linkPhone=#{linkPhone},linkEmail=#{linkEmail},department=#{department},duty=#{duty}"
-			+ "bankAccount=#{bankAccount},bankName=#{bankName},currency=#{currency} where companyId=#{companyId}")
-	public int updateCompany(Company company, @Param("companyId") String companyId);
+	@Update("update company_msg set companyId=#{companyId},companyName=#{companyName},companyPhone=#{companyPhone},companyEmail=#{companyEmail},companyAddress=#{companyAddress},"
+			+ "linkMan=#{linkMan},linkPhone=#{linkPhone},linkEmail=#{linkEmail},department=#{department},duty=#{duty},bankAccount=#{bankAccount},bankName=#{bankName},currency=#{currency} where id=#{id}")
+	public int updateCompany(Company company);
 }

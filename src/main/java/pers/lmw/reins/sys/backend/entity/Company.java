@@ -6,6 +6,8 @@ package pers.lmw.reins.sys.backend.entity;
  * @date 2019年4月13日下午9:08:38
  */
 public class Company {
+	
+	private int id;
 	//公司基本信息
 	private String companyId;			
 	private String companyName;		
@@ -24,6 +26,13 @@ public class Company {
 	private String bankAccount;
 	private String bankName;
 	private String currency;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getCompanyId() {
 		return companyId;
 	}

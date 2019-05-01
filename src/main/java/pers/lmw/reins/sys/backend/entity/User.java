@@ -7,16 +7,17 @@ package pers.lmw.reins.sys.backend.entity;
  */
 public class User {
 	
-	private int userId;
+//	private int userId;
+	private String userId;
 	private String username;
 	private String password;
 	private String phone;
 	private String email;
 	
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {

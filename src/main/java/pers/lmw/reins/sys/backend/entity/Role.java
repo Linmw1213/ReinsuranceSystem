@@ -7,28 +7,21 @@ package pers.lmw.reins.sys.backend.entity;
  */
 public class Role {
 
-	private int roleId;
-	private String roleName;
-	private String description;
+	private int id;
+	private String name;
 	
-	
-	public int getRoleId() {
-		return roleId;
+	public int getId() {
+		return id;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getRoleName() {
-		return roleName;
+	public String getName() {
+		return name;
 	}
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
+		
 }

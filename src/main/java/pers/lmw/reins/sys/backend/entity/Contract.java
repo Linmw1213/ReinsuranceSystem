@@ -8,23 +8,20 @@ import java.util.Date;
  * @date 2019年4月13日下午9:09:59
  */
 public class Contract {
+	
 	private String contractId;
 	private String contractName;
-	private String reinsCompanyName;
-	private String contractStatus;
+	private String companyName;
 	private String contractTypeName;
-	private String contractAppendix;
-	private Date beginDate;
-	private Date endDate;
-	private String linfenType;
+	private String contractStatus;
+	private String reinsTypeId;
 	private String description;
-	private double retention;
-	private double splitAmount;
-	private double ceilingTop;
-	private double riskUnit;
-	private int lineNum;
-	private double contractLimit;
-	
+	private String appendix;
+	private Date beginDate;
+	private Date stopDate;
+	private String operator;
+	private Date create_time;
+	private Date modify_time;
 	public String getContractId() {
 		return contractId;
 	}
@@ -37,17 +34,11 @@ public class Contract {
 	public void setContractName(String contractName) {
 		this.contractName = contractName;
 	}
-	public String getReinsCompanyName() {
-		return reinsCompanyName;
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setReinsCompanyName(String reinsCompanyName) {
-		this.reinsCompanyName = reinsCompanyName;
-	}
-	public String getContractStatus() {
-		return contractStatus;
-	}
-	public void setContractStatus(String contractStatus) {
-		this.contractStatus = contractStatus;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	public String getContractTypeName() {
 		return contractTypeName;
@@ -55,11 +46,29 @@ public class Contract {
 	public void setContractTypeName(String contractTypeName) {
 		this.contractTypeName = contractTypeName;
 	}
-	public String getContractAppendix() {
-		return contractAppendix;
+	public String getContractStatus() {
+		return contractStatus;
 	}
-	public void setContractAppendix(String contractAppendix) {
-		this.contractAppendix = contractAppendix;
+	public void setContractStatus(String contractStatus) {
+		this.contractStatus = contractStatus;
+	}
+	public String getReinsTypeId() {
+		return reinsTypeId;
+	}
+	public void setReinsTypeId(String reinsTypeId) {
+		this.reinsTypeId = reinsTypeId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getAppendix() {
+		return appendix;
+	}
+	public void setAppendix(String appendix) {
+		this.appendix = appendix;
 	}
 	public Date getBeginDate() {
 		return beginDate;
@@ -68,57 +77,28 @@ public class Contract {
 		this.beginDate = beginDate;
 	}
 	public Date getEndDate() {
-		return endDate;
+		return stopDate;
 	}
 	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+		this.stopDate = endDate;
 	}
-	public String getLinfenType() {
-		return linfenType;
+	public String getOperator() {
+		return operator;
 	}
-	public void setLinfenType(String linfenType) {
-		this.linfenType = linfenType;
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
-	public String getDescription() {
-		return description;
+	public Date getCreate_time() {
+		return create_time;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
-	public double getRetention() {
-		return retention;
+	public Date getModify_time() {
+		return modify_time;
 	}
-	public void setRetention(double retention) {
-		this.retention = retention;
+	public void setModify_time(Date modify_time) {
+		this.modify_time = modify_time;
 	}
-	public double getSplitAmount() {
-		return splitAmount;
-	}
-	public void setSplitAmount(double splitAmount) {
-		this.splitAmount = splitAmount;
-	}
-	public double getCeilingTop() {
-		return ceilingTop;
-	}
-	public void setCeilingTop(double ceilingTop) {
-		this.ceilingTop = ceilingTop;
-	}
-	public double getRiskUnit() {
-		return riskUnit;
-	}
-	public void setRiskUnit(double riskUnit) {
-		this.riskUnit = riskUnit;
-	}
-	public int getLineNum() {
-		return lineNum;
-	}
-	public void setLineNum(int lineNum) {
-		this.lineNum = lineNum;
-	}
-	public double getContractLimit() {
-		return contractLimit;
-	}
-	public void setContractLimit(double contractLimit) {
-		this.contractLimit = contractLimit;
-	}
+
 }
