@@ -15,7 +15,7 @@ public interface ContractService {
 	
 	public int addContract(Contract contract);
 	
-	public int updateContract(String contractId);
+	public int updateContract(Contract contract);
 	
 	public int deleteContract(String contractId);
 }

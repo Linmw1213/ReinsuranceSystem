@@ -36,4 +36,5 @@ public interface CompanyMapper {
 	@Update("update company_msg set companyId=#{companyId},companyName=#{companyName},companyPhone=#{companyPhone},companyEmail=#{companyEmail},companyAddress=#{companyAddress},"
 			+ "linkMan=#{linkMan},linkPhone=#{linkPhone},linkEmail=#{linkEmail},department=#{department},duty=#{duty},bankAccount=#{bankAccount},bankName=#{bankName},currency=#{currency} where id=#{id}")
 	public int updateCompany(Company company);
+	
 }

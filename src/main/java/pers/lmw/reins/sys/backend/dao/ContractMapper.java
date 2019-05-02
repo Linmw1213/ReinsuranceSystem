@@ -30,7 +30,7 @@ public interface ContractMapper {
 	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},contractStatus=#{contractStatus},reinsTypeId=#{reinsTypeId},"
 			+ "beginDate=#{degeinDate},stopDate=#{stopDate},description=#{description},companyName={companyName},appendix=#{appendix},operator=#{operator},create_time=#{create_time},"
 			+ "modify_time=#{modify_time} where contractId=?)")
-	public int updateContract(@Param("contractId") String contractId);
+	public int updateContract(Contract contract);
 	
 	@Delete("delete from contract_msg where contractId=?")
 	public int deleteContract(@Param("contractId") String contractId);

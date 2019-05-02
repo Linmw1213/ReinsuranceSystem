@@ -61,7 +61,7 @@ public class SetContractId {
 	 */
 	public static String getCurrentDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		sdf.applyPattern("yyyyMMdd");
+		sdf.applyPattern("yyyy-MM-dd");
 		Date date = new Date();
 		String currentDate = sdf.format(date);
 		return currentDate;

@@ -1,7 +1,5 @@
 package pers.lmw.reins.sys.backend.entity;
 
-import java.util.Date;
-
 /**
  *	合同信息
  * @author linmingwen
@@ -17,11 +15,11 @@ public class Contract {
 	private String reinsTypeId;
 	private String description;
 	private String appendix;
-	private Date beginDate;
-	private Date stopDate;
+	private String beginDate;
+	private String stopDate;
 	private String operator;
-	private Date create_time;
-	private Date modify_time;
+	private String create_time;
+	private String modify_time;
 	public String getContractId() {
 		return contractId;
 	}
@@ -70,34 +68,35 @@ public class Contract {
 	public void setAppendix(String appendix) {
 		this.appendix = appendix;
 	}
-	public Date getBeginDate() {
+	public String getBeginDate() {
 		return beginDate;
 	}
-	public void setBeginDate(Date beginDate) {
+	public void setBeginDate(String beginDate) {
 		this.beginDate = beginDate;
 	}
-	public Date getEndDate() {
-		return stopDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.stopDate = endDate;
-	}
+	
 	public String getOperator() {
 		return operator;
 	}
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-	public Date getCreate_time() {
+	public String getStopDate() {
+		return stopDate;
+	}
+	public void setStopDate(String stopDate) {
+		this.stopDate = stopDate;
+	}
+	public String getCreate_time() {
 		return create_time;
 	}
-	public void setCreate_time(Date create_time) {
+	public void setCreate_time(String create_time) {
 		this.create_time = create_time;
 	}
-	public Date getModify_time() {
+	public String getModify_time() {
 		return modify_time;
 	}
-	public void setModify_time(Date modify_time) {
+	public void setModify_time(String modify_time) {
 		this.modify_time = modify_time;
 	}
 

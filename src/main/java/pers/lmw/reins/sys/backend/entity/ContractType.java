@@ -7,21 +7,21 @@ package pers.lmw.reins.sys.backend.entity;
  */
 public class ContractType {
 	
-	private String typeId;
-	private String typeName;
+	private String contractTypeId;
+	private String contractTypeName;
 	private String description;
 	
-	public String getTypeId() {
-		return typeId;
+	public String getContractTypeId() {
+		return contractTypeId;
 	}
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
+	public void setContractTypeId(String contractTypeId) {
+		this.contractTypeId = contractTypeId;
 	}
-	public String getTypeName() {
-		return typeName;
+	public String getContractTypeName() {
+		return contractTypeName;
 	}
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setContractTypeName(String contractTypeName) {
+		this.contractTypeName = contractTypeName;
 	}
 	public String getDescription() {
 		return description;
