@@ -31,7 +31,7 @@
             <p><b>{{contract.contractId}}</b></p>
             <p><b>{{contract.contractName}}</b></p>
             <p><b>{{contract.companyName}}</b></p>
-            <p><b>{{contract.contractType}}</b></p>
+            <p><b>{{contract.contractTypeName}}</b></p>
             <div class="ui-g-12 ui-md-3 search-icon">
               <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
               <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
@@ -83,16 +83,16 @@
       <span>{{selectedContract.contractName}}</span>
     </div>
     <div class="list">
-      <span>分入公司:</span>
+      <span>再保公司:</span>
       <span>{{selectedContract.companyName}}</span>
     </div>
     <div class="list">
       <span>合同类型:</span>
-      <span>{{selectedContract.contractType}}</span>
+      <span>{{selectedContract.contractTypeName}}</span>
     </div>
     <div class="list">
       <span>再保险种:</span>
-      <span>{{selectedContract.reinsType}}</span>
+      <span>{{selectedContract.reinsTypeName}}</span>
     </div>
     <div class="list">
       <span>合同状态:</span>
@@ -108,14 +108,14 @@
     </div>
     <div class="list">
       <span>合同止期:</span>
-      <span>{{selectedContract.endDate}}</span>
+      <span>{{selectedContract.stopDate}}</span>
     </div>
   </div>
 </p-dialog>
 
 <!-- 修改合同 -->
-<p-dialog class="hkr" header="修改合同信息" [(visible)]="modifyDialog" [responsive]="true" showEffect="fade"
-  [style]="{width: 'auto',height:'auto',overflow:'auto'}" [modal]="true" (onAfterHide)="onDialogHide()">
+<p-dialog header="合同详细信息" [(visible)]="modifyDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: 'auto',height: 'auto'}" [maximizable]="true">
   <div class="ui-g" *ngIf="selectedContract">
     <div [formGroup]="contractForm" class="four_Twenty-eight update">
       <div class="list">
@@ -133,13 +133,13 @@
           *ngIf="!contractForm.controls['contractName'].valid&&contractForm.controls['contractName'].dirty">
         </p-message>
       </div>
-      <div class="list">
+      <!-- <div class="list">
         <p>当前状态</p>
         <input value="{{selectedContract.contractStatus}}" type="text" pInputText formControlName="contractStatus">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['contractStatus'].valid&&contractForm.controls['contractStatus'].dirty">
         </p-message>
-      </div>
+      </div> -->
       <div class="list">
         <p>险种类型</p>
         <p-dropdown formControlName="reinsType" [options]="reinsTypeList" placeholder="请选择险种">
@@ -235,13 +235,11 @@
         <textarea formControlName="description" rows="3" cols="100" pInputTextarea
           value="{{selectedContract.description}}"></textarea>
       </div>
-      <div class="ui-g-5"></div>
-      <div class="ui-g-3" style="width:100%;text-align:center;">
-        <button pButton type="submit" label="提交" (click)="modifyDialog=false" [disabled]="contractForm.invalid"
-          class="ui-button-rounded"></button>
-        <button pButton type="reset" label="取消" (click)="modifyDialog=false"
-          class="ui-button-rounded ui-button-secondary"></button>
-      </div>
+      <p-footer>
+        <button pButton type="submit" label="提交" (click)="modifyDialog=false"
+          [disabled]="contractForm.invalid"></button>
+        <button pButton type="reset" label="取消" (click)="modifyDialog=false" class="ui-button-secondary"></button>
+      </p-footer>
     </div>
   </div>
 </p-dialog>

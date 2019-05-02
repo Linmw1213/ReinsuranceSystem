@@ -4,7 +4,6 @@ export interface ReinsType {
     description: string;
     createTime: any;
     modifyTime: any;
-    typeStatus: string;
-    operatorName: string;
+    operator: string;
     operatorId: string;
 }

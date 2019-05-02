@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Contract } from '../VO/contract';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CalculateData } from '../VO/calculateData';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,10 +14,11 @@ const httpOptions = {
 export class ContractService {
 
   private ContractesUrl = '/assets/mock-data/contract.json';
+  private contractURL = 'http://localhost:8080/contract';
   constructor(private http: HttpClient) { }
 
   getContractMessages(): Observable<Contract[]> {
-    return this.http.get<Contract[]>('/assets/mock-data/contract.json');
+    return this.http.get<Contract[]>(this.contractURL+'/getAll');
   }
   
   addContract(contract: Contract): Observable<Contract> {

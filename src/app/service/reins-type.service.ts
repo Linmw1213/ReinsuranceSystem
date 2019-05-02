@@ -11,11 +11,13 @@ const httpOptions = {
 })
 export class ReinsTypeService {
 
-  private reinsTypeURL = '/assets/mock-data/reins-type.json';
+  // private reinsTypeURL = '/assets/mock-data/reins-type.json';
+  private reinsTypeURL = 'http://localhost:8080/reinsType';
+
   constructor(private httpClient: HttpClient) { }
 
   getReinsTypes(): Observable<ReinsType[]> {
-    return this.httpClient.get<ReinsType[]>(this.reinsTypeURL);
+    return this.httpClient.get<ReinsType[]>(this.reinsTypeURL + '/getAll');
   }
 
   addReinsType(reinsType: ReinsType): Observable<ReinsType> {

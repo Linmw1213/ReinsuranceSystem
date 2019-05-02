@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Contract } from 'src/app/VO/contract';
 import { SelectItem } from 'primeng/api';
+import { CompanyService } from 'src/app/service/company.service';
+import { ReinsTypeService } from 'src/app/service/reins-type.service';
+import { ContractTypeService } from 'src/app/service/contract-type.service';
+import { Contract } from 'src/app/VO/contract';
+import { CalculateData } from 'src/app/VO/calculateData';
+import { ContractService } from 'src/app/service/contract.service';
+import { ReinsCalculationService } from 'src/app/service/reins-calculation.service';
 
 @Component({
   selector: 'app-add-contract',
@@ -14,37 +20,61 @@ export class AddContractComponent implements OnInit {
   addContractForm: FormGroup;
   quotaAshore = false;
   surplus = false;
-  contractTypeList: SelectItem[];
-  companyList: SelectItem[];
-  reinsTypeList: SelectItem[];
+  contractTypeList = [];
+  companyList = [];
+  reinsTypeList = [];
 
-  constructor(private router: Router, private fb: FormBuilder) { }
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private contractService: ContractService,
+    private companyService: CompanyService,
+    private reinsTypeService: ReinsTypeService,
+    private contractTypeService: ContractTypeService,
+    private calculateService: ReinsCalculationService
+  ) { }
 
   ngOnInit() {
     this.createForm();
     this.dropdownList();
+    this.testDate();
+    console.log('form:' + this.addContractForm.value);
+  }
+
+  testDate() {
+    let today = new Date();
+    let date = this.addContractForm.get('beginDate').value;
+    // date.toLocaleDateString();
+    // console.log('month:' + today.getFullYear());
+    // console.log('month:' + today.getMonth());
+    // console.log('date:' + today.toLocaleDateString());
+    // console.log('test:' + date.valueOf());
   }
 
   // 响应式表单
   private createForm() {
     this.addContractForm = this.fb.group({
-      contractId: ['', Validators.required],
-      contractName: ['', Validators.required],
-      companyName: ['', Validators.required],
-      contractType: ['', Validators.required],
-      reinsType: ['', Validators.required],
-      signDate: ['', Validators.required],
-      beginDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      description: [''],
+      contractId: [''],
+      contractName: [''],
+      companyName: [''],
+      contractTypeName: [''],
       contractStatus: [''],
+      reinsTypeName: [''],
+      description: [''],
+      appendix: [''],
+      beginDate: [''],
+      stopDate: [''],
+      operator: [''],
+      create_time: [''],
+      modify_time: [''],
 
+      total: [''],
+      insurance_expence: [''],
+      retention_ratio: [''],
       retention: [''],
-      split_amount: [''],
+      line_num: [''],
       ceiling_top: [''],
-      line_no: [''],
-      contract_limit: [''],
-      risk_unit: ['']
+      pay: [''],
     });
   }
 
@@ -55,29 +85,40 @@ export class AddContractComponent implements OnInit {
 
   /**  公司列表；合同类型：成数/溢额；险种； */
   dropdownList() {
-    this.companyList = [
-      { label: '友邦资讯科技有限公司', value: '1000' },
-      { label: '人寿再保险公司', value: '1001' },
-    ];
+    this.companyService.getCompanyMessages().subscribe(
+      (data) => {
+        console.log('length:' + data.length);
+        console.log('id:' + data[1].companyId)
+        for (let i = 0; i < data.length; i++) {
+          this.companyList[i] = { label: data[i].companyName, value: data[i].companyId }
+        }
+      }
+    );
+    this.reinsTypeService.getReinsTypes().subscribe(
+      (data) => {
+        for (let i = 0; i < data.length; i++) {
+          this.reinsTypeList[i] = { label: data[i].typeName, value: data[i].typeName }
+        }
+      }
+    );
 
-    this.contractTypeList = [
-      { label: '成数再保险', value: 'type01' },
-      { label: '溢额再保险', value: 'type02' },
-    ];
+    this.contractTypeService.getContractTypes().subscribe(
+      (data) => {
+        for (let i = 0; i < data.length; i++) {
+          this.contractTypeList[i] = { label: data[i].contractTypeName, value: data[i].contractTypeName }
+        }
+      }
+    );
 
-    this.reinsTypeList = [
-      { label: '人身险 ', value: 'body' },
-      { label: '健康险', value: 'health' },
-    ]
   }
 
   /** 选择成数分保/溢额分保 */
   contractTypeOnChange() {
-    const value = this.addContractForm.get('contractType').value;
-    if (value === 'type01') {
+    const value = this.addContractForm.get('contractTypeName').value;
+    if (value === '成数再保险') {
       this.quotaAshore = true;
       this.surplus = false;
-    } else if (value === 'type02') {
+    } else if (value === '溢额再保险') {
       this.surplus = true;
       this.quotaAshore = false;
     } else {
@@ -85,5 +126,43 @@ export class AddContractComponent implements OnInit {
       this.surplus = false;
     }
   }
-  
+
+  submitAddMsg() {
+    const contract: Contract = {
+      contractId: '',
+      contractName: '',
+      companyName: this.addContractForm.get('companyName').value,
+      contractTypeName: this.addContractForm.get('contractTypeName').value,
+      contractStatus: this.addContractForm.get('contractStatus').value,
+      reinsTypeName: this.addContractForm.get('reinsTypeName').value,
+      // reinsTypeId: string;
+      description: this.addContractForm.get('description').value,
+      appendix: '',
+      beginDate: this.addContractForm.get('beginDate').value,
+      stopDate: this.addContractForm.get('stopDate').value,
+      operator: this.addContractForm.get('operator').value,
+      create_time: this.addContractForm.get('create_time').value,
+      modify_time: '',
+    }
+
+    const calculateData: CalculateData = {
+      contractId: '',
+      total: this.addContractForm.get('total').value,
+      insurance_expence: this.addContractForm.get('insurance_expence').value,
+      retention_ratio: this.addContractForm.get('retention_ratio').value,
+      retention: this.addContractForm.get('retention').value,
+      line_num: this.addContractForm.get('line_num').value,
+      ceiling_top: this.addContractForm.get('ceiling_top').value,
+      pay: this.addContractForm.get('pay').value,
+    }
+
+    this.contractService.addContract(contract).subscribe(
+      (data) => {
+        console.log('add success' + data);
+      }
+    );
+    this.calculateService.addCalculateData(calculateData).subscribe();
+
+  }
+
 }

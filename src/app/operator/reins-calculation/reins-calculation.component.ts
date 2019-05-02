@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ReinsCalculationComponent implements OnInit {
 
   data: any;
-  contractId: SelectItem[];
+  contractId = [];
   reinsCalculationForm: FormGroup;
   // reinsCaculation: ReinsCaculation;
 
@@ -34,41 +34,31 @@ export class ReinsCalculationComponent implements OnInit {
 
   setData() {
     this.data = {
-      datasets: [{
-        data: [
-          5,
-          7,
-          5,
-          3,
-          8,
-          4
-        ],
-        backgroundColor: [
-          "#FF6384",
-          "#4BC0C0",
-          "#FFCE56",
-          "#36A2EB",
-          "#EEE9BF",
-          "#56A2WE"
-        ],
-        label: 'My dataset'
-      }],
-      labels: [
-        "总额",
-        "自留额",
-        "分保额",
-        "赔款",
-        "佣金",
-        "风险单位"
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'My First dataset',
+          backgroundColor: '#42A5F5',
+          borderColor: '#1E88E5',
+          data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+          label: 'My Second dataset',
+          backgroundColor: '#9CCC65',
+          borderColor: '#7CB342',
+          data: [28, 48, 40, 19, 86, 27, 90]
+        }
       ]
     }
   }
 
   getAndSetContractId() {
-    this.contractId = [
-      { label: 'jhto2g2', value: 'chengshu' },
-      { label: 'jhto2g2', value: 'yie' },
-    ]
-    // this.contractId[0] = { label: 'jhto2g2', value: 'chengshu' };
+    // this.contractId = [
+    //   { label: 'jhto2g2', value: 'chengshu' },
+    //   { label: 'jhto2g2', value: 'yie' },
+    // ]
+    // console.log('length:' + this.contractId[0].label);
+    this.contractId[0] = { label: 'jhto2g2', value: 'chengshu' };
+    this.contractId[1] = { label: '123to223', value: 'chengshu' };
   }
 }

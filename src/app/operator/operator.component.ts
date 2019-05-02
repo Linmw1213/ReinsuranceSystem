@@ -11,6 +11,7 @@ export class OperatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('userId:' + sessionStorage.getItem('username'));
   }
 
 }

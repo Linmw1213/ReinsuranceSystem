@@ -31,7 +31,7 @@ export class ReinsTypesManagemententComponent implements OnInit {
       createTime: '',
       modifyTime: new FormControl({ value: '', disabled: true }),
       typeStatus: new FormControl({ value: '', disabled: true }),
-      operatorName: new FormControl({ value: '', disabled: true }),
+      operator: new FormControl({ value: '', disabled: true }),
       operatorId: new FormControl({ value: '', disabled: true }),
     })
   }
@@ -66,7 +66,7 @@ export class ReinsTypesManagemententComponent implements OnInit {
     this.reinsTypeForm.get('modifyTime').setValue(rowData.modifyTime);
     this.reinsTypeForm.get('createTime').setValue(rowData.createTime);
     this.reinsTypeForm.get('typeStatus').setValue(rowData.typeStatus);
-    this.reinsTypeForm.get('operatorName').setValue(rowData.operatorName);
+    this.reinsTypeForm.get('operator').setValue(rowData.operator);
     this.reinsTypeForm.get('operatorId').setValue(rowData.operatorId);
   }
 
@@ -79,8 +79,7 @@ export class ReinsTypesManagemententComponent implements OnInit {
       description: this.reinsTypeForm.get('description').value,
       createTime: this.reinsTypeForm.get('createTime').value,
       modifyTime: this.reinsTypeForm.get('modifyTime').value,
-      typeStatus: this.reinsTypeForm.get('typeStatus').value,
-      operatorName: this.reinsTypeForm.get('operatorName').value,
+      operator: this.reinsTypeForm.get('operator').value,
       operatorId: this.reinsTypeForm.get('operatorId').value,
     }
     this.reinsTypeService.modiifyReinsType(reinsType).subscribe();
@@ -105,8 +104,7 @@ export class ReinsTypesManagemententComponent implements OnInit {
       description: this.reinsTypeForm.get('description').value,
       createTime: '2019/12/13',
       modifyTime: '2019/12/13',
-      typeStatus: '待审核',
-      operatorName: '李白',
+      operator: '李白',
       operatorId: '1001',
     }
     this.reinsTypes.push(reinsType);

@@ -12,13 +12,12 @@
     <div class="main" style="width:100%;display:block;">
       <h1 class="Title"><small>Login</small></h1>
       <div class="UserName">
-        <input type="text" formControlName="username" class="form-control" placeholder="用户名(由字母、数字、下划线组成)">
+        <input type="text" formControlName="userId" class="form-control" placeholder="用户名(由字母、数字、下划线组成)">
         <div class="Usererror">
           <p-message severity="error"
-            [text]="loginform.controls['username'].errors['required'] ? '账号不能为空' : 
-            loginform.controls['username'].errors['minlength'] ? '账号不能小于6个字符' : 
-            loginform.controls['username'].errors['maxlength'] ? '账号不能大于20个字符' :''"
-            *ngIf="!loginform.controls['username'].valid&&loginform.controls['username'].dirty">
+            [text]="loginform.controls['userId'].errors['required'] ? '账号不能为空' : 
+            loginform.controls['userId'].errors['maxlength'] ? '账号不能大于20个字符' :''"
+            *ngIf="!loginform.controls['userId'].valid&&loginform.controls['userId'].dirty">
           </p-message>
         </div>
       </div>

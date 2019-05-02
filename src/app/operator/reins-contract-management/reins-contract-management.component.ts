@@ -46,24 +46,38 @@ export class ReinsContractManagementComponent implements OnInit {
   //创建响应式表单
   createForm() {
     this.contractForm = this.fb.group({
-      contractId: ['', Validators.required],
-      contractName: ['', Validators.required],
-      companyName: ['', Validators.required],
       contractType: ['', Validators.required],
       reinsType: ['', Validators.required],
       signDate: ['', Validators.required],
-      beginDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      description: [''],
-      contractStatus: [''],
 
-      retention: [''],
       split_amount: [''],
-      ceiling_top: [''],
       line_no: [''],
       contract_limit: [''],
       risk_unit: [''],
       // contractArr: new FormArray([this.createFormArray()]),
+
+      contractId: [''],
+      contractName: [''],
+      companyName: [''],
+      contractTypeName: [''],
+      contractStatus: [''],
+      reinsTypeName: [''],
+      description: [''],
+      appendix: [''],
+      beginDate: [''],
+      stopDate: [''],
+      operator: [''],
+      create_time: [''],
+      modify_time: [''],
+
+      total: [''],
+      insurance_expence: [''],
+      retention_ratio: [''],
+      retention: [''],
+      line_num: [''],
+      ceiling_top: [''],
+      pay: [''],
     });
 
   }
@@ -81,6 +95,36 @@ export class ReinsContractManagementComponent implements OnInit {
       bankName: [''],
       currency: [''],
     });
+  }
+
+  private createContractFormArr() {
+    return this.fb.group({
+      contractId: [''],
+      contractName: [''],
+      companyName: [''],
+      contractTypeName: [''],
+      contractStatus: [''],
+      reinsTypeName: [''],
+      description: [''],
+      appendix: [''],
+      beginDate: [''],
+      stopDate: [''],
+      operator: [''],
+      create_time: [''],
+      modify_time: [''],
+    })
+  }
+
+  private createCalculateDataFormArr() {
+    return this.fb.group({
+      total: [''],
+      insurance_expence: [''],
+      retention_ratio: [''],
+      retention: [''],
+      line_num: [''],
+      ceiling_top: [''],
+      pay: [''],
+    })
   }
 
   getFormArray() {
@@ -122,12 +166,13 @@ export class ReinsContractManagementComponent implements OnInit {
 
   modifyContract(event: Event, contract: Contract) {
     this.selectedContract = contract;
+    this.contractForm.get('reinsType').setValue(contract.companyName);
     event.preventDefault();
     this.modifyDialog = true;
   }
 
-   /**  公司列表；合同类型：成数/溢额；险种； */
-   dropdownList() {
+  /**  公司列表；合同类型：成数/溢额；险种； */
+  dropdownList() {
     this.companyList = [
       { label: '友邦资讯科技有限公司', value: '1000' },
       { label: '人寿再保险公司', value: '1001' },
@@ -162,7 +207,5 @@ export class ReinsContractManagementComponent implements OnInit {
   addBtnOnClick() {
     this.router.navigateByUrl('addContract');
   }
-
-
 
 }
