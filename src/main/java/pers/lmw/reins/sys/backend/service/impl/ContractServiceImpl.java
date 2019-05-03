@@ -38,6 +38,11 @@ public class ContractServiceImpl implements ContractService{
 	public int deleteContract(String contractId) {
 		return mapper.deleteContract(contractId);
 	}
+
+	@Override
+	public int countContract(Contract contract) {
+		return mapper.countContract(contract);
+	}
 	
 	
 	

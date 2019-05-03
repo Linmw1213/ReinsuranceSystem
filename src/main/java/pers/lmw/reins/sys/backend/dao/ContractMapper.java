@@ -21,9 +21,9 @@ public interface ContractMapper {
 	@Select("select * from contract_msg")
 	public List<Contract> getAllContract();
 	
-	@Insert("insert into contract_msg(contractId,contractName,contractTypeName,contractStatus,reinsTypeId,"
+	@Insert("insert into contract_msg(contractId,contractName,contractTypeName,contractStatus,reinsTypeName,"
 			+ "beginDate,stopDate,description,companyName,appendix,operator,create_time,modify_time) "
-			+ "values(#{contractId},#{contractName},#{contractTypeName},#{contractStatus},#{reinsTypeId},"
+			+ "values(#{contractId},#{contractName},#{contractTypeName},#{contractStatus},#{reinsTypeName},"
 			+ "#{beginDate},#{stopDate},#{description},#{companyName},#{appendix},#{operator},#{create_time},#{modify_time})")
 	public int addContract(Contract contract);
 	
@@ -35,7 +35,7 @@ public interface ContractMapper {
 	@Delete("delete from contract_msg where contractId=?")
 	public int deleteContract(@Param("contractId") String contractId);
 	
-	@Select("select count(*) from contract_msg where companyName=?")
-	public int countContract(@Param("companyName")String companyName);
+	@Select("select count(*) from contract_msg where companyName=#{companyName} and reinsTypeName=#{reinsTypeName}")
+	public int countContract(Contract contract);
 	
 }
