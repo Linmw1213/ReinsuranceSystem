@@ -18,11 +18,11 @@ export class ContractService {
   constructor(private http: HttpClient) { }
 
   getContractMessages(): Observable<Contract[]> {
-    return this.http.get<Contract[]>(this.contractURL+'/getAll');
+    return this.http.get<Contract[]>(this.contractURL + '/getAll');
   }
-  
+
   addContract(contract: Contract): Observable<Contract> {
-    return this.http.post<Contract>(this.ContractesUrl, contract, httpOptions);
+    return this.http.post<Contract>(this.contractURL + '/add', contract, httpOptions);
   }
 
   modifyContract(contract: Contract): Observable<Contract> {

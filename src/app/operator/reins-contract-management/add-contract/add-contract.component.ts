@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
 import { CompanyService } from 'src/app/service/company.service';
 import { ReinsTypeService } from 'src/app/service/reins-type.service';
 import { ContractTypeService } from 'src/app/service/contract-type.service';
 import { Contract } from 'src/app/VO/contract';
-import { CalculateData } from 'src/app/VO/calculateData';
 import { ContractService } from 'src/app/service/contract.service';
 import { ReinsCalculationService } from 'src/app/service/reins-calculation.service';
 
@@ -90,7 +88,7 @@ export class AddContractComponent implements OnInit {
         console.log('length:' + data.length);
         console.log('id:' + data[1].companyId)
         for (let i = 0; i < data.length; i++) {
-          this.companyList[i] = { label: data[i].companyName, value: data[i].companyId }
+          this.companyList[i] = { label: data[i].companyName, value: data[i].companyName }
         }
       }
     );
@@ -115,10 +113,10 @@ export class AddContractComponent implements OnInit {
   /** 选择成数分保/溢额分保 */
   contractTypeOnChange() {
     const value = this.addContractForm.get('contractTypeName').value;
-    if (value === '成数再保险') {
+    if (value === '成数分保') {
       this.quotaAshore = true;
       this.surplus = false;
-    } else if (value === '溢额再保险') {
+    } else if (value === '溢额分保') {
       this.surplus = true;
       this.quotaAshore = false;
     } else {
@@ -128,9 +126,12 @@ export class AddContractComponent implements OnInit {
   }
 
   submitAddMsg() {
+    const beginDate = this.addContractForm.get('beginDate').value;
+    const stopDate = this.addContractForm.get('stopDate').value;
+    console.log('beginDate' + beginDate.valueOf());
     const contract: Contract = {
       contractId: '',
-      contractName: '',
+      contractName: this.addContractForm.get('contractName').value,
       companyName: this.addContractForm.get('companyName').value,
       contractTypeName: this.addContractForm.get('contractTypeName').value,
       contractStatus: this.addContractForm.get('contractStatus').value,
@@ -138,15 +139,12 @@ export class AddContractComponent implements OnInit {
       // reinsTypeId: string;
       description: this.addContractForm.get('description').value,
       appendix: '',
-      beginDate: this.addContractForm.get('beginDate').value,
-      stopDate: this.addContractForm.get('stopDate').value,
+      beginDate: beginDate.valueOf(),
+      stopDate: stopDate.valueOf(),
       operator: this.addContractForm.get('operator').value,
-      create_time: this.addContractForm.get('create_time').value,
+      create_time: '',
       modify_time: '',
-    }
 
-    const calculateData: CalculateData = {
-      contractId: '',
       total: this.addContractForm.get('total').value,
       insurance_expence: this.addContractForm.get('insurance_expence').value,
       retention_ratio: this.addContractForm.get('retention_ratio').value,
@@ -158,10 +156,9 @@ export class AddContractComponent implements OnInit {
 
     this.contractService.addContract(contract).subscribe(
       (data) => {
-        console.log('add success' + data);
+        console.log('data:' + data);
       }
     );
-    this.calculateService.addCalculateData(calculateData).subscribe();
 
   }
 
