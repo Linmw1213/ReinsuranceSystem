@@ -1,14 +1,15 @@
 package pers.lmw.reins.sys.backend.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pers.lmw.reins.sys.backend.dao.UserMapper;
 import pers.lmw.reins.sys.backend.entity.Role;
 import pers.lmw.reins.sys.backend.entity.User;
 import pers.lmw.reins.sys.backend.service.UserService;
@@ -20,10 +21,6 @@ public class UserController {
 
 	@Autowired
 	UserService service;
-	HttpSession session;
-
-	@Autowired
-	UserMapper mapper;
 
 	@RequestMapping("/login")
 	public Role login(@RequestBody(required = false) User user) {
@@ -35,10 +32,17 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/info")
-	public User userInfo() {
-		return service.queryInfo(session.getAttribute("userId").toString());
+	@GetMapping("/getCurrentUser/{userId}")
+	public User userInfo(@PathVariable(value="userId") String userId) {
+		return service.queryInfo(userId);
 	}
+	
+//	@PostMapping("/add")
+//	public int add(@RequestBody User u) {
+//		return service.a
+//	}
+	
+	
 	
 	
 }

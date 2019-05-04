@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pers.lmw.reins.sys.backend.dao.ContractMapper;
+import pers.lmw.reins.sys.backend.entity.CalculateData;
 import pers.lmw.reins.sys.backend.entity.Contract;
 import pers.lmw.reins.sys.backend.service.ContractService;
 
@@ -40,10 +41,19 @@ public class ContractServiceImpl implements ContractService{
 	}
 
 	@Override
-	public int countContract(Contract contract) {
-		return mapper.countContract(contract);
+	public List<String> getContractId() {
+		return mapper.getContractId();
 	}
-	
-	
+
+	@Override
+	public CalculateData getCalculateDataById(String contractId) {
+		return mapper.getCalculateDataById(contractId);
+	}
+
+	@Override
+	public Contract getBasicMsgById(String contractId) {
+		return mapper.getBasicMsgById(contractId);
+	}
+
 	
 }

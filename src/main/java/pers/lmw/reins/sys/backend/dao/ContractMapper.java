@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import pers.lmw.reins.sys.backend.entity.CalculateData;
 import pers.lmw.reins.sys.backend.entity.Contract;
 
 /**
@@ -20,22 +21,32 @@ public interface ContractMapper {
 
 	@Select("select * from contract_msg")
 	public List<Contract> getAllContract();
-	
+
 	@Insert("insert into contract_msg(contractId,contractName,contractTypeName,contractStatus,reinsTypeName,"
-			+ "beginDate,stopDate,description,companyName,appendix,operator,create_time,modify_time) "
+			+ "beginDate,stopDate,description,companyName,appendix,operator,create_time,"
+			+ "insurance_expence,retention_ratio,retention,line_num,ceiling_top,pay,total) "
 			+ "values(#{contractId},#{contractName},#{contractTypeName},#{contractStatus},#{reinsTypeName},"
-			+ "#{beginDate},#{stopDate},#{description},#{companyName},#{appendix},#{operator},#{create_time},#{modify_time})")
+			+ "#{beginDate},#{stopDate},#{description},#{companyName},#{appendix},#{operator},#{create_time},"
+			+ "#{insurance_expence},#{retention_ratio},#{retention},#{line_num},#{ceiling_top},#{pay},#{total})")
 	public int addContract(Contract contract);
-	
-	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},contractStatus=#{contractStatus},reinsTypeId=#{reinsTypeId},"
-			+ "beginDate=#{degeinDate},stopDate=#{stopDate},description=#{description},companyName={companyName},appendix=#{appendix},operator=#{operator},create_time=#{create_time},"
-			+ "modify_time=#{modify_time} where contractId=?)")
+
+	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},contractStatus=#{contractStatus},reinsTypeName=#{reinsTypeName},beginDate=#{beginDate},stopDate=#{stopDate},description=#{description},appendix=#{appendix},"
+			+ "operator=#{operator},modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId=#{contractId}")
 	public int updateContract(Contract contract);
-	
-	@Delete("delete from contract_msg where contractId=?")
+
+	@Delete("delete from contract_msg where contractId=#{contractId}")
 	public int deleteContract(@Param("contractId") String contractId);
 	
-	@Select("select count(*) from contract_msg where companyName=#{companyName} and reinsTypeName=#{reinsTypeName}")
-	public int countContract(Contract contract);
+	@Update("update contract_msg set contractName=#{contractName}',contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},description=#{description},appendix=#{appendix},beginDate=#{beginDate},stopDate=#{stopDate},operator='test',\r\n" + 
+			"modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId='#{contractId}'")
+	public int test(Contract contract);
 	
+	@Select("select contractId from contract_msg")
+	public List<String> getContractId();
+	
+	@Select("select total,insurance_expence,retention_ratio,retention,line_num,ceiling_top,pay from contract_msg where contractId=#{contractId}")
+	public CalculateData getCalculateDataById(@Param("contractId") String contractId);
+	
+	@Select("select * from contract_Msg where contractId=#{contractId}")
+	public Contract getBasicMsgById(@Param("contractId") String contractId);
 }

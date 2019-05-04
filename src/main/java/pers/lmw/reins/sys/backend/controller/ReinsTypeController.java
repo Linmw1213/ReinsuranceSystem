@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pers.lmw.reins.sys.backend.entity.ReinsType;
 import pers.lmw.reins.sys.backend.service.ReinsTypeService;
+import pers.lmw.reins.sys.backend.util.TransferTimeUtil;
 
 @CrossOrigin(origins = { "http://localhost:4200", "null" })
 @RestController
@@ -23,6 +24,9 @@ public class ReinsTypeController {
 	@Autowired
 	ReinsTypeService service;
 	
+	@Autowired
+	TransferTimeUtil timeUtil;
+	
 	@GetMapping("/getAll")
 	public List<ReinsType> getAll() {
 		return service.getAllReinsTypes();
@@ -30,6 +34,8 @@ public class ReinsTypeController {
 	
 	@PostMapping("/add")
 	public int add(@RequestBody ReinsType type) {
+		type.setCreateTime(timeUtil.getCurrentTime());
+		type.setStatus("待审核");
 		return service.addReinsType(type);
 	}
 	

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pers.lmw.reins.sys.backend.dao.ContractMapper;
+import pers.lmw.reins.sys.backend.entity.CalculateData;
 import pers.lmw.reins.sys.backend.entity.Contract;
 import pers.lmw.reins.sys.backend.service.ContractService;
 import pers.lmw.reins.sys.backend.util.SetContractIdUtil;
@@ -27,12 +29,25 @@ public class ContractController {
 
 	@Autowired
 	ContractService service;
+	
+	@Autowired
+	ContractMapper mapper;
 
 	@Autowired
 	SetContractIdUtil setIdUtil;
 
 	@Autowired
 	TransferTimeUtil timeUtil;
+	
+	@RequestMapping("/test")
+	public int test(Contract contract) {
+//		String contractId = setIdUtil.generate(contract.getCompanyName());
+//		contract.setContractId(contractId);
+//		contract.setBeginDate(timeUtil.stampToDate(contract.getBeginDate()));
+//		contract.setStopDate(timeUtil.stampToDate(contract.getStopDate()));
+		contract.setModify_time(timeUtil.getCurrentTime());
+		return mapper.test(contract);
+	}
 
 	public String stampToDate(String s) {
 		String res;
@@ -55,19 +70,38 @@ public class ContractController {
 		contract.setBeginDate(timeUtil.stampToDate(contract.getBeginDate()));
 		contract.setStopDate(timeUtil.stampToDate(contract.getStopDate()));
 		contract.setCreate_time(timeUtil.getCurrentTime());
-		contract.setModify_time(null);
-		return service.addContract(contract);
+//		contract.setModify_time(null);
+		return mapper.test(contract);
 	}
 
-	@PutMapping("/modify/{contractId}")
+	@PutMapping("/modify")
 	public int modify(@RequestBody Contract contract) {
+		String contractId = setIdUtil.generate(contract.getCompanyName());
+		contract.setContractId(contractId);
+		contract.setBeginDate(timeUtil.stampToDate(contract.getBeginDate()));
+		contract.setStopDate(timeUtil.stampToDate(contract.getStopDate()));
+		contract.setModify_time(timeUtil.getCurrentTime());
 		return service.updateContract(contract);
-
 	}
 
 	@DeleteMapping("delete/{contractId}")
 	public int delete(@PathVariable(value = "contractId") String contractId) {
 		return service.deleteContract(contractId);
 	}
-
+	
+	@GetMapping("/getId")
+	public List<String> getContractId(){
+		return service.getContractId();
+	}
+	
+	@GetMapping("/getCalculateData/{contractId}")
+	public CalculateData getData(@PathVariable(value="contractId") String contractId) {
+		return service.getCalculateDataById(contractId);
+	}
+	
+	@GetMapping("/getBasicMsg/{contractId}")
+	public Contract getBasicMsg(@PathVariable(value="contractId") String contractId){
+		return service.getBasicMsgById(contractId);
+	}
+	
 }

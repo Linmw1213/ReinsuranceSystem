@@ -13,6 +13,7 @@ public class ReinsType {
 	private String operator;
 	private String operatorId;
 	private String createTime;
+	private String status;
 	
 	public String getTypeId() {
 		return typeId;
@@ -49,6 +50,12 @@ public class ReinsType {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

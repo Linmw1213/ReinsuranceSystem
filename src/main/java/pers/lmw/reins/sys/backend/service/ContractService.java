@@ -3,6 +3,8 @@ package pers.lmw.reins.sys.backend.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import pers.lmw.reins.sys.backend.entity.CalculateData;
 import pers.lmw.reins.sys.backend.entity.Contract;
 
 /**
@@ -20,5 +22,9 @@ public interface ContractService {
 
 	public int deleteContract(String contractId);
 
-	public int countContract(Contract contract);
+	public List<String> getContractId();
+
+	public CalculateData getCalculateDataById(String contractId);
+	
+	public Contract getBasicMsgById(String contractId);
 }
