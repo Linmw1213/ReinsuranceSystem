@@ -11,7 +11,6 @@ const httpOptions = {
 })
 export class ReinsTypeService {
 
-  // private reinsTypeURL = '/assets/mock-data/reins-type.json';
   private reinsTypeURL = 'http://localhost:8080/reinsType';
 
   constructor(private httpClient: HttpClient) { }
@@ -20,18 +19,13 @@ export class ReinsTypeService {
     return this.httpClient.get<ReinsType[]>(this.reinsTypeURL + '/getAll');
   }
 
-  addReinsType(reinsType: ReinsType): Observable<ReinsType> {
-    return this.httpClient.post<ReinsType>(this.reinsTypeURL, reinsType);
+  addReinsType(reinsType: ReinsType): Observable<any> {
+    return this.httpClient.post<ReinsType>(this.reinsTypeURL + '/add', reinsType);
   }
 
-  deleteReinsType(reinsType: ReinsType | string): Observable<ReinsType> {
+  deleteReinsType(reinsType: ReinsType | string): Observable<any> {
     const id = typeof reinsType === 'string' ? reinsType : reinsType.typeId;
-    const url = `${this.reinsTypeURL}/${id}`;
+    const url = `${this.reinsTypeURL + '/delete'}/${id}`;
     return this.httpClient.delete<ReinsType>(url, httpOptions);
-  }
-
-  modiifyReinsType(reinsType: ReinsType): Observable<ReinsType> {
-
-    return this.httpClient.put<ReinsType>(`${this.reinsTypeURL}/${reinsType.typeId}`, reinsType);
   }
 }

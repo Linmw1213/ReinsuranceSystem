@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: UserInfoService,
-    private service: TestService,
     private router: Router) { }
 
   ngOnInit() {
@@ -41,19 +40,22 @@ export class LoginComponent implements OnInit {
 
   btnOnClick() {
 
-    const user: User = {
+    const user = {
       userId: this.loginform.get('userId').value,
       password: this.loginform.get('password').value,
-      username: '',
-      phone: '',
-      email: '',
-      name: ''
     }
-    this.loginService.login(user).subscribe(
+    this.loginService.login(user as User).subscribe(
       (data) => {
         this.name = data.name;
         if (this.loginform.valid) {
-          sessionStorage.setItem('username', this.loginform.get('userId').value)
+          sessionStorage.setItem('currentUserId', this.loginform.get('userId').value);
+          
+          this.loginService.getSelfInfo(this.loginform.get('userId').value).subscribe(
+            (data) => {
+              console.log('currentUser:' + data.username);
+              sessionStorage.setItem("currentUserName", data.username);
+            }
+          )
           if (this.name === 'operator') {
             this.router.navigateByUrl('operatorIndex');
           } else if (this.name === 'admin') {

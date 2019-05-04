@@ -1,5 +1,4 @@
 export interface CalculateData {
-    contractId: any;
     total: any;
     insurance_expence: any;
     retention_ratio: any;

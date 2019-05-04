@@ -1,27 +1,48 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-16">
-      <div class="col-md-3">
-        <p-dropdown [options]="contractId" [showClear]="true" placeholder="请选择合同编号"></p-dropdown>
-      </div>
-      <div class="col-md-3">
-        <input type="text" pInputText [disabled]="true" value="合同名称1">
-      </div>
-      <div class="col-md-3">
-        <input type="text" pInputText [disabled]="true" value="成数分保合同">
-      </div>
-      <div class="col-md-3">
-        <input type="text" pInputText [disabled]="true" value="友邦资讯科技有限公司">
-      </div>
+<form [formGroup]="reinsCalculationForm">
+  <div class="ui-g">
+    <div class="ui-g-3">
+      <label>合同编号</label>
+      <br>
+      <p-dropdown [options]="contractId" formControlName="contractId" filter="true" [showClear]="true"
+        placeholder="请选择合同编号" (onChange)="contractIdOnChange()"></p-dropdown>
     </div>
-
-  </div>
-  <div class="row" style="margin-top:20px;">
-
-  </div>
-  <div class="row ">
-    <div class="col-md-10 col-md-offset-1" style="text-align:center">
-      <p-chart type="bar" [data]="data"></p-chart>
+    <div class="ui-g-2">
+      <label>合同名称</label>
+      <input type="text" pInputText formControlName="contractName">
+    </div>
+    <div class="ui-g-2">
+      <label>再保类型</label>
+      <input type="text" pInputText formControlName="contractType">
+    </div>
+    <div class="ui-g-2">
+      <label>再保公司</label>
+      <input type="text" pInputText formControlName="companyName">
     </div>
   </div>
-</div>
+  <div class="ui-g" style="margin-top:20px;">
+  </div>
+  <div class="ui-g" *ngIf="surplus">
+    <div class="ui-g-12 ui-md-6">
+      <p-card subheader="再保数据" styleClass="ui-card-shadow">
+        <p-chart type="doughnut" [data]="surplusData"></p-chart>
+      </p-card>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <p-card subheader="计算结果" styleClass="ui-card-shadow">
+        <p-chart type="bar" [data]="surplusRs"></p-chart>
+      </p-card>
+    </div>
+  </div>
+  <div class="ui-g" *ngIf="quotaAshore">
+    <div class="ui-g-12 ui-md-6">
+      <p-card subheader="再保数据" styleClass="ui-card-shadow">
+        <p-chart type="doughnut" [data]="quotaAshoreData"></p-chart>
+      </p-card>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <p-card subheader="计算结果" styleClass="ui-card-shadow">
+        <p-chart type="bar" [data]="quotaAshoreRs"></p-chart>
+      </p-card>
+    </div>
+  </div>
+</form>

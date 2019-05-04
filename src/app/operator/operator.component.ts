@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { User } from '../VO/user';
+import { UserInfoService } from '../service/user-info.service';
 
 @Component({
   selector: 'app-operator',
@@ -8,10 +9,11 @@ import { MenuItem } from 'primeng/api';
 })
 export class OperatorComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+  constructor(userService: UserInfoService) { }
 
   ngOnInit() {
-    console.log('userId:' + sessionStorage.getItem('username'));
+    console.log('userId:' + sessionStorage.getItem('currentUserId'));
   }
 
 }

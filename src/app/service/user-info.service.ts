@@ -19,7 +19,7 @@ export class UserInfoService {
    return this.httpClient.post<any>(this.userURL + '/login', user);
   }
 
-  getSelfInfo(): Observable<User> {
-    return this.httpClient.get<User>(this.userURL + '/info');
+  getSelfInfo(userId: any): Observable<User> {
+    return this.httpClient.get<User>(this.userURL + '/getCurrentUser/'+userId);
   }
 }

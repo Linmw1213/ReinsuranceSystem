@@ -29,7 +29,6 @@ export class AddContractComponent implements OnInit {
     private companyService: CompanyService,
     private reinsTypeService: ReinsTypeService,
     private contractTypeService: ContractTypeService,
-    private calculateService: ReinsCalculationService
   ) { }
 
   ngOnInit() {
@@ -128,7 +127,6 @@ export class AddContractComponent implements OnInit {
   submitAddMsg() {
     const beginDate = this.addContractForm.get('beginDate').value;
     const stopDate = this.addContractForm.get('stopDate').value;
-    console.log('beginDate' + beginDate.valueOf());
     const contract: Contract = {
       contractId: '',
       contractName: this.addContractForm.get('contractName').value,
@@ -136,7 +134,6 @@ export class AddContractComponent implements OnInit {
       contractTypeName: this.addContractForm.get('contractTypeName').value,
       contractStatus: this.addContractForm.get('contractStatus').value,
       reinsTypeName: this.addContractForm.get('reinsTypeName').value,
-      // reinsTypeId: string;
       description: this.addContractForm.get('description').value,
       appendix: '',
       beginDate: beginDate.valueOf(),
@@ -156,7 +153,11 @@ export class AddContractComponent implements OnInit {
 
     this.contractService.addContract(contract).subscribe(
       (data) => {
-        console.log('data:' + data);
+        if(data === 1 ){
+          console.log('add contract succeessfully');
+        } else {
+          console.log('add failured');
+        }
       }
     );
 

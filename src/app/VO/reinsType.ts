@@ -6,4 +6,5 @@ export interface ReinsType {
     modifyTime: any;
     operator: string;
     operatorId: string;
+    status: string;
 }
