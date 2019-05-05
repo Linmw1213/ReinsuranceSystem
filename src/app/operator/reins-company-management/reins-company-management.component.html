@@ -15,6 +15,15 @@
     </div>
   </div>
 
+  
+  <div class="ui-n-3" *ngIf="modifyFailured">
+    <div class="alert alert-error" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="modifyAlert=false"><span
+          aria-hidden="true">&times;</span></button>
+      <strong>修改失败！</strong>
+    </div>
+  </div>
+
   <!--查询、添加按钮-->
   <div class="search">
     <div class="search_input">

@@ -42,6 +42,8 @@ export class ReinsCompanyManagementComponent implements OnInit {
   modifyAlert = false;
   modifyIndex: any;
   notFound: false;
+
+  modifyFailured =  false;
   constructor(
     public dialogService: DialogService,
     public messageService: MessageService,
@@ -202,7 +204,14 @@ export class ReinsCompanyManagementComponent implements OnInit {
 
     this.service.updateCompany(company).subscribe(
       (data) => {
-        console.log('修改成功' + data);
+        if (data == 1) {
+          this.service.getCompanyMessages().subscribe((companyMsg) => {
+            this.companyMsg = companyMsg;
+          });
+          this.modifyAlert = true;
+        } else {
+          this.modifyFailured = true;
+        }
       }
     );
   }

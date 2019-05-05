@@ -31,11 +31,11 @@ export class UserInfoComponent implements OnInit {
   getUserInfo() {
     this.userService.getSelfInfo(sessionStorage.getItem('currentUserId')).subscribe(
       (data) => {
-        console.log(data.username);
+        console.log(data.phone);
         this.userForm.get('userId').setValue(data.userId);
         this.userForm.get('username').setValue(data.username);
-        this.userForm.get('userEmail').setValue(data.username);
-        this.userForm.get('userPhone').setValue(data.username);
+        this.userForm.get('userEmail').setValue(data.email);
+        this.userForm.get('userPhone').setValue(data.phone);
       }
     );
   }

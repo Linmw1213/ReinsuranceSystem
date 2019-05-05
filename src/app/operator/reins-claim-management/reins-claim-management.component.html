@@ -1,33 +1,39 @@
 <div class="ui-g-24 ui-g-nopad">
   <div class="ui-g">
     <div class="ui-g-24 ui-md-12">
-        <p-table #dt [columns]="cols" [value]="reinsClaimArr" [paginator]="true" [rows]="10">
-            <ng-template pTemplate="caption">
-              <div style="text-align: center">
-                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                <input icon="pi pi-search" type="text" pInputText size="50" placeholder="全局搜索"
-                  (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-              </div>
-            </ng-template>
-            <ng-template pTemplate="header" let-columns>
-              <tr>
-                <th *ngFor="let col of columns">
-                  {{col.header}}
-                </th>
-                <th>操作</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-              <tr>
-                <td *ngFor="let col of columns">
-                  {{rowData[col.field]}}
-                </td>
-                <td>
-                  <i style="cursor: pointer;" class="pi pi-trash" (click)="delete($event,rowData)"></i>
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
+      <p-table #dt [columns]="cols" [value]="reinsClaimArr" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="caption">
+          <div style="text-align: center">
+            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+            <input icon="pi pi-search" type="text" pInputText size="50" placeholder="全局搜索"
+              (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+            <th>操作</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              {{rowData[col.field]}}
+            </td>
+            <td>
+              <i style="cursor: pointer;" class="pi pi-trash" (click)="delete($event,rowData)"></i>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary" let-rowData>
+          <div style="text-align:left">
+            <button type="button" pButton icon="pi pi-plus" label="新增"></button>
+          </div>
+        </ng-template>
+      </p-table>
     </div>
   </div>
 
@@ -36,30 +42,50 @@
       <p-card subheader="新增理赔件" styleClass="ui-card-shadow">
         <p-steps [model]="items"></p-steps>
 
-        <label>合同编号</label>       
-        <p-dropdown [options]="contractId" formControlNam="contractId" placeholder="请选择合同编号"></p-dropdown>
-       
-        <label>合同名称</label>
-        <input type="text" pInputText formControlNam="contractName">
+        <div class="ui-g">
+          <div class="ui-g-4">
+            <label>合同编号</label>
+            <p-dropdown [options]="contractId" formControlNam="contractId" placeholder="请选择合同编号"></p-dropdown>
+          </div>
 
-        <label>合同类型</label>
-        <input type="text" pInputText formControlNam="contractName">
-       
-        <label>再保公司</label>        
-        <input type="text" pInputText formControlNam="contractName">
+          <div class="ui-g-4">
+            <label>合同名称</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
 
-        <label>结算账户</label>
-        <input type="text" pInputText formControlNam="contractName">
-
-        <label>结算币种</label>
-        <input type="text" pInputText formControlNam="contractName">
-
-        <label>理赔金额</label>
-        <input type="text" pInputText formControlNam="contractName">
-
-        <label>当前状态</label>
-        <input type="text" pInputText formControlNam="contractName">
-        <button pButton label="提交" type="button"></button>
+          <div class="ui-g-4">
+            <label>合同类型</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-4">
+            <label>再保公司</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
+          <div class="ui-g-4">
+            <label>结算账户</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
+          <div class="ui-g-4">
+            <label>结算币种</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-4">
+            <label>理赔金额</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
+          <div class="ui-g-4">
+            <label>当前状态</label>
+            <input type="text" pInputText formControlNam="contractName">
+          </div>
+          <div class="ui-g-4" style="margin-top:30px;">
+            <label></label>
+            <button pButton label="提交" type="button"></button>
+          </div>
+        </div>
       </p-card>
     </div>
     <div class="ui-g-12 ui-md-6">

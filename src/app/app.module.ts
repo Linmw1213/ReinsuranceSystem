@@ -50,6 +50,7 @@ import { ReinsClaimManagementComponent } from './operator/reins-claim-management
 import { SystemManagementComponent } from './operator/system-management/system-management.component';
 import { UserInfoComponent } from './operator/system-management/user-info/user-info.component';
 import { UpdatePasswordComponent } from './operator/system-management/update-password/update-password.component';
+import { ParameterMaintenanceComponent } from './admin/parameter-maintenance/parameter-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { UpdatePasswordComponent } from './operator/system-management/update-pas
     SystemManagementComponent,
     UserInfoComponent,
     UpdatePasswordComponent,
+    ParameterMaintenanceComponent,
   ],
   imports: [
     BrowserModule,
