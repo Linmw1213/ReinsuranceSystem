@@ -29,7 +29,6 @@ public class CompanyController {
 		return companyService.getCompany();
 	}
 
-	@CrossOrigin(origins = { "http://localhost:4200", "null" })
 	@GetMapping("/getById/{companyId}")
 	public Company getCompanyById(@PathVariable(value = "companyId") String companyId) {
 		return companyService.getCompanyById(companyId);

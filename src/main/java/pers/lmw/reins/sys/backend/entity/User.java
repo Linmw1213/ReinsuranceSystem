@@ -13,7 +13,35 @@ public class User {
 	private String password;
 	private String phone;
 	private String email;
+	private String loginTime;
+	private String sex;
+	private String address;
+	private String role_name;
 	
+	public String getRole_name() {
+		return role_name;
+	}
+	public void setRole_name(String role_name) {
+		this.role_name = role_name;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(String loginTime) {
+		this.loginTime = loginTime;
+	}
 	public String getUserId() {
 		return userId;
 	}

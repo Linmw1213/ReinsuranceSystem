@@ -1,7 +1,5 @@
 package pers.lmw.reins.sys.backend.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,25 +37,6 @@ public class ContractController {
 	@Autowired
 	TransferTimeUtil timeUtil;
 	
-	@RequestMapping("/test")
-	public int test(Contract contract) {
-//		String contractId = setIdUtil.generate(contract.getCompanyName());
-//		contract.setContractId(contractId);
-//		contract.setBeginDate(timeUtil.stampToDate(contract.getBeginDate()));
-//		contract.setStopDate(timeUtil.stampToDate(contract.getStopDate()));
-		contract.setModify_time(timeUtil.getCurrentTime());
-		return mapper.test(contract);
-	}
-
-	public String stampToDate(String s) {
-		String res;
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		long lt = new Long(s);
-		Date date = new Date(lt);
-		res = simpleDateFormat.format(date);
-		return res;
-	}
-
 	@GetMapping("/getAll")
 	public List<Contract> getAll() {
 		return service.getAllContract();
@@ -70,7 +49,6 @@ public class ContractController {
 		contract.setBeginDate(timeUtil.stampToDate(contract.getBeginDate()));
 		contract.setStopDate(timeUtil.stampToDate(contract.getStopDate()));
 		contract.setCreate_time(timeUtil.getCurrentTime());
-//		contract.setModify_time(null);
 		return mapper.test(contract);
 	}
 

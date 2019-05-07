@@ -37,8 +37,8 @@ public interface ContractMapper {
 	@Delete("delete from contract_msg where contractId=#{contractId}")
 	public int deleteContract(@Param("contractId") String contractId);
 	
-	@Update("update contract_msg set contractName=#{contractName}',contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},description=#{description},appendix=#{appendix},beginDate=#{beginDate},stopDate=#{stopDate},operator='test',\r\n" + 
-			"modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId='#{contractId}'")
+	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},description=#{description},appendix=#{appendix},beginDate=#{beginDate},stopDate=#{stopDate},operator=#{operator},\r\n" + 
+			"modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId=#{contractId}")
 	public int test(Contract contract);
 	
 	@Select("select contractId from contract_msg")

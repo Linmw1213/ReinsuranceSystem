@@ -8,7 +8,7 @@ package pers.lmw.reins.sys.backend.entity;
 public class Role {
 
 	private int id;
-	private String name;
+	private String role_name;
 	
 	public int getId() {
 		return id;
@@ -16,11 +16,11 @@ public class Role {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getRole_name() {
+		return role_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setRole_name(String role_name) {
+		this.role_name = role_name;
 	}
 	
 		

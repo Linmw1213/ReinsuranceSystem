@@ -1,5 +1,7 @@
 package pers.lmw.reins.sys.backend.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +34,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int updateMsg(String userId) {
-		return mapper.updateMsg(userId);
+	public int updateMsg(User u) {
+		return mapper.updateMsg(u);
 	}
 
 	@Override
-	public int updatePwd(String userId) {
-		return mapper.updatePwd(userId);
+	public int updatePwd(User u) {
+		return mapper.updatePwd(u);
+	}
+
+	@Override
+	public List<User> getAll() {
+		return mapper.getAll();
 	}
 
 }

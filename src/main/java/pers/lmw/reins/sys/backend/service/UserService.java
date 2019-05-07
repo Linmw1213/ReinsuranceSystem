@@ -1,5 +1,7 @@
 package pers.lmw.reins.sys.backend.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,15 @@ public interface UserService {
 	// 查询当前用户角色
 	public Role queryRole(User u);
 
+	// 获取所有用户信息
+	public List<User> getAll();
+	
 	// 查看个人信息
 	public User queryInfo(@Param("userId") String userId);
 
 	// 修改个人信息
-	public int updateMsg(@Param("userId") String userId);
+	public int updateMsg(User u);
 
 	// 修改密码
-	public int updatePwd(@Param("userId") String userId);
+	public int updatePwd(User u);
 }

@@ -19,7 +19,6 @@ public class CompanyServiceImpl implements CompanyService {
 	@Autowired
 	CompanyMapper companyMapper;
 
-	/** 获取所有公司 */
 	@Override
 	public List<Company> getCompany() {
 		return companyMapper.getCompany();
