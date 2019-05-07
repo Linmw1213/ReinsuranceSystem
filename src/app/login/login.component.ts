@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   errorDialog: boolean = false;
   company: Company;
   name: any;
-  login_register:boolean = true;
+  login_register: boolean = true;
   constructor(
     private fb: FormBuilder,
     private loginService: UserInfoService,
@@ -32,8 +32,22 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.loginform = this.fb.group({
-      'userId': new FormControl('', Validators.compose([Validators.required, Validators.maxLength(20)])),
-      'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])),
+      userId: new FormControl('', Validators.compose(
+        [
+          Validators.required,
+          // Validators.minLength(6), 
+          Validators.maxLength(20),
+          Validators.pattern('^[0-9a-zA-Z_]{1,}$')
+        ]
+      )),
+      password: new FormControl('', Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+          Validators.pattern('^[0-9a-zA-Z_]{1,}$')
+        ]
+      )),
       'role': new FormControl(''),
     });
 
@@ -44,33 +58,28 @@ export class LoginComponent implements OnInit {
       userId: this.loginform.get('userId').value,
       password: this.loginform.get('password').value,
     }
-    this.loginService.login(user as User).subscribe(
-      (data) => {
-        this.name = data.name;
-        if (this.loginform.valid) {
+    if (this.loginform.valid) {
+      this.loginService.login(user as User).subscribe(
+        (data) => {
+          const role_name = data.role_name;
           sessionStorage.setItem('currentUserId', this.loginform.get('userId').value);
-          this.loginService.getSelfInfo(this.loginform.get('userId').value).subscribe(
-            (data) => {
-              sessionStorage.setItem("currentUserName", data.username);
-            }
-          )
-          if (this.name === '系统业务员') {
-            sessionStorage.setItem('currentUserRole', this.name);
-            this.router.navigateByUrl('operatorIndex');
-          } else if (this.name === '系统管理员') {
+          sessionStorage.setItem('currentUserRole', role_name);
+          if (role_name === '系统管理员') {
             this.router.navigateByUrl('adminIndex');
+          } else if (role_name === '系统业务员') {
+            this.router.navigateByUrl('operatorIndex');
           } else {
-            console.log('error username');
+            console.log('登录失败');
           }
         }
-      }
-    )
-
+      )
+    }
   }
-  Login_Register(Type){
-    if(Type == true){
+
+  Login_Register(Type) {
+    if (Type == true) {
       this.login_register = true;
-    }else{
+    } else {
       this.login_register = false;
     }
     console.log(Type)

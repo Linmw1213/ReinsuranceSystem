@@ -1,4 +1,4 @@
-<div [formGroup]="loginform" id="Login">
+<div [formGroup]="loginform" id="Login" style="background-image:url(../../assets/img/star.jpg)">
   <div class="main">
     <p-card>
       <div class="Title">
@@ -6,10 +6,10 @@
       </div>
       <div class="Title_Type">
         <a (click)="Login_Register(true)">
-          <p [ngClass]="{'login_register': login_register}">登录</p>
+          <p style="cursor: pointer;" [ngClass]="{'login_register': login_register}">登录</p>
         </a>
         <a (click)="Login_Register(false)">
-          <p [ngClass]="{'login_register': !login_register}">注册</p>
+          <p style="cursor: pointer;" [ngClass]="{'login_register': !login_register}">注册</p>
         </a>
       </div>
       <div class="Login" *ngIf="login_register" style="margin-top:20px;">
@@ -20,9 +20,11 @@
               placeholder="用户名(由字母、数字、下划线组成)"> -->
             <span class="ui-float-label">
               <input id="float-input" formControlName="userId" size="60" type="text" maxlength="21" pInputText>
-              <label for="float-input">请输入用户名(由字母、数字、下划线组成)</label>
+              <label for="float-input">请输入账户(由字母、数字、下划线组成)</label>
             </span>
             <p-message severity="error" [text]="loginform.controls['userId'].errors['required'] ? '账号不能为空' : 
+                loginform.controls['userId'].errors['pattern'] ? '账号不能含有非法字符' : 
+                loginform.controls['userId'].errors['minlength'] ? '密码不能小于6个字符' :                 
                 loginform.controls['userId'].errors['maxlength'] ? '账号不能大于20个字符' :''"
               *ngIf="!loginform.controls['userId'].valid&&loginform.controls['userId'].dirty">
             </p-message>
@@ -32,10 +34,11 @@
                 placeholder="密码()"> -->
             <img src="../../assets/img/Password1.png" alt="">
             <span class="ui-float-label">
-              <input id="float-input" size="80" type="text" formControlName="password" maxlength="21" pInputText>
+              <input id="float-input" size="80" type="password" formControlName="password" maxlength="21" pInputText>
               <label for="float-input">请输入密码(由字母、数字、下划线组成)</label>
             </span>
             <p-message severity="error" [text]="loginform.controls['password'].errors['required'] ? '密码不能为空' : 
+                loginform.controls['password'].errors['pattern'] ? '密码不能含有非法字符' : 
                 loginform.controls['password'].errors['minlength'] ? '密码不能小于6个字符' : 
                 loginform.controls['password'].errors['maxlength'] ? '密码不能大于20个字符' :''"
               *ngIf="!loginform.controls['password'].valid&&loginform.controls['password'].dirty">
@@ -52,7 +55,7 @@
         </div>
       </div>
       <div class="Register" *ngIf="!login_register">
-        <p>aaaa</p>
+        <app-register></app-register>
       </div>
     </p-card>
   </div>

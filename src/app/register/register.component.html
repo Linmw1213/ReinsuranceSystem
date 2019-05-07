@@ -1,0 +1,47 @@
+<div class="ui-fluid" [formGroup]="registerForm">
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          用户名
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" formControlName="username" />
+        </div>
+  
+        <div class="ui-g-4">
+          性别
+        </div>
+        <div class="ui-g-8">
+          <p-radioButton name="group1" value="男" label="男" formControlName="sex"></p-radioButton>
+          <p-radioButton name="group1" value="女" label="女" formControlName="sex" [style]="{'margin-left':'10px'}"></p-radioButton>
+        </div>
+  
+        <div class="ui-g-4">
+          邮箱
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" formControlName="email" />
+        </div>
+  
+        <div class="ui-g-4">
+          联系电话
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" formControlName="phone" />
+        </div>
+        
+        <div class="ui-g-4">
+          家庭住址
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" formControlName="address" />
+        </div>
+  
+        <div class="ui-g-4"></div>
+        <div class="ui-g-8">
+          <button pButton style="background:#474a4c" label="注册" type="button" [disabled]="registerForm.invalid" (click)="confirm()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

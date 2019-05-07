@@ -51,6 +51,7 @@ import { SystemManagementComponent } from './operator/system-management/system-m
 import { UserInfoComponent } from './operator/system-management/user-info/user-info.component';
 import { UpdatePasswordComponent } from './operator/system-management/update-password/update-password.component';
 import { ParameterMaintenanceComponent } from './admin/parameter-maintenance/parameter-maintenance.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ParameterMaintenanceComponent } from './admin/parameter-maintenance/par
     UserInfoComponent,
     UpdatePasswordComponent,
     ParameterMaintenanceComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

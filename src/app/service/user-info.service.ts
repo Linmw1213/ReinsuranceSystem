@@ -16,7 +16,7 @@ export class UserInfoService {
   // }
 
   login(user: User): Observable<any> {
-    return this.httpClient.post<any>(this.userURL + '/login', user);
+    return this.httpClient.post<User>(this.userURL + '/login', user);
   }
 
   getAll(): Observable<User[]> {
@@ -41,5 +41,9 @@ export class UserInfoService {
 
   updatePwd(user: User): Observable<any> {
     return this.httpClient.put<User>(this.userURL + '/updatePwd', user);
+  }
+
+  register(user: User): Observable<any> {
+    return this.httpClient.post<User>(this.userURL + '/register',user);
   }
 }
