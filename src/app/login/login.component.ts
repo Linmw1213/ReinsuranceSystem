@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   errorDialog: boolean = false;
   company: Company;
   name: any;
+  login_register:boolean = true;
   constructor(
     private fb: FormBuilder,
     private loginService: UserInfoService,
@@ -39,7 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   btnOnClick() {
-
     const user = {
       userId: this.loginform.get('userId').value,
       password: this.loginform.get('password').value,
@@ -49,16 +49,15 @@ export class LoginComponent implements OnInit {
         this.name = data.name;
         if (this.loginform.valid) {
           sessionStorage.setItem('currentUserId', this.loginform.get('userId').value);
-          
           this.loginService.getSelfInfo(this.loginform.get('userId').value).subscribe(
             (data) => {
-              console.log('currentUser:' + data.username);
               sessionStorage.setItem("currentUserName", data.username);
             }
           )
-          if (this.name === 'operator') {
+          if (this.name === '系统业务员') {
+            sessionStorage.setItem('currentUserRole', this.name);
             this.router.navigateByUrl('operatorIndex');
-          } else if (this.name === 'admin') {
+          } else if (this.name === '系统管理员') {
             this.router.navigateByUrl('adminIndex');
           } else {
             console.log('error username');
@@ -67,14 +66,13 @@ export class LoginComponent implements OnInit {
       }
     )
 
-    // this.service.test('1001').subscribe(
-    //   (data) => {
-    //     this.company = data;
-    //     console.log(data.currency);
-    //     console.log(this.company.bankName);
-    //   }
-    // );
-
   }
-
+  Login_Register(Type){
+    if(Type == true){
+      this.login_register = true;
+    }else{
+      this.login_register = false;
+    }
+    console.log(Type)
+  }
 }

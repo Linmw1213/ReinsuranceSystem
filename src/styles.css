@@ -49,3 +49,15 @@
 
 
 /* reins-contract-management.component.css */
+
+
+/*20190506 login.component.css */
+
+#Login .main .Login .Login_input .Number p-message .ui-message,
+#Login .main .Login .Login_input .Password p-message .ui-message {
+    padding: 0;
+    background-color: inherit;
+}
+
+
+/*20190506 login.component.css */

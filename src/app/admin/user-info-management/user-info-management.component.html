@@ -11,44 +11,22 @@
   </div>
   <div class="ui-g-12 ui-g-nopad" style="text-align:center">
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-4">
-        <p-card header="李白" subheader="系统业务员" styleClass="ui-card-shadow">
+      <div class="ui-g-12 ui-md-4" *ngFor="let user of users">
+        <p-card header="{{user.username}}" subheader="系统业务员" styleClass="ui-card-shadow">
           <p-header>
             <img src="Card" src="assets/img/usercard.png">
           </p-header>
           <div>
             <div style="text-align:left;position: relative;;color:teal">
-              用户姓名：李白
+              用户姓名：{{user.username}}
               <br>
-              手机号码：17808897897
+              性别：{{user.sex}}
               <br>
-              email: forestmw1213@outlook.com
+              手机号码：{{user.phone}}
               <br>
-              现居住地：海南海口
+              email: {{user.email}}
               <br>
-              用户角色：系统业务员
-            </div>
-          </div>
-          <p-footer>
-            <button pButton type="button" icon="pi pi-pencil" style="margin-right: .25em"></button>
-            <button pButton type="button" icon="pi pi-trash" class="ui-button-danger"></button>
-          </p-footer>
-        </p-card>
-      </div>
-      <div class="ui-g-12 ui-md-4">
-        <p-card header="张三" subheader="系统业务员" styleClass="ui-card-shadow">
-          <p-header>
-            <img src="Card" src="assets/img/usercard.png">
-          </p-header>
-          <div>
-            <div style="text-align:left;color:teal">
-              用户姓名：张三
-              <br>
-              手机号码：18808897890
-              <br>
-              email: 1209215924@qq.com
-              <br>
-              现居住地：广东广州
+              现居住地：{{user.address}}
               <br>
               用户角色：系统业务员
             </div>
@@ -59,52 +37,6 @@
           </p-footer>
         </p-card>
       </div>
-      <div class="ui-g-12 ui-md-4">
-        <p-card header="韩愈" subheader="访客" styleClass="ui-card-shadow">
-          <p-header>
-            <img src="Card" src="assets/img/usercard.png">
-          </p-header>
-          <div style="text-align:left;color:teal">
-            用户姓名：韩愈
-            <br>
-            手机号码：18808897890
-            <br>
-            email: 1209215924@qq.com
-            <br>
-            现居住地：海南三亚
-            <br>
-            用户角色：访客
-          </div>
-          <p-footer>
-            <button pButton type="button" icon="pi pi-pencil" style="margin-right: .25em"></button>
-            <button pButton type="button" icon="pi pi-trash" class="ui-button-danger"></button>
-          </p-footer>
-        </p-card>
-      </div>
-    </div>
-  </div>
-  <div class="ui-g-12 ui-g-nopad" style="text-align:center">
-    <div class="ui-g-12 ui-md-4">
-      <p-card header="韩愈" subheader="访客" styleClass="ui-card-shadow">
-        <p-header>
-          <img src="Card" src="assets/img/usercard.png">
-        </p-header>
-        <div style="text-align:left;color:teal">
-          用户姓名：韩愈
-          <br>
-          手机号码：18808897890
-          <br>
-          email: 1209215924@qq.com
-          <br>
-          现居住地：海南三亚
-          <br>
-          用户角色：访客
-        </div>
-        <p-footer>
-          <button pButton type="button" icon="pi pi-pencil" style="margin-right: .25em"></button>
-          <button pButton type="button" icon="pi pi-trash" class="ui-button-danger"></button>
-        </p-footer>
-      </p-card>
     </div>
   </div>
 </div>

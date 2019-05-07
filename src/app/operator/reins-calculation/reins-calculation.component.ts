@@ -113,42 +113,51 @@ export class ReinsCalculationComponent implements OnInit {
     const id = this.reinsCalculationForm.get('contractId').value;
     this.contractService.getBasicMsgById(id).subscribe(
       (data) => {
-        console.log(data.contractName);
         this.reinsCalculationForm.get('contractName').setValue(data.contractName);
         this.reinsCalculationForm.get('companyName').setValue(data.companyName);
         this.reinsCalculationForm.get('contractType').setValue(data.contractTypeName);
-
-        console.log('cal1:' + data.total);
 
         const typename = this.reinsCalculationForm.get('contractType').value;
         if (typename == '成数分保') {
           this.surplus = false;
           this.quotaAshore = true;
 
+          // 分出公司应付赔款、自留保费
+          const outPay = data.pay * (1 - data.retention_ratio);
+          const outAmount = data.insurance_expence * (1 - data.retention_ratio);
+
+          // 再保公司应付赔款、再保费
+          const enterPay = data.pay * data.retention_ratio;
+          const enterAmount = data.insurance_expence * data.retention_ratio;
+
+          const outPrimune = data.total * data.retention_ratio;
+          const selfApart = data.total * (1 - data.retention_ratio);
+
           this.quotaAshoreData = {
             datasets: [{
-              data: [data.total, data.pay, data.insurance_expence, data.retention],
+              data: [data.total, outPrimune, selfApart, data.ceiling_top],
               backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#36A2EB",],// "#36A2EB"
               label: '溢额再保险',
               hoverBackgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#36A2EB"]
             }],
-            labels: ["总保额", "自留额", "保险费", "赔款"]// "线数"
+            // labels: ["总保额", "赔款", "保险费", "最高限额"]// "线数"
+            labels: ["总保额", "分出保额", "自留额", "最高限额"]// "线数"
           }
 
           this.quotaAshoreRs = {
-            labels: ['应付赔款', '保费'],
+            labels: ['应付赔款', '再保费'],
             datasets: [
               {
                 label: '原保险公司',
                 backgroundColor: '#42A5F5',
                 borderColor: '#1E88E5',
-                data: [65, 59]
+                data: [outPay, outAmount]
               },
               {
                 label: '再保公司',
                 backgroundColor: '#9CCC65',
                 borderColor: '#7CB342',
-                data: [28, 48]
+                data: [enterPay, enterAmount]
               }
             ]
           }
@@ -157,6 +166,14 @@ export class ReinsCalculationComponent implements OnInit {
           this.surplus = true;
           this.quotaAshore = false;
 
+          // 分出公司应付赔款、自留保费
+          const outAmount = data.retention / data.total * data.insurance_expence;
+          const outPay = data.retention / data.total * data.pay;
+
+          // 再保公司应付赔款、再保费
+          const enterAmount = (data.total - data.retention) / data.total * data.insurance_expence;
+          const enterPay = (data.total - data.retention) / data.total * data.pay;
+
           this.surplusData = {
             datasets: [{
               data: [data.total, data.pay, data.insurance_expence, data.retention],
@@ -164,7 +181,7 @@ export class ReinsCalculationComponent implements OnInit {
               label: '溢额再保险',
               hoverBackgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#36A2EB"]
             }],
-            labels: ["总保额", "自留额", "保险费", "赔款"]// "线数"
+            labels: ["总保额", "赔款", "保险费", "自留额"]// "线数"
           }
 
           this.surplusRs = {
@@ -174,13 +191,13 @@ export class ReinsCalculationComponent implements OnInit {
                 label: '原保险公司',
                 backgroundColor: '#42A5F5',
                 borderColor: '#1E88E5',
-                data: [65, 59]
+                data: [outPay, outAmount]
               },
               {
                 label: '再保公司',
                 backgroundColor: '#9CCC65',
                 borderColor: '#7CB342',
-                data: [28, 48]
+                data: [enterPay, enterAmount]
               }
             ]
           }

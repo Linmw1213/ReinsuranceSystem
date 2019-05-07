@@ -41,7 +41,6 @@ export class ReinsTypesManagemententComponent implements OnInit {
     this.reinsTypeService.getReinsTypes().subscribe(
       (data) => {
         this.reinsTypes = data;
-        console.log(data);
       }
     );
   }
@@ -52,7 +51,7 @@ export class ReinsTypesManagemententComponent implements OnInit {
       { field: 'typeId', header: '险种代码' },
       { field: 'typeName', header: '险种名称' },
       { field: 'description', header: '备注' },
-      { field: 'status', header: '当前状态' },
+      // { field: 'status', header: '当前状态' },
     ];
   }
 
@@ -81,12 +80,18 @@ export class ReinsTypesManagemententComponent implements OnInit {
       description: this.reinsTypeForm.get('description').value,
       operator: sessionStorage.getItem('currentUserName'),
       operatorId: sessionStorage.getItem('currentUserId'),
+      status: '待审核'
     }
     this.addDialog = false;
     this.reinsTypeService.addReinsType(reinsType as ReinsType).subscribe(
       (data) => {
         if (data == 1) {
-          this.reinsTypes.push(reinsType as ReinsType);
+          // this.reinsTypes.push(reinsType as ReinsType);
+          this.reinsTypeService.getReinsTypes().subscribe(
+            (types) => {
+              this.reinsTypes = types;
+            }
+          );
         } else {
           console.log('data:' + data);
         }

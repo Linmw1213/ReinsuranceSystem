@@ -30,17 +30,17 @@
 
         <ng-template pTemplate="summary" let-rowData>
           <div style="text-align:left">
-            <button type="button" pButton icon="pi pi-plus" label="新增"></button>
+            <button type="button" pButton icon="pi pi-plus" label="新增" (click)="addBtnOnClick()"></button>
           </div>
         </ng-template>
       </p-table>
     </div>
   </div>
 
-  <div class="ui-g" [formGroup]="reinsClaimForm">
+  <div class="ui-g" [formGroup]="reinsClaimForm" *ngIf="add">
     <div class="ui-g-12 ui-md-6">
       <p-card subheader="新增理赔件" styleClass="ui-card-shadow">
-        <p-steps [model]="items"></p-steps>
+        <!-- <p-steps [model]="items"></p-steps> -->
 
         <div class="ui-g">
           <div class="ui-g-4">
@@ -88,11 +88,11 @@
         </div>
       </p-card>
     </div>
-    <div class="ui-g-12 ui-md-6">
+    <!-- <div class="ui-g-12 ui-md-6">
       <p-card subheader="进展一览处" styleClass="ui-card-shadow">
         <p-chart type="pie" [data]="data"></p-chart>
       </p-card>
-    </div>
+    </div> -->
   </div>
 
 </div>

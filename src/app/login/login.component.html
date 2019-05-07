@@ -1,42 +1,59 @@
-<div class="container" [formGroup]="loginform" id="Login">
-  <div class="row">
-    <div
-      style="background-image: url(../../../../assets/img/tou.png);position: absolute;left: 80px;top: -87px;width: 97px;height: 92px;">
-    </div>
-    <div
-      style="background-image: url(../../../../assets/img/hand.png);width: 30px;height: 20px;position: absolute;top: -12px;left: 30px;">
-    </div>
-    <div
-      style="background-image: url(../../../../assets/img/hand.png);width: 30px;height: 20px;position: absolute;top: -12px;left: 200px;">
-    </div>
-    <div class="main" style="width:100%;display:block;">
-      <h1 class="Title"><small>Login</small></h1>
-      <div class="UserName">
-        <input type="text" formControlName="userId" class="form-control" placeholder="用户名(由字母、数字、下划线组成)">
-        <div class="Usererror">
-          <p-message severity="error"
-            [text]="loginform.controls['userId'].errors['required'] ? '账号不能为空' : 
-            loginform.controls['userId'].errors['maxlength'] ? '账号不能大于20个字符' :''"
-            *ngIf="!loginform.controls['userId'].valid&&loginform.controls['userId'].dirty">
-          </p-message>
+<div [formGroup]="loginform" id="Login">
+  <div class="main">
+    <p-card>
+      <div class="Title">
+        <p>友邦再保险信息管理系统</p>
+      </div>
+      <div class="Title_Type">
+        <a (click)="Login_Register(true)">
+          <p [ngClass]="{'login_register': login_register}">登录</p>
+        </a>
+        <a (click)="Login_Register(false)">
+          <p [ngClass]="{'login_register': !login_register}">注册</p>
+        </a>
+      </div>
+      <div class="Login" *ngIf="login_register" style="margin-top:20px;">
+        <div class="Login_input">
+          <div class="Number">
+            <img src="../../assets/img/Number1.png" alt="">
+            <!-- <input type="text" formControlName="userId" maxlength="21" class="form-control"
+              placeholder="用户名(由字母、数字、下划线组成)"> -->
+            <span class="ui-float-label">
+              <input id="float-input" formControlName="userId" size="60" type="text" maxlength="21" pInputText>
+              <label for="float-input">请输入用户名(由字母、数字、下划线组成)</label>
+            </span>
+            <p-message severity="error" [text]="loginform.controls['userId'].errors['required'] ? '账号不能为空' : 
+                loginform.controls['userId'].errors['maxlength'] ? '账号不能大于20个字符' :''"
+              *ngIf="!loginform.controls['userId'].valid&&loginform.controls['userId'].dirty">
+            </p-message>
+          </div>
+          <div class="Password" style="margin-top:10px;">
+            <!-- <input type="password" formControlName="password" maxlength="21" class="form-control"
+                placeholder="密码()"> -->
+            <img src="../../assets/img/Password1.png" alt="">
+            <span class="ui-float-label">
+              <input id="float-input" size="80" type="text" formControlName="password" maxlength="21" pInputText>
+              <label for="float-input">请输入密码(由字母、数字、下划线组成)</label>
+            </span>
+            <p-message severity="error" [text]="loginform.controls['password'].errors['required'] ? '密码不能为空' : 
+                loginform.controls['password'].errors['minlength'] ? '密码不能小于6个字符' : 
+                loginform.controls['password'].errors['maxlength'] ? '密码不能大于20个字符' :''"
+              *ngIf="!loginform.controls['password'].valid&&loginform.controls['password'].dirty">
+            </p-message>
+          </div>
+        </div>
+        <div class="Login_Title">
+          <a href="javascript:history.go(0)">
+            <p>忘记密码?</p>
+          </a>
+        </div>
+        <div class="Submit">
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="btnOnClick()">登录</button>
         </div>
       </div>
-      <div class="PassWord">
-        <input type="password" formControlName="password" class="form-control" placeholder="密码(由字母、数字、下划线组成)">
-        <div class="PassWorderror">
-          <p-message severity="error"
-            [text]="loginform.controls['password'].errors['required'] ? '密码不能为空' : 
-            loginform.controls['password'].errors['minlength'] ? '密码不能小于6个字符' : 
-            loginform.controls['password'].errors['maxlength'] ? '密码不能大于20个字符' :''"
-            *ngIf="!loginform.controls['password'].valid&&loginform.controls['password'].dirty">
-          </p-message>
-        </div>
+      <div class="Register" *ngIf="!login_register">
+        <p>aaaa</p>
       </div>
-
-
-      <div class="Submit">
-        <button type="button" class="btn btn-primary btn-lg btn-block" (click)="btnOnClick()">Log On</button>
-      </div>
-    </div>
+    </p-card>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserInfoService {
-  userURL = 'http://localhost:8080/user';
+  userURL = 'http://localhost:8080/userInfo';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,10 +16,30 @@ export class UserInfoService {
   // }
 
   login(user: User): Observable<any> {
-   return this.httpClient.post<any>(this.userURL + '/login', user);
+    return this.httpClient.post<any>(this.userURL + '/login', user);
   }
 
-  getSelfInfo(userId: any): Observable<User> {
-    return this.httpClient.get<User>(this.userURL + '/getCurrentUser/'+userId);
+  getAll(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.userURL + '/getAll');
+  }
+
+  addUser(user: User): Observable<any> {
+    return this.httpClient.post<User>(this.userURL + '/add', user);
+  }
+
+  getSelfInfo(userId: any): Observable<any> {
+    return this.httpClient.get<User>(this.userURL + '/getCurrentUser/' + userId);
+  }
+
+  updateInfo(user: User): Observable<any> {
+    return this.httpClient.put<User>(this.userURL + '/update', user);
+  }
+
+  deleteUser(userId: any): Observable<any> {
+    return this.httpClient.delete<User>(this.userURL + '/delete/' + userId);
+  }
+
+  updatePwd(user: User): Observable<any> {
+    return this.httpClient.put<User>(this.userURL + '/updatePwd', user);
   }
 }

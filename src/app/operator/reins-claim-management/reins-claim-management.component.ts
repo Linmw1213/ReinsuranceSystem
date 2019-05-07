@@ -17,6 +17,7 @@ export class ReinsClaimManagementComponent implements OnInit {
   cols: any[];
   reinsClaimForm: FormGroup;
   contractId: SelectItem[];
+  add = false;
 
   constructor(private service: ReinsClaimService, private fb: FormBuilder) { }
 
@@ -130,5 +131,9 @@ export class ReinsClaimManagementComponent implements OnInit {
       { label: 'jhto2g2', value: 'yie' },
     ];
     //  this.contractId[0] = { label: 'jhto2g2', value: 'chengshu' }
+  }
+
+  addBtnOnClick() {
+    this.add = true;
   }
 }

@@ -26,7 +26,7 @@ export class ContractService {
   }
 
   modifyContract(contract: Contract): Observable<any> {
-    return this.http.put<Contract>(this.contractURL + '/modify', contract, httpOptions);
+    return this.http.put<Contract>(this.contractURL + '/modify', contract);
   }
 
   deleteContract(Contract: Contract | string): Observable<any> {

@@ -20,7 +20,7 @@
         {{rowData[col.field]}}
       </td>
       <td>
-        <i style="cursor: pointer;" class="pi pi-pencil" (click)="editReinsType(rowData)"></i>
+        <!-- <i style="cursor: pointer;" class="pi pi-pencil" (click)="editReinsType(rowData)"></i> -->
         <i style="cursor: pointer;" class="pi pi-trash" (click)="deleteReinsType($event,rowData)"></i>
       </td>
     </tr>
@@ -68,11 +68,11 @@
         <h4>备注信息</h4>
         <textarea rows="3" cols="20" pInputTextarea formControlName="description"></textarea>
       </div>
-      <div class="ui-n-24" style="margin-top:10px">
+      <!-- <div class="ui-n-24" style="margin-top:10px">
         <h4>当前状态</h4>
         <input type="text" pInputText formControlName="typeStatus">
-      </div>
-    </div>
+      </div>-->
+    </div> 
     <p-footer>
       <button type="button" pButton icon="pi pi-check" (click)="submitModifyMessage()" label="提交"></button>
       <button type="button" pButton icon="pi pi-times" (click)="submitModifyMessage()" label="取消"
