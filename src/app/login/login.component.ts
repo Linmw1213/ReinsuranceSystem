@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CompanyService } from '../service/company.service';
-import { TestService } from '../service/test.service';
 import { Company } from '../VO/company';
 import { UserInfoService } from '../service/user-info.service';
 import { User } from '../VO/user';
@@ -61,13 +59,17 @@ export class LoginComponent implements OnInit {
     if (this.loginform.valid) {
       this.loginService.login(user as User).subscribe(
         (data) => {
-          const role_name = data.role_name;
-          sessionStorage.setItem('currentUserId', this.loginform.get('userId').value);
-          sessionStorage.setItem('currentUserRole', role_name);
-          if (role_name === '系统管理员') {
-            this.router.navigateByUrl('adminIndex');
-          } else if (role_name === '系统业务员') {
-            this.router.navigateByUrl('operatorIndex');
+          if (data !== null) {
+            const role_name = data.role_name;
+            sessionStorage.setItem('currentUserId', this.loginform.get('userId').value);
+            sessionStorage.setItem('currentUserRole', role_name);
+
+            if (role_name === '系统管理员') {
+              this.router.navigateByUrl('adminIndex');
+            } else {
+              this.router.navigateByUrl('operatorIndex');
+            }
+            
           } else {
             console.log('登录失败');
           }
@@ -84,4 +86,6 @@ export class LoginComponent implements OnInit {
     }
     console.log(Type)
   }
+
+  
 }

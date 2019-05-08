@@ -1,0 +1,55 @@
+<div class="ui-fluid" [formGroup]="userForm">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+
+      <div class="ui-g-3">
+        用户名
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="username" />
+      </div>
+
+      <div class="ui-g-3">
+        性别
+      </div>
+      <div class="ui-g-8">
+        <p-radioButton name="group1" value="男" label="男" formControlName="sex"></p-radioButton>
+        <p-radioButton name="group1" value="女" label="女" formControlName="sex" [style]="{'margin-left':'10px'}">
+        </p-radioButton>
+      </div>
+
+      <div class="ui-g-3">
+        邮箱
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="email" />
+      </div>
+
+      <div class="ui-g-3">
+        联系电话
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="phone" />
+      </div>
+
+      <div class="ui-g-3">
+        家庭住址
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" formControlName="address" />
+      </div>
+
+      <div class="ui-g-3">
+        设定角色
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown [options]="roles" formControlName="role_name" placeholder="请选择角色"></p-dropdown>
+      </div>
+
+      <div class="ui-g-3"></div>
+      <div class="ui-g-8">
+        <button pButton label="提交" type="submit" [disabled]="userForm.invalid" (click)="submit()"></button>
+      </div>
+    </div>
+  </div>
+</div>

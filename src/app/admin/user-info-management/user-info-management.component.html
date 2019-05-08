@@ -1,53 +1,86 @@
-<div class="container-fluid">
-  <div class="ui-g-12 ui-g-nopad">
-    <div class="ui-g ui-md-offset-3">
-      <div class="ui-g-12 ui-md-8">
-        <input type="text" class="form-control">
+<form [formGroup]="userForm">
+  <div class="container-fluid">
+    <div class="ui-g-12 ui-g-nopad">
+      <button pButton type="button" (click)="addUser()">add</button>
+      <div class="ui-g ui-md-offset-3">
+        <div class="ui-g-12 ui-md-8">
+          <input type="text" formControlName="id" placeholder="请输入用户编号查询" class="form-control">
+        </div>
+        <div class="ui-g-12 ui-md-4">
+          <button pButton type="button" icon="pi pi-search" (click)="getUserById()"></button>
+        </div>
       </div>
-      <div class="ui-g-12 ui-md-4">
-        <button pButton type="button" icon="pi pi-search"></button>
-      </div>
-    </div>
-  </div>
-  <div class="ui-g-12 ui-g-nopad" style="text-align:center">
-    <div class="ui-g">
-      <div class="ui-g-12 ui-md-4" *ngFor="let user of users">
-        <p-card header="{{user.username}}" subheader="{{user.role_name}}" styleClass="ui-card-shadow">
-          <p-header>
-            <img src="Card" src="assets/img/usercard.png">
-          </p-header>
-          <div>
-            <div style="text-align:left;position: relative;;color:teal">
-              用户姓名：{{user.username}}
-              <br>
-              性别：{{user.sex}}
-              <br>
-              手机号码：{{user.phone}}
-              <br>
-              email: {{user.email}}
-              <br>
-              现居住地：{{user.address}}
-              <br>
-              用户角色：{{user.role_name}}
-            </div>
-          </div>
-          <p-footer>
-            <button pButton type="button" icon="pi pi-pencil" (click)="modifyBtnOnClick(user)"
-              style="margin-right: .25em"></button>
-            <button pButton type="button" icon="pi pi-trash" (click)="deleteBtnOnClick(user)"
-              class="ui-button-danger"></button>
-          </p-footer>
-        </p-card>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- 修改用户信息 -->
-<p-card>
-  <p-dialog header="修改用户信息" [(visible)]="modifyDialog" [modal]="true" [style]="{width: 'auto', height: 'auto'}"
-    [maximizable]="true">
-    <div class="ui-fluid" [formGroup]="userForm">
+      <p-dialog header="查询结果" [modal]="true" [(visible)]="displayRs" [style]="{width: '400px', height: '400px'}">
+        <div *ngIf="found" style="text-align:left;position: relative; font-size: 18px;">
+          用户编号：{{userForm.get('userId').value}}
+          <br>
+          用户姓名：{{userForm.get('username').value}}
+          <br>
+          拥有角色：{{userForm.get('role_name').value}}
+          <br>
+          性别：{{userForm.get('sex').value}}
+          <br>
+          手机号码：{{userForm.get('phone').value}}
+          <br>
+          email: {{userForm.get('email').value}}
+          <br>
+          现居住地：{{userForm.get('address').value}}
+          <br>
+        </div>
+        <div *ngIf="notFound" style="height:30px;font-size: 1em">
+          <span>
+            <i class="pi pi-info-circle"></i>
+          </span>
+          <span>没找到任何信息</span>
+        </div>
+        <p-footer>
+          <button type="button" pButton (click)="displayRs=false" label="确定"></button>
+        </p-footer>
+      </p-dialog>
+
+    </div>
+    <div class="ui-g-12 ui-g-nopad" style="text-align:center">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4" *ngFor="let user of users">
+          <p-card header="{{user.username}}" subheader="{{user.role_name}}" styleClass="ui-card-shadow">
+            <p-header>
+              <img src="Card" src="assets/img/usercard.png">
+            </p-header>
+            <div>
+              <div style="text-align:left;position: relative;;color:teal">
+                用户编号：{{user.userId}}
+                <br>
+                用户姓名：{{user.username}}
+                <br>
+                性别：{{user.sex}}
+                <br>
+                手机号码：{{user.phone}}
+                <br>
+                email: {{user.email}}
+                <br>
+                现居住地：{{user.address}}
+                <br>
+                用户角色：{{user.role_name}}
+              </div>
+            </div>
+            <p-footer>
+              <button pButton type="button" icon="pi pi-pencil" (click)="modifyBtnOnClick(user)"
+                style="margin-right: .25em"></button>
+              <button pButton type="button" icon="pi pi-trash" (click)="deleteBtnOnClick(user)"
+                class="ui-button-danger"></button>
+            </p-footer>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 修改用户信息 -->
+  <p-card>
+    <p-dialog header="修改用户信息" [(visible)]="modifyDialog" [modal]="true" [style]="{width: 'auto', height: 'auto'}"
+      [maximizable]="true">
+      <div class="ui-fluid">
         <!-- <p-card subheader="个人信息管理" styleClass="ui-card-shadow"> -->
         <div class="ui-g">
           <div class="ui-g-12 ui-md-6">
@@ -55,45 +88,46 @@
               拥有角色
             </div>
             <div class="ui-g-8">
-              <input pInputText type="text" formControlName="role_name" />
+              <p-dropdown [options]="roles" formControlName="role_name" placeholder="请选择角色"></p-dropdown>
             </div>
-      
+
             <div class="ui-g-4">
               用户名
             </div>
             <div class="ui-g-8">
               <input pInputText type="text" formControlName="username" />
             </div>
-      
+
             <div class="ui-g-4">
               性别
             </div>
             <div class="ui-g-8">
               <p-radioButton name="group1" value="男" label="男" formControlName="sex"></p-radioButton>
-              <p-radioButton name="group1" value="女" label="女" formControlName="sex" [style]="{'margin-left':'10px'}"></p-radioButton>
+              <p-radioButton name="group1" value="女" label="女" formControlName="sex" [style]="{'margin-left':'10px'}">
+              </p-radioButton>
             </div>
-      
+
             <div class="ui-g-4">
               邮箱
             </div>
             <div class="ui-g-8">
               <input pInputText type="text" formControlName="email" />
             </div>
-      
+
             <div class="ui-g-4">
               联系电话
             </div>
             <div class="ui-g-8">
               <input pInputText type="text" formControlName="phone" />
             </div>
-            
+
             <div class="ui-g-4">
               家庭住址
             </div>
             <div class="ui-g-8">
               <input pInputText type="text" formControlName="address" />
             </div>
-      
+
             <div class="ui-g-4"></div>
             <div class="ui-g-8">
               <button pButton label="提交修改" type="button" [disabled]="userForm.invalid" (click)="saveUpdate()"></button>
@@ -101,7 +135,8 @@
           </div>
         </div>
         <!-- </p-card> -->
-      </div>      
+      </div>
 
-  </p-dialog>
-</p-card>
+    </p-dialog>
+  </p-card>
+</form>

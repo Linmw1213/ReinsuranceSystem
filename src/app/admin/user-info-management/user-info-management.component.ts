@@ -3,6 +3,7 @@ import { User } from 'src/app/VO/user';
 import { UserInfoService } from 'src/app/service/user-info.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-info-management',
@@ -14,6 +15,12 @@ export class UserInfoManagementComponent implements OnInit {
   users: User[];
   modifyDialog = false;
   userForm: FormGroup;
+  roles = [];
+  findUser: User;
+  displayRs = false;
+  notFound = false;
+  found = false;
+  role = '';
 
   constructor(
     private userService: UserInfoService,
@@ -23,18 +30,55 @@ export class UserInfoManagementComponent implements OnInit {
   ngOnInit() {
     this.getAll();
     this.createForm();
+    this.setRole();
+  }
+
+  setRole() {
+    this.roles = [
+      { label: '系统管理员', value: 1 },
+      { label: '系统业务员', value: 2 }
+    ]
   }
 
   createForm() {
     this.userForm = this.fb.group({
+      id: ['', Validators.required],
       userId: new FormControl({ value: '', disabled: true }),
       username: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
       sex: ['', Validators.required],
       address: ['', Validators.required],
-      role_name: new FormControl({ value: '', disabled: true })
+      role_name: ['', Validators.required],
     });
+  }
+
+  getUserById() {
+    this.displayRs = true;
+    const id = this.userForm.get('id').value;
+    this.userService.getSelfInfo(id).subscribe(
+      (data) => {
+        if (data !== null) {
+          this.found = true;
+          this.notFound = false;
+
+          this.userService.queryUserRoleById(data.userId).subscribe(
+            (role) => {
+              this.userForm.get('role_name').setValue(role.role_name);
+            }
+          );
+          this.userForm.get('userId').setValue(data.userId);
+          this.userForm.get('username').setValue(data.username);
+          this.userForm.get('phone').setValue(data.phone);
+          this.userForm.get('email').setValue(data.email);
+          this.userForm.get('sex').setValue(data.sex);
+          this.userForm.get('address').setValue(data.address);
+        } else {
+          this.notFound = true;
+          this.found = false;
+        }
+      }
+    );
   }
 
   getAll() {
@@ -67,6 +111,12 @@ export class UserInfoManagementComponent implements OnInit {
       address: this.userForm.get('address').value,
       sex: this.userForm.get('sex').value
     }
+
+    const userRole = {
+      uid: this.userForm.get('userId').value,
+      rid: this.userForm.get('role_name').value,
+    }
+
     this.userService.updateInfo(user as User).subscribe(
       (data) => {
         if (data == 1) {
@@ -77,19 +127,32 @@ export class UserInfoManagementComponent implements OnInit {
         }
       }
     );
+
+    this.userService.updateUserRole(userRole).subscribe(
+      (data) => {
+        console.log('add role success')
+      }
+    );
+
     this.modifyDialog = false;
   }
 
   deleteBtnOnClick(selectedUser: User) {
     this.userService.deleteUser(selectedUser.userId).subscribe(
       (data) => {
-        if (data === 1) {
+        if (data == 1) {
+          this.getAll();
           console.log('delete success');
         } else {
           console.log('can not delete');
         }
       }
     );
+
+    this.userService.deleteRole(selectedUser.userId).subscribe();
   }
 
+  addUser(){
+    this.router.navigateByUrl('addUser'); 
+  }
 }

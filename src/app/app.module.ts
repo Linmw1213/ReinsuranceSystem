@@ -30,6 +30,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
 import { StepsModule } from 'primeng/steps';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 /** native components */
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { UserInfoComponent } from './operator/system-management/user-info/user-i
 import { UpdatePasswordComponent } from './operator/system-management/update-password/update-password.component';
 import { ParameterMaintenanceComponent } from './admin/parameter-maintenance/parameter-maintenance.component';
 import { RegisterComponent } from './register/register.component';
+import { AddUserComponent } from './admin/user-info-management/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { RegisterComponent } from './register/register.component';
     UpdatePasswordComponent,
     ParameterMaintenanceComponent,
     RegisterComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,8 @@ import { RegisterComponent } from './register/register.component';
     DynamicDialogModule,
     InputTextareaModule,
     TabViewModule,
-    StepsModule
+    StepsModule,
+    ConfirmDialogModule
 
   ],
   providers: [],
