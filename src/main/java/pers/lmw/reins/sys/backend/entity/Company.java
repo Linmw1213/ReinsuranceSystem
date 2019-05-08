@@ -27,6 +27,29 @@ public class Company {
 	private String bankName;
 	private String currency;
 	
+	// 日志
+	private String operator;
+	private String createTime;
+	private String modifyTime;
+	
+	public String getOperator() {
+		return operator;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getModifyTime() {
+		return modifyTime;
+	}
+	public void setModifyTime(String modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 	public int getId() {
 		return id;
 	}

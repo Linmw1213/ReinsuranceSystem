@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pers.lmw.reins.sys.backend.dao.LogMapper;
 import pers.lmw.reins.sys.backend.dao.UserMapper;
 import pers.lmw.reins.sys.backend.entity.Role;
 import pers.lmw.reins.sys.backend.entity.User;
 import pers.lmw.reins.sys.backend.entity.UserRole;
 import pers.lmw.reins.sys.backend.service.UserService;
+import pers.lmw.reins.sys.backend.util.TransferTimeUtil;
 
 @CrossOrigin(origins = { "http://localhost:4200", "null" })
 @RestController
@@ -29,11 +31,19 @@ public class UserController {
 	
 	@Autowired
 	UserMapper mapper;
+	
+	@Autowired
+	LogMapper logMapper;
+	
+	@Autowired
+	TransferTimeUtil timeUtil;
 
 	@RequestMapping("/login")
 	public Role login(@RequestBody(required = false) User user) {
 		User u = service.login(user);
 		if (u != null) {
+			user.setLoginTime(timeUtil.getCurrentTime());
+			logMapper.setLoginTime(user);
 			return service.queryRole(user.getUserId());
 		} else {
 			return null;

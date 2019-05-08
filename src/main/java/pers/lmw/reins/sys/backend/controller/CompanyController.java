@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pers.lmw.reins.sys.backend.entity.Company;
 import pers.lmw.reins.sys.backend.service.CompanyService;
+import pers.lmw.reins.sys.backend.util.TransferTimeUtil;
 
 @CrossOrigin(origins = { "http://localhost:4200", "null" })
 @RestController
@@ -23,6 +24,9 @@ public class CompanyController {
 
 	@Autowired
 	CompanyService companyService;
+	
+	@Autowired
+	TransferTimeUtil timeUtil;
 
 	@GetMapping("/getAll")
 	public List<Company> getCompany() {
@@ -41,11 +45,13 @@ public class CompanyController {
 
 	@PostMapping("/add")
 	public int addCompany(@RequestBody Company company) {
+		company.setCreateTime(timeUtil.getCurrentTime());
 		return companyService.addCompany(company);
 	}
 
 	@PutMapping("/modifyById")
 	public int modifyCompanyById(@RequestBody Company company) {
+		company.setModifyTime(timeUtil.getCurrentTime());
 		return companyService.updateCompany(company);
 	}
 
