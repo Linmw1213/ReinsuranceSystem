@@ -100,5 +100,9 @@ public class UserController {
 		return mapper.getLastUserId();
 	}
 	
+	@PutMapping("/updateRole")
+	public int updataRole(@RequestBody UserRole ur) {
+		return mapper.updateRole(ur);
+	}
 
 }

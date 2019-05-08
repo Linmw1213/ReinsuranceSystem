@@ -34,7 +34,7 @@ public class ReinsTypeController {
 	
 	@PostMapping("/add")
 	public int add(@RequestBody ReinsType type) {
-		type.setCreateTime(timeUtil.getCurrentTime());
+		type.setCreate_time(timeUtil.getCurrentTime());
 		type.setStatus("待审核");
 		return service.addReinsType(type);
 	}

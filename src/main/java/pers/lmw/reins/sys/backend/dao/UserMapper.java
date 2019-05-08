@@ -54,5 +54,8 @@ public interface UserMapper {
 	
 	@Select("SELECT userId FROM user ORDER BY userId DESC LIMIT 1")
 	public User getLastUserId();
+	
+	@Update("update user_role set rid=#{rid} where uid=#{uid}")
+	public int updateRole(UserRole ur);
 
 }

@@ -16,8 +16,8 @@ public interface ReinsTypeMapper {
 	@Select("select * from reins_type")
 	public List<ReinsType> getAllReinsTypes();
 
-	@Insert("insert into reins_type(typeId,typeName,description,operator,operatorId,createTime)"
-			+ " values(#{typeId},#{typeName},#{description},#{operator},#{operatorId},#{createTime})")
+	@Insert("insert into reins_type(typeId,typeName,description,operator,operatorId,create_time)"
+			+ " values(#{typeId},#{typeName},#{description},#{operator},#{operatorId},#{create_time})")
 	public int addReinsType(ReinsType type);
 
 	@Delete("delete from reins_type where typeId=#{typeId}")
