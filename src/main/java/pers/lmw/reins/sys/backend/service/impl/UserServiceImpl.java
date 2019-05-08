@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pers.lmw.reins.sys.backend.dao.UserMapper;
 import pers.lmw.reins.sys.backend.entity.Role;
 import pers.lmw.reins.sys.backend.entity.User;
+import pers.lmw.reins.sys.backend.entity.UserRole;
 import pers.lmw.reins.sys.backend.service.UserService;
 
 /**
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Role queryRole(User u) {
-		return mapper.queryRole(u);
+	public Role queryRole(String id) {
+		return mapper.queryRole(id);
 	}
 
 	@Override
@@ -46,6 +47,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAll() {
 		return mapper.getAll();
+	}
+
+	@Override
+	public int deleteUser(String userId) {
+		return mapper.deleteUser(userId);
+	}
+
+	@Override
+	public int deleteRole(String uid) {
+		return mapper.deleteRole(uid);
+	}
+
+	@Override
+	public int addUser(User u) {
+		return mapper.addUser(u);
+	}
+
+	@Override
+	public int addRole(UserRole r) {
+		return mapper.addRole(r);
 	}
 
 }

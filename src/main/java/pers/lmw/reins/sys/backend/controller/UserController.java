@@ -4,15 +4,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pers.lmw.reins.sys.backend.dao.UserMapper;
 import pers.lmw.reins.sys.backend.entity.Role;
 import pers.lmw.reins.sys.backend.entity.User;
+import pers.lmw.reins.sys.backend.entity.UserRole;
 import pers.lmw.reins.sys.backend.service.UserService;
 
 @CrossOrigin(origins = { "http://localhost:4200", "null" })
@@ -22,15 +26,23 @@ public class UserController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	UserMapper mapper;
 
 	@RequestMapping("/login")
 	public Role login(@RequestBody(required = false) User user) {
 		User u = service.login(user);
 		if (u != null) {
-			return service.queryRole(user);
+			return service.queryRole(user.getUserId());
 		} else {
 			return null;
 		}
+	}
+	
+	@GetMapping("/getRole/{id}")
+	public Role getRole(@PathVariable("id") String id) {
+		return service.queryRole(id);
 	}
 
 	@GetMapping("/getAll")
@@ -52,5 +64,31 @@ public class UserController {
 	public int updatePwd(@RequestBody User u) {
 		return service.updatePwd(u);
 	}
+	
+	@DeleteMapping("/deleteUser/{userId}")
+	public int deleteUser(@PathVariable("userId") String userId) {
+		return service.deleteUser(userId);
+	}
+	
+	@DeleteMapping("/deleteRole/{uid}")
+	public int deleteRole(@PathVariable("uid") String uid) {
+		return service.deleteRole(uid);
+	}
+	
+	@PostMapping("/addUser")
+	public int addUser(@RequestBody User u) {
+		return service.addUser(u);
+	}
+	
+	@PostMapping("/addRole")
+	public int addRole(@RequestBody UserRole r) {
+		return service.addRole(r);
+	}
+	
+	@GetMapping("/getLastUserId")
+	public User getLastUserId() {
+		return mapper.getLastUserId();
+	}
+	
 
 }

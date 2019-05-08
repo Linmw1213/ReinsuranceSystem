@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import pers.lmw.reins.sys.backend.entity.Role;
 import pers.lmw.reins.sys.backend.entity.User;
+import pers.lmw.reins.sys.backend.entity.UserRole;
 
 @Service
 public interface UserService {
@@ -14,11 +15,11 @@ public interface UserService {
 	public User login(User u);
 
 	// 查询当前用户角色
-	public Role queryRole(User u);
+	public Role queryRole(@Param("userId") String userId);
 
 	// 获取所有用户信息
 	public List<User> getAll();
-	
+
 	// 查看个人信息
 	public User queryInfo(@Param("userId") String userId);
 
@@ -27,4 +28,12 @@ public interface UserService {
 
 	// 修改密码
 	public int updatePwd(User u);
+
+	public int deleteUser(@Param("userId") String userId);
+
+	public int deleteRole(@Param("uid") String uid);
+	
+	public int addUser(User u);
+	
+	public int addRole(UserRole r);
 }

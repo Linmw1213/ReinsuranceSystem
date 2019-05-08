@@ -6,20 +6,19 @@ package pers.lmw.reins.sys.backend.entity;
  * @date 2019年4月14日上午10:49:37
  */
 public class UserRole {
-	private int userId;
-	private int roleId;
+	private int uid;
+	private int rid;
 	
-	public int getUserId() {
-		return userId;
+	public int getUid() {
+		return uid;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
-	public int getRoleId() {
-		return roleId;
+	public int getRid() {
+		return rid;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRid(int rid) {
+		this.rid = rid;
 	}
-
 }
