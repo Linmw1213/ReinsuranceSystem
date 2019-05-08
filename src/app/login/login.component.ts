@@ -63,6 +63,11 @@ export class LoginComponent implements OnInit {
             const role_name = data.role_name;
             sessionStorage.setItem('currentUserId', this.loginform.get('userId').value);
             sessionStorage.setItem('currentUserRole', role_name);
+            this.loginService.getSelfInfo(this.loginform.get('userId').value).subscribe(
+              (info) => {
+                sessionStorage.setItem('currentUsername',info.username);
+              }
+            )
 
             if (role_name === '系统管理员') {
               this.router.navigateByUrl('adminIndex');

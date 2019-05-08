@@ -13,4 +13,8 @@ export interface Company {
     bankAccount: string;
     bankName: string;
     currency: string;
+
+    operator: string;
+    createTime: any;
+    modifyTime: any;
 }

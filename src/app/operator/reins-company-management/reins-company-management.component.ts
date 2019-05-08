@@ -185,8 +185,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
 
     const arr = this.companyForm.get('modifyArr') as FormArray;
     const id = this.modifyIndex.id;
-    const company: Company = {
-      id: id,
+    const company = {
       companyId: arr.at(0).get('modifyCompanyId').value,
       companyName: arr.at(0).get('modifyCompanyName').value,
       companyAddress: arr.at(0).get('modifyCompanyAddress').value,
@@ -196,13 +195,13 @@ export class ReinsCompanyManagementComponent implements OnInit {
       department: arr.at(0).get('modifyDepartment').value,
       duty: arr.at(0).get('modifyDuty').value,
       linkPhone: arr.at(0).get('modifyLinkPhone').value,
-      linkEmail: '1209215924@qq.com',
       bankAccount: arr.at(0).get('modifyBankAccount').value,
       bankName: arr.at(0).get('modifyBankName').value,
       currency: arr.at(0).get('modifyCurrency').value,
+      operator: sessionStorage.getItem('currentUsername'),
     };
 
-    this.service.updateCompany(company).subscribe(
+    this.service.updateCompany(company as Company).subscribe(
       (data) => {
         if (data == 1) {
           this.service.getCompanyMessages().subscribe((companyMsg) => {

@@ -6,6 +6,6 @@ export interface User {
     email: string;
     address: string;
     sex: string;
-    last_login_time: string;
+    loginTime: string;
     role_name: string;
 }

@@ -31,6 +31,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
 import { StepsModule } from 'primeng/steps';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 /** native components */
 import { AppComponent } from './app.component';
@@ -54,6 +55,11 @@ import { UpdatePasswordComponent } from './operator/system-management/update-pas
 import { ParameterMaintenanceComponent } from './admin/parameter-maintenance/parameter-maintenance.component';
 import { RegisterComponent } from './register/register.component';
 import { AddUserComponent } from './admin/user-info-management/add-user/add-user.component';
+import { LoginLogComponent } from './admin/parameter-maintenance/login-log/login-log.component';
+import { CompanyLogComponent } from './admin/parameter-maintenance/company-log/company-log.component';
+import { ContractLogComponent } from './admin/parameter-maintenance/contract-log/contract-log.component';
+import { ReinsTypeLogComponent } from './admin/parameter-maintenance/reins-type-log/reins-type-log.component';
+import { ReinsClaimLogComponent } from './admin/parameter-maintenance/reins-claim-log/reins-claim-log.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +84,11 @@ import { AddUserComponent } from './admin/user-info-management/add-user/add-user
     ParameterMaintenanceComponent,
     RegisterComponent,
     AddUserComponent,
+    LoginLogComponent,
+    CompanyLogComponent,
+    ContractLogComponent,
+    ReinsTypeLogComponent,
+    ReinsClaimLogComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,7 +123,8 @@ import { AddUserComponent } from './admin/user-info-management/add-user/add-user
     InputTextareaModule,
     TabViewModule,
     StepsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TabMenuModule,
 
   ],
   providers: [],

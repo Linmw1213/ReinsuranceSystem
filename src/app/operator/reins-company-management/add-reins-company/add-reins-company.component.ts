@@ -48,8 +48,7 @@ export class AddReinsCompanyComponent implements OnInit {
 
   // 保存并提交
   confirmBtnOnClick() {
-    const company: Company = {
-      id: 1,
+    const company = {
       companyId: this.addForm.get('companyId').value,
       companyName: this.addForm.get('companyName').value,
       companyAddress: this.addForm.get('companyAddress').value,
@@ -63,9 +62,10 @@ export class AddReinsCompanyComponent implements OnInit {
       bankAccount: this.addForm.get('bankAccount').value,
       bankName: this.addForm.get('bankName').value,
       currency: this.addForm.get('currency').value,
+      operator: sessionStorage.getItem('currentUsername'),
     }
 
-    this.companyService.addCompany(company).subscribe(
+    this.companyService.addCompany(company as Company).subscribe(
       (data) => {
         console.log(data + 'add successfully');
       }

@@ -1,19 +1,27 @@
 <div id="top">
-    <ul class="right"></ul>
-    <h1 class="left">再保险信息管理系统</h1>
-    <!-- 友邦 -->
+  <ul class="right"></ul>
+  <h1 class="left">再保险信息管理系统</h1>
+  <!-- 友邦 -->
 </div>
 <div id="main">
-    <div class="left" id="menu" style="background-size:cover;background-repeat:no-repeat;">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="/UserInfoManagement" target="mainframe">用户管理</a></li>
-            <li role="presentation"><a routerLink="/SystemManagement" target="mainframe">系统设置</a></li>
-            <li role="presentation"><a routerLink="/paramMaintenance" target="mainframe">参数维护</a></li>
-        </ul>
+  <div class="left" id="menu" style="background-size:cover;background-repeat:no-repeat;">
+    <ul class="nav nav-pills nav-stacked">
+      <!-- <p-tieredMenu [model]="items"></p-tieredMenu> -->
+      <li role="presentation" style="margin-top:10px;">
+        <a routerLink="/UserInfoManagement" target="mainframe">用户管理</a>
+      </li>
+      <li role="presentation">
+        <a routerLink="/SystemManagement" target="mainframe">系统设置</a>
+      </li>
+      <li role="presentation">
+        <a routerLink="/paramMaintenance" target="mainframe">操作日志</a>
+      </li>
+    </ul>
+  </div>
+  <div id="content">
+    <div class="item">
+      <iframe name="mainframe"
+        style="margin:0;padding:0;height:100%;width:100%;right:0px;border:solid 0px red;"></iframe>
     </div>
-    <div id="content">
-        <div class="item">
-            <iframe name="mainframe" style="margin:0;padding:0;height:100%;width:100%;right:0px;border:solid 0px red;"></iframe>
-        </div>
-    </div>
+  </div>
 </div>
