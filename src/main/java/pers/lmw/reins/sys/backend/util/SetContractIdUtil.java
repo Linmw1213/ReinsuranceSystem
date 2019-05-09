@@ -29,9 +29,9 @@ public class SetContractIdUtil {
 		int i = 1000;
 		System.out.println(i + 24);
 //		System.out.println(setContractId(""));
-		
+
 		System.out.println(System.currentTimeMillis());
-		
+
 	}
 
 	/**
@@ -71,16 +71,29 @@ public class SetContractIdUtil {
 		Date date = new Date();
 		sdf.applyPattern("yyyyMMddHHmmss");
 		String currentTime = sdf.format(date);
-		Random random = new Random();
-		int num = (int)(random.nextDouble()*(9999-1000+1))+1000;
-		return currentTime+num;
+		return currentTime;
 	}
-	
+
+	public int getRandomNum() {
+		Random random = new Random();
+		int num = (int) (random.nextDouble() * (9999 - 1000 + 1)) + 1000;
+		return num;
+	}
+
 	// 设置合同编号
 	public String generate(String companyName) {
-		String id = ToFirstChar(companyName).toUpperCase() + getCurrentTime();
+		String id = ToFirstChar(companyName).toUpperCase() + getCurrentTime() + getRandomNum();
 		return id;
 	}
 
+	public String getRandomChar(int length) { // 生成随机字符串
+		char[] chr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+		Random random = new Random();
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < length; i++) {
+			buffer.append(chr[random.nextInt(36)]);
+		}
+		return buffer.toString();
+	}
 
 }

@@ -27,4 +27,10 @@ public class TransferTimeUtil {
         Date date = new Date(lt);
     	return simpleDateFormat.format(date);
     }
+    public String getCurrentTime2() {
+    	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        long lt = new Long(System.currentTimeMillis());
+        Date date = new Date(lt);
+    	return simpleDateFormat.format(date);
+    }
 }

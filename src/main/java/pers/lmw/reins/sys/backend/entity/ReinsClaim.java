@@ -6,7 +6,7 @@ package pers.lmw.reins.sys.backend.entity;
  * @date 2019年4月14日上午10:25:24
  */
 public class ReinsClaim {
-	private String claimeCode;					//理赔号
+	private String claimCode;					//理赔号
 	private String claimSum;					//理赔金额
 
 	private String companyName;					//再保公司
@@ -16,6 +16,13 @@ public class ReinsClaim {
 	private String contractName;				//合同名称
 	private String contractType;
 	
+	private String operator;
+	private String createTime;
+	private String modifyTime;
+	
+	private String status;						//理赔状态
+	private String description;	
+		
 	public String getCompanyAccount() {
 		return companyAccount;
 	}
@@ -51,19 +58,13 @@ public class ReinsClaim {
 	}
 	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
-	}
-	private String operator;
-	private String createTime;
-	private String modifyTime;
+	}			
 	
-	private String status;						//理赔状态
-	private String description;					//详细描述
-	
-	public String getClaimeCode() {
-		return claimeCode;
+	public String getClaimCode() {
+		return claimCode;
 	}
-	public void setClaimeCode(String claimeCode) {
-		this.claimeCode = claimeCode;
+	public void setClaimCode(String claimCode) {
+		this.claimCode = claimCode;
 	}
 	public String getCompanyName() {
 		return companyName;

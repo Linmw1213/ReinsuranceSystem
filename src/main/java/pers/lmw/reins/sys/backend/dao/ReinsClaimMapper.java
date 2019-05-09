@@ -17,11 +17,14 @@ public interface ReinsClaimMapper {
 	public List<ReinsClaim> getAll();
 
 	@Insert("insert into reins_claim(claimCode,companyName,claimSum,contractName,description,status,contractType,companyAccount,currency,operator,createTime) "
-			+ "values(#{claimCode},#{companyName},#{claimSum},#{contractName},#{description},#{status},#{contractType},#{companyAccount},#{currency},#{operator},#{crateTime})")
+			+ "values(#{claimCode},#{companyName},#{claimSum},#{contractName},#{description},#{status},#{contractType},#{companyAccount},#{currency},#{operator},#{createTime})")
 	public int add(ReinsClaim rc);
 	
 	@Delete("delete from reins_claim where claimCode=#{claimCode}")
 	public int delete(@Param("claimCode") String claimCode);
+	
+	@Select("SELECT COUNT(*) FROM reins_claim")
+	public int count();
 	
 //@Update("update reins_claim set(companyName=#{companyName},)")
 //public int update(ReinsClaim c);
