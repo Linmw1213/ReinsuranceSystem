@@ -19,6 +19,9 @@ public interface UserMapper {
 	// 登录判断
 	@Select("select * from user where userId=#{userId} and password=#{password}")
 	public User login(User u);
+	
+	@Insert("insert into user(loginTime) values(#{loginTime} where userId=#{userId})")
+	public int addUserLoginLog(@Param("userId") String userId);
 
 	// 查询当前用户角色
 	@Select("select r.role_name from user_role as ur left join user as u on u.userId=ur.uid left join role as r on r.id=ur.rid where userId=#{userId}")

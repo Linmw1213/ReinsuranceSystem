@@ -42,8 +42,9 @@ public class UserController {
 	public Role login(@RequestBody(required = false) User user) {
 		User u = service.login(user);
 		if (u != null) {
-			user.setLoginTime(timeUtil.getCurrentTime());
-			logMapper.setLoginTime(user);
+			u.setLoginTime(timeUtil.getCurrentTime());
+			u.setUserId(user.getUserId());
+			logMapper.setLoginTime(u);
 			return service.queryRole(user.getUserId());
 		} else {
 			return null;
