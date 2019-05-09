@@ -37,11 +37,15 @@ export class CompanyService {
   /** delete the company from the server */
   deleteCompany(companyId: any): Observable<any> {
     const url = `${this.deleteUrl}/${companyId}`;
-    return this.http.delete(url,httpOptions);
+    return this.http.delete(url, httpOptions);
   }
 
   /** add company massage */
   addCompany(company: Company): Observable<any> {
-    return this.http.post<Company>(this.companyURL+'/add',company);
+    return this.http.post<Company>(this.companyURL + '/add', company);
+  }
+
+  getCompanyAccountByCompanyName(companyName: string): Observable<any> {
+    return this.http.get<Company>(this.companyURL + '/getCompanyAccount/' + companyName)
   }
 }

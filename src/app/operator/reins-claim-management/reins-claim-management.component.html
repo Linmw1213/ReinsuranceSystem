@@ -37,62 +37,9 @@
     </div>
   </div>
 
-  <div class="ui-g" [formGroup]="reinsClaimForm" *ngIf="add">
-    <div class="ui-g-12 ui-md-6">
-      <p-card subheader="新增理赔件" styleClass="ui-card-shadow">
-        <!-- <p-steps [model]="items"></p-steps> -->
-
-        <div class="ui-g">
-          <div class="ui-g-4">
-            <label>合同编号</label>
-            <p-dropdown [options]="contractId" formControlNam="contractId" placeholder="请选择合同编号"></p-dropdown>
-          </div>
-
-          <div class="ui-g-4">
-            <label>合同名称</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-
-          <div class="ui-g-4">
-            <label>合同类型</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-        </div>
-        <div class="ui-g">
-          <div class="ui-g-4">
-            <label>再保公司</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-          <div class="ui-g-4">
-            <label>结算账户</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-          <div class="ui-g-4">
-            <label>结算币种</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-        </div>
-        <div class="ui-g">
-          <div class="ui-g-4">
-            <label>理赔金额</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-          <div class="ui-g-4">
-            <label>当前状态</label>
-            <input type="text" pInputText formControlNam="contractName">
-          </div>
-          <div class="ui-g-4" style="margin-top:30px;">
-            <label></label>
-            <button pButton label="提交" type="button"></button>
-          </div>
-        </div>
-      </p-card>
-    </div>
-    <!-- <div class="ui-g-12 ui-md-6">
-      <p-card subheader="进展一览处" styleClass="ui-card-shadow">
-        <p-chart type="pie" [data]="data"></p-chart>
-      </p-card>
-    </div> -->
+  <!-- 新增理赔件 -->
+  <div class="ui-g-24" *ngIf="add">
+    <app-add-claim></app-add-claim>
   </div>
 
 </div>

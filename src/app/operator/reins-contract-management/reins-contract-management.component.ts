@@ -91,9 +91,10 @@ export class ReinsContractManagementComponent implements OnInit {
   }
 
   // 选中事件
-  selectContract(event: Event, contract: Contract) {
+  selectContract(contract: Contract) {
     this.selectedContract = contract;
     this.displayDialog = true;
+   
     event.preventDefault();
   }
 
@@ -130,6 +131,8 @@ export class ReinsContractManagementComponent implements OnInit {
     this.selectedContract = contract;
     event.preventDefault();
     this.modifyDialog = true;
+    console.log('eid:'+contract.contractId);
+    this.contractForm.get('contractId').setValue(contract.contractId);
   }
 
   /**  公司列表；合同类型：成数/溢额；险种； */
@@ -186,8 +189,7 @@ export class ReinsContractManagementComponent implements OnInit {
       description: this.contractForm.get('description').value,
       beginDate: beginDate.valueOf(),
       stopDate: stopDate.valueOf(),
-      operator: sessionStorage.getItem('currentUserName'),
-      modify_time: '',
+      operator: sessionStorage.getItem('currentUsername'),
       total: this.contractForm.get('total').value,
       insurance_expence: this.contractForm.get('insurance_expence').value,
       retention_ratio: this.contractForm.get('retention_ratio').value,
@@ -196,7 +198,7 @@ export class ReinsContractManagementComponent implements OnInit {
       ceiling_top: this.contractForm.get('ceiling_top').value,
       pay: this.contractForm.get('pay').value,
     }
-
+    
     this.service.modifyContract(contract as Contract).subscribe(
       (data) => {
         if (data == 1) {

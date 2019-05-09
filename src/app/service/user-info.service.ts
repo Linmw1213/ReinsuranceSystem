@@ -49,7 +49,7 @@ export class UserInfoService {
   }
 
   updateUserRole(userRole: UserRole): Observable<any> {
-    return this.httpClient.put<any>(this.userURL + '/updateRole', userRole);
+    return this.httpClient.put<UserRole>(this.userURL + '/updateRole', userRole);
   }
 
   deleteUser(userId: any): Observable<any> {

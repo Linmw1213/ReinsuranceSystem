@@ -3,6 +3,7 @@ import { MenuItem, SelectItem } from 'primeng/api';
 import { ReinsClaim } from 'src/app/VO/reinsClaim';
 import { ReinsClaimService } from 'src/app/service/reins-claim.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ContractService } from 'src/app/service/contract.service';
 
 @Component({
   selector: 'app-reins-claim-management',
@@ -15,33 +16,18 @@ export class ReinsClaimManagementComponent implements OnInit {
   items: MenuItem[];
   reinsClaimArr: ReinsClaim[];
   cols: any[];
-  reinsClaimForm: FormGroup;
-  contractId: SelectItem[];
+  contractId = [];
   add = false;
 
-  constructor(private service: ReinsClaimService, private fb: FormBuilder) { }
+  constructor(
+    private service: ReinsClaimService,
+    private contractService: ContractService) { }
 
   ngOnInit() {
-    this.createForm();
     this.setChartData();
     this.setSteps();
     this.getAll();
     this.setCols();
-    this.setContractId();
-  }
-
-  createForm() {
-    this.reinsClaimForm = this.fb.group({
-      contractId: ['', Validators.required],
-      claimId: new FormControl({ value: '', disabled: true }),
-      contractName: new FormControl({ value: '', disabled: true }),
-      contractType: new FormControl({ value: '', disabled: true }),
-      companyName: new FormControl({ value: '', disabled: true }),
-      bankAccount: new FormControl({ value: '', disabled: true }),
-      bankName: new FormControl({ value: '', disabled: true }),
-      currency: new FormControl({ value: '', disabled: true }),
-      claimAmount: new FormControl({ value: '', disabled: true }),
-    })
   }
 
   getAll() {
@@ -54,41 +40,25 @@ export class ReinsClaimManagementComponent implements OnInit {
   }
 
   delete(event: Event, rowData: ReinsClaim) {
-    this.reinsClaimArr = this.reinsClaimArr.filter(reinsClaim => reinsClaim !== rowData);
+    this.service.delete(rowData).subscribe(
+      (data) => {
+        if (data == 1) {
+          this.reinsClaimArr = this.reinsClaimArr.filter(reinsClaim => reinsClaim !== rowData);
+        } else {
+          console.log('删除失败');
+        }
+      }
+    )
   }
 
-  submitAddMsg() {
-    const reinsClaim: ReinsClaim = {
-      claimId: '',
-      contractId: this.reinsClaimForm.get('contractId').value,
-      contractName: this.reinsClaimForm.get('contractName').value,
-      contractType: this.reinsClaimForm.get('contractName').value,
-      companyName: this.reinsClaimForm.get('contractName').value,
-      bankAccount: this.reinsClaimForm.get('contractName').value,
-      bankName: this.reinsClaimForm.get('contractName').value,
-      currency: this.reinsClaimForm.get('contractName').value,
-      claimAmount: this.reinsClaimForm.get('contractName').value,
-      description: this.reinsClaimForm.get('contractName').value,
-      modifyTime: '',
-      claimTime: '',
-      claimStatus: '',
-      operatorName: '',
-      operatorId: '',
-    }
-  }
 
   setCols() {
     this.cols = [
-      { field: 'claimId', header: '理赔号' },
-      { field: 'contractId', header: '合同编号' },
-      { field: 'contractName', header: '合同名称' },
-      { field: 'contractType', header: '合同类型' },
+      { field: 'claimCode', header: '理赔号' },
       { field: 'companyName', header: '再保公司' },
-      { field: 'claimAmount', header: '理赔金额' },
-      { field: 'bankAccount', header: '结算账户' },
-      // { field: 'bankName', header: '银行名称' },
+      { field: 'claimSum', header: '理赔金额' },
+      { field: 'companyAccount', header: '结算账户' },
       { field: 'currency', header: '结算币种' },
-      { field: 'claimStatus', header: '当前状态' },
     ];
   }
 
@@ -118,19 +88,6 @@ export class ReinsClaimManagementComponent implements OnInit {
       { label: '提交审核' },
       { label: '待审核' }
     ];
-  }
-
-  setContractId() {
-    this.contractId = [
-      { label: 'jhto2g2', value: 'chengshu' },
-      { label: 'jhto2g2', value: 'yie' },
-      { label: 'jhto2g2', value: 'chengshu' },
-      { label: 'jhto2g2', value: 'yie' },
-      { label: 'jhto2g2', value: 'chengshu' },
-      { label: 'jhto2g2', value: 'yie' },
-      { label: 'jhto2g2', value: 'yie' },
-    ];
-    //  this.contractId[0] = { label: 'jhto2g2', value: 'chengshu' }
   }
 
   addBtnOnClick() {

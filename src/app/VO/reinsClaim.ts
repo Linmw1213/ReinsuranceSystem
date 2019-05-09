@@ -1,17 +1,17 @@
 export interface ReinsClaim {
-    claimId: string;
+    claimCode: string;
+    claimSum: any;
+
     contractId: string;
     contractName: string;
     contractType: string;
+    
     companyName: any;
-    bankAccount: string;
-    bankName: string;
+    companyAccount: string;
     currency: any;
-    claimAmount: any;
+
     description: string;
-    modifyTime: any;
-    claimTime: any;
-    claimStatus: string;
-    operatorName: string;
-    operatorId: string;
+    creatTime: any;
+    status: string;
+    operator: string;
 }

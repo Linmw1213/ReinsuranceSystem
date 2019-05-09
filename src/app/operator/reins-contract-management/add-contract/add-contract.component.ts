@@ -127,20 +127,16 @@ export class AddContractComponent implements OnInit {
   submitAddMsg() {
     const beginDate = this.addContractForm.get('beginDate').value;
     const stopDate = this.addContractForm.get('stopDate').value;
-    const contract: Contract = {
-      contractId: '',
+    const contract = {
       contractName: this.addContractForm.get('contractName').value,
       companyName: this.addContractForm.get('companyName').value,
       contractTypeName: this.addContractForm.get('contractTypeName').value,
       contractStatus: this.addContractForm.get('contractStatus').value,
       reinsTypeName: this.addContractForm.get('reinsTypeName').value,
       description: this.addContractForm.get('description').value,
-      appendix: '',
       beginDate: beginDate.valueOf(),
       stopDate: stopDate.valueOf(),
-      operator: this.addContractForm.get('operator').value,
-      create_time: '',
-      modify_time: '',
+      operator: sessionStorage.getItem('currentUsername'),
 
       total: this.addContractForm.get('total').value,
       insurance_expence: this.addContractForm.get('insurance_expence').value,
@@ -151,9 +147,9 @@ export class AddContractComponent implements OnInit {
       pay: this.addContractForm.get('pay').value,
     }
 
-    this.contractService.addContract(contract).subscribe(
+    this.contractService.addContract(contract as Contract).subscribe(
       (data) => {
-        if(data === 1 ){
+        if(data == 1 ){
           console.log('add contract succeessfully');
         } else {
           console.log('add failured');

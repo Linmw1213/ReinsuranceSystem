@@ -33,7 +33,7 @@
             <p><b>{{contract.companyName}}</b></p>
             <p><b>{{contract.contractTypeName}}</b></p>
             <div class="ui-g-12 ui-md-3 search-icon">
-              <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
+              <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button>
               <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
               <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
                 (click)="delete($event, contract)"></button>
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="button">
-          <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract($event, contract)"></button>
+          <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button>
           <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
           <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
             (click)="delete($event, contract)"></button>
@@ -118,14 +118,14 @@
   [style]="{width: 'auto', minWidth: 'auto'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
   <div class="ui-g" *ngIf="selectedContract">
     <div [formGroup]="contractForm" class="four_Twenty-eight update">
-      <div class="list">
+      <!-- <div class="list">
         <p class="main">合同编号</p>
         <input value="{{selectedContract.contractId}}" type="text" pInputText formControlName="contractId"
           required="required" title="请输入4位及以上的字符" autofocus="autofocus">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['contractId'].valid&&contractForm.controls['contractId'].dirty">
         </p-message>
-      </div>
+      </div> -->
       <div class="list">
         <p>合同名称</p>
         <input value="{{selectedContract.contractName}}" type="text" pInputText formControlName="contractName">

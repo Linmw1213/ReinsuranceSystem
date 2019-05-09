@@ -4,6 +4,7 @@ import { UserInfoService } from 'src/app/service/user-info.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
+import { UserRole } from 'src/app/VO/userRole';
 
 @Component({
   selector: 'app-user-info-management',
@@ -21,6 +22,7 @@ export class UserInfoManagementComponent implements OnInit {
   notFound = false;
   found = false;
   role = '';
+  role_name = '';
 
   constructor(
     private userService: UserInfoService,
@@ -120,17 +122,17 @@ export class UserInfoManagementComponent implements OnInit {
     this.userService.updateInfo(user as User).subscribe(
       (data) => {
         if (data == 1) {
-          this.getAll();
-          console.log('success');
+          this.userService.updateUserRole(userRole as UserRole).subscribe(
+            (role) => {
+              if(role == 1){
+                console.log('add role success')
+                this.getAll();
+              }
+            }
+          );
         } else {
           console.log('failured');
         }
-      }
-    );
-
-    this.userService.updateUserRole(userRole).subscribe(
-      (data) => {
-        console.log('add role success')
       }
     );
 

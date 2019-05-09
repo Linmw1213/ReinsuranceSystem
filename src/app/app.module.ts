@@ -60,6 +60,7 @@ import { CompanyLogComponent } from './admin/parameter-maintenance/company-log/c
 import { ContractLogComponent } from './admin/parameter-maintenance/contract-log/contract-log.component';
 import { ReinsTypeLogComponent } from './admin/parameter-maintenance/reins-type-log/reins-type-log.component';
 import { ReinsClaimLogComponent } from './admin/parameter-maintenance/reins-claim-log/reins-claim-log.component';
+import { AddClaimComponent } from './operator/reins-claim-management/add-claim/add-claim.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { ReinsClaimLogComponent } from './admin/parameter-maintenance/reins-clai
     ContractLogComponent,
     ReinsTypeLogComponent,
     ReinsClaimLogComponent,
+    AddClaimComponent,
   ],
   imports: [
     BrowserModule,

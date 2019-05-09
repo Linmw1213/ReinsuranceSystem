@@ -186,6 +186,7 @@ export class ReinsCompanyManagementComponent implements OnInit {
     const arr = this.companyForm.get('modifyArr') as FormArray;
     const id = this.modifyIndex.id;
     const company = {
+      id: id,
       companyId: arr.at(0).get('modifyCompanyId').value,
       companyName: arr.at(0).get('modifyCompanyName').value,
       companyAddress: arr.at(0).get('modifyCompanyAddress').value,

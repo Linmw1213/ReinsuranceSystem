@@ -1,0 +1,63 @@
+  <div class="ui-g-24 ui-md-12" [formGroup]="reinsClaimForm">
+    <p-card subheader="新增理赔件" [style]="{'width':'auto'}" styleClass="ui-card-shadow">
+      <!-- <p-steps [model]="items"></p-steps> -->
+      <div class="ui-g" style="margin-top:5px;">
+        <div class="ui-g-4">
+          <label>合同编号：</label>
+          <p-dropdown [options]="contractId" filter="true" [showClear]="true" formControlName="contractId" (onChange)="contractIdOnChange()"
+            placeholder="请选择合同编号"></p-dropdown>
+        </div>
+
+        <div class="ui-g-4">
+          <label>合同名称：</label>
+          <input type="text" pInputText formControlName="contractName">
+        </div>
+
+        <div class="ui-g-4">
+          <label>合同类型：</label>
+          <input type="text" pInputText formControlName="contractType">
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-4">
+          <label>再保公司：</label>
+          <input type="text" pInputText formControlName="companyName">
+        </div>
+        <div class="ui-g-4">
+          <label>结算账户：</label>
+          <input type="text" pInputText formControlName="companyAccount">
+        </div>
+        <div class="ui-g-4">
+          <label>结算币种：</label>
+          <input type="text" pInputText formControlName="currency">
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-4">
+          <label>理赔金额：</label>
+          <input type="text" pInputText formControlName="claimSum">
+        </div>
+        <div class="ui-g-4">
+          <label>险种类型：</label>
+          <input type="text" pInputText formControlName="reinsType">
+        </div>
+      </div>
+      <div class="ui-g" style="margin-top:5px;">
+        <div style="padding-left:6px;">
+          <label>详细备注：</label>
+        </div>
+        <textarea rows="3" cols="123" formControlName="description" pInputTextarea autoResize="autoResize"></textarea>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-4" style="margin-top:30px;text-align: center">
+          <label></label>
+          <button pButton label="提交" type="button" (click)="submit()"></button>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <!-- <div class="ui-g-12 ui-md-6">
+      <p-card subheader="进展一览处" styleClass="ui-card-shadow">
+        <p-chart type="pie" [data]="data"></p-chart>
+      </p-card>
+    </div> -->
