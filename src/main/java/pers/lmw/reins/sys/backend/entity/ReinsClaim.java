@@ -13,7 +13,8 @@ public class ReinsClaim {
 	private String companyAccount;
 	private String currency;
 	
-	private String contractName;				//合同名称
+	private String contractId;					//合同名称
+	private String contractName;				
 	private String contractType;
 	
 	private String operator;
@@ -23,6 +24,12 @@ public class ReinsClaim {
 	private String status;						//理赔状态
 	private String description;	
 		
+	public String getContractId() {
+		return contractId;
+	}
+	public void setContractId(String contractId) {
+		this.contractId = contractId;
+	}
 	public String getCompanyAccount() {
 		return companyAccount;
 	}

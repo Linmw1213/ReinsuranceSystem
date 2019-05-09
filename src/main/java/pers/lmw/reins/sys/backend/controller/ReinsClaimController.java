@@ -39,7 +39,7 @@ public class ReinsClaimController {
 	@PostMapping("/add")
 	public int add(@RequestBody ReinsClaim rc) {
 		int num = mapper.count();
-		String id = setIdUtil.getRandomChar(4) + timeUtil.getCurrentTime2() + "00" + num;
+		String id = timeUtil.getCurrentTime2() + setIdUtil.getRandomNum() + num;
 		rc.setClaimCode(id);
 		rc.setCreateTime(timeUtil.getCurrentTime());
 		return mapper.add(rc);
@@ -48,5 +48,10 @@ public class ReinsClaimController {
 	@DeleteMapping("/delete/{claimCode}")
 	public int delete(@PathVariable("claimCode") String claimCode) {
 		return mapper.delete(claimCode);
+	}
+	
+	@GetMapping("/getContractId")
+	public List<String> getContractId(){
+		return mapper.getContractId();
 	}
 }

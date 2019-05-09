@@ -49,7 +49,7 @@ public class ContractController {
 		contract.setBeginDate(timeUtil.stampToDate(contract.getBeginDate()));
 		contract.setStopDate(timeUtil.stampToDate(contract.getStopDate()));
 		contract.setCreate_time(timeUtil.getCurrentTime());
-		return mapper.test(contract);
+		return mapper.addContract(contract);
 	}
 
 	@PutMapping("/modify")

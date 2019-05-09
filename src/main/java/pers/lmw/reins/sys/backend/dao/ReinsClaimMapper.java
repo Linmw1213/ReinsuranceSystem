@@ -16,8 +16,8 @@ public interface ReinsClaimMapper {
 	@Select("select * from reins_claim")
 	public List<ReinsClaim> getAll();
 
-	@Insert("insert into reins_claim(claimCode,companyName,claimSum,contractName,description,status,contractType,companyAccount,currency,operator,createTime) "
-			+ "values(#{claimCode},#{companyName},#{claimSum},#{contractName},#{description},#{status},#{contractType},#{companyAccount},#{currency},#{operator},#{createTime})")
+	@Insert("insert into reins_claim(claimCode,companyName,claimSum,contractId,contractName,description,status,contractType,companyAccount,currency,operator,createTime) "
+			+ "values(#{claimCode},#{companyName},#{claimSum},#{contractId},#{contractName},#{description},#{status},#{contractType},#{companyAccount},#{currency},#{operator},#{createTime})")
 	public int add(ReinsClaim rc);
 	
 	@Delete("delete from reins_claim where claimCode=#{claimCode}")
@@ -25,6 +25,9 @@ public interface ReinsClaimMapper {
 	
 	@Select("SELECT COUNT(*) FROM reins_claim")
 	public int count();
+	
+	@Select("select contract_msg.contractId from contract_msg left join reins_claim on contract_msg.contractId=reins_claim.contractId where reins_claim.contractId is null")
+	public List<String> getContractId();
 	
 //@Update("update reins_claim set(companyName=#{companyName},)")
 //public int update(ReinsClaim c);

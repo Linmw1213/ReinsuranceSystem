@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pers.lmw.reins.sys.backend.dao.CompanyMapper;
 import pers.lmw.reins.sys.backend.entity.Company;
 import pers.lmw.reins.sys.backend.service.CompanyService;
 import pers.lmw.reins.sys.backend.util.TransferTimeUtil;
@@ -27,6 +28,9 @@ public class CompanyController {
 	
 	@Autowired
 	TransferTimeUtil timeUtil;
+	
+	@Autowired
+	CompanyMapper mapper;
 
 	@GetMapping("/getAll")
 	public List<Company> getCompany() {
@@ -54,5 +58,10 @@ public class CompanyController {
 		company.setModifyTime(timeUtil.getCurrentTime());
 		return companyService.updateCompany(company);
 	}
-
+	
+	@GetMapping("/getCompanyAccount/{companyName}")
+	public Company getCompanyAccount(@PathVariable("companyName") String companyName) {
+		return mapper.getCompanyAccount(companyName);
+	}
+	
 }

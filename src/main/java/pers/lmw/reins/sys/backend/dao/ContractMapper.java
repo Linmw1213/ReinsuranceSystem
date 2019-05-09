@@ -23,22 +23,23 @@ public interface ContractMapper {
 	public List<Contract> getAllContract();
 
 	@Insert("insert into contract_msg(contractId,contractName,contractTypeName,contractStatus,reinsTypeName,"
-			+ "beginDate,stopDate,description,companyName,appendix,operator,create_time,"
-			+ "insurance_expence,retention_ratio,retention,line_num,ceiling_top,pay,total) "
+			+ "beginDate,stopDate,description,companyName,appendix,insurance_expence,retention_ratio,retention,"
+			+ "line_num,ceiling_top,pay,total,operator,create_time) "
 			+ "values(#{contractId},#{contractName},#{contractTypeName},#{contractStatus},#{reinsTypeName},"
-			+ "#{beginDate},#{stopDate},#{description},#{companyName},#{appendix},#{operator},#{create_time},"
-			+ "#{insurance_expence},#{retention_ratio},#{retention},#{line_num},#{ceiling_top},#{pay},#{total})")
+			+ "#{beginDate},#{stopDate},#{description},#{companyName},#{appendix},#{insurance_expence},#{retention_ratio},#{retention},"
+			+ "#{line_num},#{ceiling_top},#{pay},#{total},#{operator},#{create_time})")
 	public int addContract(Contract contract);
-
-	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},contractStatus=#{contractStatus},reinsTypeName=#{reinsTypeName},beginDate=#{beginDate},stopDate=#{stopDate},description=#{description},appendix=#{appendix},"
-			+ "operator=#{operator},modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId=#{contractId}")
+	
+	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},"
+			+ "beginDate=#{beginDate},stopDate=#{stopDate},description=#{description},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},"
+			+ "line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total},operator=#{operator},modify_time=#{modify_time} where contractId=#{contractId}")
 	public int updateContract(Contract contract);
 
 	@Delete("delete from contract_msg where contractId=#{contractId}")
 	public int deleteContract(@Param("contractId") String contractId);
 	
-	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},description=#{description},appendix=#{appendix},beginDate=#{beginDate},stopDate=#{stopDate},operator=#{operator},\r\n" + 
-			"modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId=#{contractId}")
+	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},description=#{description},appendix=#{appendix},beginDate=#{beginDate},stopDate=#{stopDate},operator=#{operator},"
+			+ "modify_time=#{modify_time},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total} where contractId=#{contractId}")
 	public int test(Contract contract);
 	
 	@Select("select contractId from contract_msg")

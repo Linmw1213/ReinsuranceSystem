@@ -37,4 +37,7 @@ public interface CompanyMapper {
 			+ "linkMan=#{linkMan},linkPhone=#{linkPhone},linkEmail=#{linkEmail},department=#{department},duty=#{duty},bankAccount=#{bankAccount},bankName=#{bankName},currency=#{currency} where id=#{id}")
 	public int updateCompany(Company company);
 	
+	@Select("select bankAccount,currency from company_msg where companyName=#{companyName}")
+	public Company getCompanyAccount(@Param("companyName") String companyName);
+	
 }

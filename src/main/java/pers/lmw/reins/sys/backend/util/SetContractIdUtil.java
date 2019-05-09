@@ -31,7 +31,8 @@ public class SetContractIdUtil {
 //		System.out.println(setContractId(""));
 
 		System.out.println(System.currentTimeMillis());
-
+		
+//		System.out.println(getRandomChar(4));
 	}
 
 	/**
