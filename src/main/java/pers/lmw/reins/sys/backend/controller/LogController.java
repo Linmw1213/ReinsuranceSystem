@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pers.lmw.reins.sys.backend.dao.LogMapper;
 import pers.lmw.reins.sys.backend.entity.Company;
 import pers.lmw.reins.sys.backend.entity.Contract;
+import pers.lmw.reins.sys.backend.entity.ReinsClaim;
 import pers.lmw.reins.sys.backend.entity.ReinsType;
 import pers.lmw.reins.sys.backend.entity.User;
 
@@ -66,4 +67,16 @@ public class LogController {
 	public int deleteTypeLog(@PathVariable("typeId") String typeId) {
 		return mapper.deleteReinsTypeLog(typeId);
 	}
+	
+	// 理赔日志管理
+	@GetMapping("/reinsClaim")
+	public List<ReinsClaim> getReinsClaimLog(){
+		return mapper.getReinsClaimLog();
+	}
+	
+	@PutMapping("/deleteReinsClaim/{claimCode}")
+	public int deleteClaimLog(@PathVariable("claimCode") String claimCode) {
+		return mapper.deleteReinsClaimLog(claimCode);
+	}
+	
 }

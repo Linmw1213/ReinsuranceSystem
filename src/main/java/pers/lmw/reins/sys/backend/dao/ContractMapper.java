@@ -32,7 +32,7 @@ public interface ContractMapper {
 	
 	@Update("update contract_msg set contractName=#{contractName},contractTypeName=#{contractTypeName},reinsTypeName=#{reinsTypeName},"
 			+ "beginDate=#{beginDate},stopDate=#{stopDate},description=#{description},insurance_expence=#{insurance_expence},retention_ratio=#{retention_ratio},retention=#{retention},"
-			+ "line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total},operator=#{operator},modify_time=#{modify_time} where contractId=#{contractId}")
+			+ "line_num=#{line_num},ceiling_top=#{ceiling_top},pay=#{pay},total=#{total},operator=#{operator},modify_time=#{modify_time} where id=#{id}")
 	public int updateContract(Contract contract);
 
 	@Delete("delete from contract_msg where contractId=#{contractId}")

@@ -8,6 +8,7 @@ package pers.lmw.reins.sys.backend.entity;
  */
 public class Contract {
 
+	private int id;
 	private String contractId;
 	private String contractName;
 	private String companyName;
@@ -29,6 +30,14 @@ public class Contract {
 	private int line_num;
 	private double ceiling_top;
 	private double pay;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getContractId() {
 		return contractId;
