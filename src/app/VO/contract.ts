@@ -1,10 +1,11 @@
 export interface Contract {
-    contractId: string;
+	id: any;
+	contractId: string;
 	contractName: string;
 	companyName: string;
 	contractTypeName: string;
-    contractStatus: string;
-    reinsTypeName: string;
+	contractStatus: string;
+	reinsTypeName: string;
 	// reinsTypeId: string;
 	description: string;
 	appendix: any;
@@ -14,12 +15,12 @@ export interface Contract {
 	create_time: any;
 	modify_time: any;
 
-    total: any;
-    insurance_expence: any;
-    retention_ratio: any;
-    retention: any;
-    line_num: any;
-    ceiling_top: any;
-    pay: any;
+	total: any;
+	insurance_expence: any;
+	retention_ratio: any;
+	retention: any;
+	line_num: any;
+	ceiling_top: any;
+	pay: any;
 
 }

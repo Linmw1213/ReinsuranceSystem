@@ -33,6 +33,7 @@ import { StepsModule } from 'primeng/steps';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TabMenuModule } from 'primeng/tabmenu';
 
+
 /** native components */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -61,6 +62,7 @@ import { ContractLogComponent } from './admin/parameter-maintenance/contract-log
 import { ReinsTypeLogComponent } from './admin/parameter-maintenance/reins-type-log/reins-type-log.component';
 import { ReinsClaimLogComponent } from './admin/parameter-maintenance/reins-claim-log/reins-claim-log.component';
 import { AddClaimComponent } from './operator/reins-claim-management/add-claim/add-claim.component';
+import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,7 @@ import { AddClaimComponent } from './operator/reins-claim-management/add-claim/a
     ReinsTypeLogComponent,
     ReinsClaimLogComponent,
     AddClaimComponent,
+    ForgotPwdComponent,
   ],
   imports: [
     BrowserModule,

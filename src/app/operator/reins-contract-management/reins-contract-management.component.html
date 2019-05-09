@@ -34,7 +34,7 @@
             <p><b>{{contract.contractTypeName}}</b></p>
             <div class="ui-g-12 ui-md-3 search-icon">
               <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button>
-              <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
+              <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract(contract)"></button>
               <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
                 (click)="delete($event, contract)"></button>
             </div>
@@ -62,7 +62,7 @@
         </div>
         <div class="button">
           <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button>
-          <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract($event,contract)"></button>
+          <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract(contract)"></button>
           <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
             (click)="delete($event, contract)"></button>
         </div>
@@ -118,17 +118,17 @@
   [style]="{width: 'auto', minWidth: 'auto'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
   <div class="ui-g" *ngIf="selectedContract">
     <div [formGroup]="contractForm" class="four_Twenty-eight update">
-      <!-- <div class="list">
+      <div class="list">
         <p class="main">合同编号</p>
-        <input value="{{selectedContract.contractId}}" type="text" pInputText formControlName="contractId"
+        <input type="text" pInputText formControlName="contractId"
           required="required" title="请输入4位及以上的字符" autofocus="autofocus">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['contractId'].valid&&contractForm.controls['contractId'].dirty">
         </p-message>
-      </div> -->
+      </div>
       <div class="list">
         <p>合同名称</p>
-        <input value="{{selectedContract.contractName}}" type="text" pInputText formControlName="contractName">
+        <input type="text" pInputText formControlName="contractName">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['contractName'].valid&&contractForm.controls['contractName'].dirty">
         </p-message>
@@ -141,13 +141,13 @@
           *ngIf="!contractForm.controls['reinsTypeName'].valid&&contractForm.controls['reinsTypeName'].dirty">
         </p-message>
       </div>
-      <div class="list">
+      <!-- <div class="list">
         <p>再保公司</p>
         <p-dropdown formControlName="companyName" [options]="companyList" placeholder="请选择再保公司"></p-dropdown>
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['companyName'].valid&&contractForm.controls['companyName'].dirty">
         </p-message>
-      </div>
+      </div> -->
       <div class="list">
         <p>分保类型</p>
         <p-dropdown formControlName="contractTypeName" [options]="contractTypeList" placeholder="请选择分保类型"
@@ -176,7 +176,7 @@
 
       <div class="list">
         <p>保险金额</p>
-        <input value="{{selectedContract.total}}" type="text" pInputText formControlName="total">
+        <input type="text" pInputText formControlName="total">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['total'].valid&&contractForm.controls['total'].dirty">
         </p-message>
@@ -184,7 +184,7 @@
 
       <div class="list">
         <p>赔款金额</p>
-        <input value="{{selectedContract.pay}}" type="text" pInputText formControlName="pay">
+        <input type="text" pInputText formControlName="pay">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['pay'].valid&&contractForm.controls['pay'].dirty">
         </p-message>
@@ -192,7 +192,7 @@
 
       <div class="list">
         <p>保险费用</p>
-        <input value="{{selectedContract.insurance_expence}}" type="text" pInputText formControlName="insurance_expence">
+        <input type="text" pInputText formControlName="insurance_expence">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['insurance_expence'].valid&&contractForm.controls['insurance_expence'].dirty">
         </p-message>
@@ -205,7 +205,7 @@
           *ngIf="!contractForm.controls['retention'].valid&&contractForm.controls['retention'].dirty">
         </p-message>
       </div>
-  
+
       <div class="list" *ngIf="surplus">
         <p>线数</p>
         <input type="text" pInputText formControlName="line_num">
@@ -230,15 +230,13 @@
       </div>
       <div class="list">
         <p>合同备注:</p>
-        <textarea formControlName="description" rows="3" cols="100" pInputTextarea
-          value="{{selectedContract.description}}"></textarea>
+        <textarea formControlName="description" rows="3" cols="100" pInputTextarea></textarea>
       </div>
     </div>
   </div>
 
   <p-footer>
-    <button type="button" pButton icon="pi pi-check" (click)="submitModifyMsg()"
-      label="提交"></button>
+    <button type="button" pButton icon="pi pi-check" (click)="submitModifyMsg()" label="提交"></button>
     <button type="button" pButton icon="pi pi-close" (click)="modifyDialog=false" label="取消"
       class="ui-button-secondary"></button>
   </p-footer>

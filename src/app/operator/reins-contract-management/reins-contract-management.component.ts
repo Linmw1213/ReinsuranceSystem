@@ -54,6 +54,7 @@ export class ReinsContractManagementComponent implements OnInit {
   //创建响应式表单
   createForm() {
     this.contractForm = this.fb.group({
+      id:[''],
       contractId: [''],
       contractName: [''],
       companyName: [''],
@@ -127,12 +128,29 @@ export class ReinsContractManagementComponent implements OnInit {
     );
   }
 
-  modifyContract(event: Event, contract: Contract) {
+  modifyContract(contract: Contract) {
     this.selectedContract = contract;
-    event.preventDefault();
     this.modifyDialog = true;
-    console.log('eid:'+contract.contractId);
+    console.log('begindate:'+contract.beginDate);
+    const date = contract.beginDate;
+    this.contractForm.get('id').setValue(contract.id);
     this.contractForm.get('contractId').setValue(contract.contractId);
+    this.contractForm.get('contractName').setValue(contract.contractName);
+    this.contractForm.get('companyName').setValue(contract.companyName);
+    this.contractForm.get('contractTypeName').setValue(contract.contractTypeName);
+    this.contractForm.get('reinsTypeName').setValue(contract.reinsTypeName);
+    this.contractForm.get('description').setValue(contract.description);
+    // this.contractForm.get('beginDate').setValue(contract.beginDate);
+    // this.contractForm.get('stopDate').setValue(contract.stopDate);
+    this.contractForm.get('total').setValue(contract.total);
+    this.contractForm.get('insurance_expence').setValue(contract.insurance_expence);
+    this.contractForm.get('retention_ratio').setValue(contract.retention_ratio);
+    this.contractForm.get('retention').setValue(contract.retention);
+    this.contractForm.get('line_num').setValue(contract.line_num);
+    this.contractForm.get('ceiling_top').setValue(contract.ceiling_top);
+    this.contractForm.get('pay').setValue(contract.pay);
+
+
   }
 
   /**  公司列表；合同类型：成数/溢额；险种； */
@@ -180,11 +198,11 @@ export class ReinsContractManagementComponent implements OnInit {
     const beginDate = this.contractForm.get('beginDate').value;
     const stopDate = this.contractForm.get('stopDate').value;
     const contract = {
+      id: this.contractForm.get('id').value,
       contractId: this.contractForm.get('contractId').value,
       contractName: this.contractForm.get('contractName').value,
       companyName: this.contractForm.get('companyName').value,
       contractTypeName: this.contractForm.get('contractTypeName').value,
-      contractStatus: this.contractForm.get('contractStatus').value,
       reinsTypeName: this.contractForm.get('reinsTypeName').value,
       description: this.contractForm.get('description').value,
       beginDate: beginDate.valueOf(),
@@ -204,6 +222,7 @@ export class ReinsContractManagementComponent implements OnInit {
         if (data == 1) {
           this.service.getContractMessages().subscribe((contracts => {
             this.contracts = contracts;
+            console.log('修改成功');
           }));
         } else {
           console.log('modify failured');

@@ -1,0 +1,55 @@
+  <div class="ui-g ui-md-offset-4">
+    <div class="ui-g-12 ui-md-5" *ngIf="displayUsername">
+      <div class="ui-g">
+        <div class="ui-g-2">
+          用户名
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" size="39" />
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-2">
+          手机号
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" size="39" />
+        </div>
+      </div>
+
+      <div class="Submit">
+        <div class="ui-g-2">
+        </div>
+        <div class="ui-g-20" style="margin-left:75px;margin-top: 20px;">
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="nextBtnOnClick()">下一步</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-5" *ngIf="displayReset">
+        <div class="ui-g">
+          <div class="ui-g-3">
+            输入新密码
+          </div>
+          <div class="ui-g-8">
+            <input pInputText type="text" size="39" />
+          </div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-3">
+            确认新密码
+          </div>
+          <div class="ui-g-8">
+            <input pInputText type="text" size="39" />
+          </div>
+        </div>
+  
+        <div class="Submit">
+          <div class="ui-g-2">
+          </div>
+          <div class="ui-g-20" style="margin-left:90px;margin-top: 20px;">
+            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="nextBtnOnClick()">找回密码</button>
+          </div>
+        </div>
+      </div>
+  </div>
