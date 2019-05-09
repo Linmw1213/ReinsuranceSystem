@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="button">
-          <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button>
+          <!-- <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button> -->
           <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract(contract)"></button>
           <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
             (click)="delete($event, contract)"></button>
@@ -93,10 +93,6 @@
     <div class="list">
       <span>再保险种:</span>
       <span>{{selectedContract.reinsTypeName}}</span>
-    </div>
-    <div class="list">
-      <span>合同状态:</span>
-      <span>{{selectedContract.contractStatus}}</span>
     </div>
     <div class="list">
       <span>合同备注:</span>

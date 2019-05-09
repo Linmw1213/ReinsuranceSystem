@@ -13,6 +13,9 @@ export class AddUserComponent implements OnInit {
   userForm: FormGroup;
   roles = [];
   uid: any;
+  display = false;
+  success = false;
+  failured = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,9 +68,15 @@ export class AddUserComponent implements OnInit {
               this.userService.addRole(role).subscribe(
                 (role) => {
                   if (role == 1) {
-                    console.log('add success')
+                    // console.log('add success')
+                    this.display = true;
+                    this.success = true;
+                    this.failured = false;
                   } else {
-                    console.log('add failured')
+                    this.display = true;
+                    this.success = false;
+                    this.failured = true;
+                    // console.log('add failured')
                   }
                 }
               )

@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { Company } from '../VO/company';
 import { UserInfoService } from '../service/user-info.service';
 import { User } from '../VO/user';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [ConfirmationService]
 })
 export class LoginComponent implements OnInit {
 
@@ -21,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: UserInfoService,
-    private router: Router) { }
+    private router: Router,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.createForm();
@@ -76,7 +79,17 @@ export class LoginComponent implements OnInit {
             }
             
           } else {
-            console.log('登录失败');
+            this.confirmationService.confirm({
+              message: '账号或密码输入错误！',
+              header: '登录失败',
+              icon: 'pi pi-exclamation-triangle',
+              accept: () => {
+                // this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' }];
+              },
+              reject: () => {
+                // this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+              }
+            });
           }
         }
       )

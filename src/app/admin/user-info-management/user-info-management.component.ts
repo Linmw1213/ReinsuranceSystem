@@ -23,6 +23,8 @@ export class UserInfoManagementComponent implements OnInit {
   found = false;
   role = '';
   role_name = '';
+  deleteConfirmDialog=false;
+  deleteUser: User;
 
   constructor(
     private userService: UserInfoService,
@@ -140,18 +142,23 @@ export class UserInfoManagementComponent implements OnInit {
   }
 
   deleteBtnOnClick(selectedUser: User) {
-    this.userService.deleteUser(selectedUser.userId).subscribe(
+    this.deleteConfirmDialog = true;
+    this.deleteUser = selectedUser;
+  }
+
+  confirmDeletion() {
+    this.userService.deleteUser( this.deleteUser.userId).subscribe(
       (data) => {
         if (data == 1) {
           this.getAll();
+          this.deleteConfirmDialog = false;
           console.log('delete success');
         } else {
           console.log('can not delete');
         }
       }
     );
-
-    this.userService.deleteRole(selectedUser.userId).subscribe();
+    this.userService.deleteRole( this.deleteUser.userId).subscribe();
   }
 
   addUser(){

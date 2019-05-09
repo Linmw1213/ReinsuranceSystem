@@ -27,29 +27,37 @@
     </div>
 
     <div class="ui-g-12 ui-md-5" *ngIf="displayReset">
-        <div class="ui-g">
-          <div class="ui-g-3">
-            输入新密码
-          </div>
-          <div class="ui-g-8">
-            <input pInputText type="text" size="39" />
-          </div>
+      <div class="ui-g">
+        <div class="ui-g-3">
+          输入新密码
         </div>
-        <div class="ui-g">
-          <div class="ui-g-3">
-            确认新密码
-          </div>
-          <div class="ui-g-8">
-            <input pInputText type="text" size="39" />
-          </div>
-        </div>
-  
-        <div class="Submit">
-          <div class="ui-g-2">
-          </div>
-          <div class="ui-g-20" style="margin-left:90px;margin-top: 20px;">
-            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="nextBtnOnClick()">找回密码</button>
-          </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" size="39" />
         </div>
       </div>
+      <div class="ui-g">
+        <div class="ui-g-3">
+          确认新密码
+        </div>
+        <div class="ui-g-8">
+          <input pInputText type="text" size="39" />
+        </div>
+      </div>
+
+      <div class="Submit">
+        <div class="ui-g-2">
+        </div>
+        <div class="ui-g-20" style="margin-left:90px;margin-top: 20px;">
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="nextBtnOnClick()">找回密码</button>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- <p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>
+
+  <button type="button" (click)="confirm1()" pButton icon="pi pi-check" label="Confirm"></button>
+
+  <button type="button" (click)="confirm2()" pButton icon="pi pi-times" label="Delete"></button>
+
+  <p-messages [value]="msgs"></p-messages> -->
