@@ -26,18 +26,17 @@
         </div>
         <div class="col-md-3">
           <label>公司固话</label>
-          <input type="text" class="form-control" formControlName="companyPhone">
-          <p-message severity="error" 
-          [text]="addForm.controls['companyPhone'].errors['required'] ? '固话不能为空' : 
-          addForm.controls['companyPhone'].errors['pattern'] ? '固话格式不正确' : 
-          ''"
-            *ngIf="!addForm.controls['companyPhone'].valid&&addForm.controls['companyPhone'].dirty">
+          <p-inputMask mask="(999) 999-9999" size="32" formControlName="companyPhone" placeholder="(999) 999-9999"></p-inputMask>
+          <p-message severity="error" [text]="addForm.controls['companyPhone'].errors['required'] ? '固话不能为空' : 
+          ''" *ngIf="!addForm.controls['companyPhone'].valid&&addForm.controls['companyPhone'].dirty">
           </p-message>
         </div>
         <div class="col-md-3">
           <label>公司邮箱</label>
           <input type="text" class="form-control" formControlName="companyEmail">
-          <p-message severity="error" text="此项必填"
+          <p-message severity="error" [text]="addForm.controls['companyEmail'].errors['required'] ? '邮箱不能为空' : 
+          addForm.controls['companyEmail'].errors['email'] ? '请注意邮箱格式' : 
+          ''"
             *ngIf="!addForm.controls['companyEmail'].valid&&addForm.controls['companyEmail'].dirty">
           </p-message>
         </div>
@@ -78,7 +77,9 @@
         <div class="col-md-3">
           <label>邮箱</label>
           <input type="text" class="form-control" formControlName="linkEmail">
-          <p-message severity="error" text="此项必填"
+          <p-message severity="error"  [text]="addForm.controls['linkEmail'].errors['required'] ? '邮箱不能为空' : 
+          addForm.controls['linkEmail'].errors['email'] ? '请注意邮箱格式' : 
+          ''"
             *ngIf="!addForm.controls['linkEmail'].valid&&addForm.controls['linkEmail'].dirty">
           </p-message>
         </div>
@@ -111,6 +112,25 @@
         </div>
       </div>
       <p-footer>
+
+        <p-dialog header="网页提示" [modal]="true" [(visible)]="display" [style]="{width: '400px', height: '50px'}">
+          <div *ngIf="success" style="height:30px;font-size: 1em">
+            <span>
+              <i class="pi pi-info-circle"></i>
+            </span>
+            <span>添加公司信息成功！</span>
+          </div>
+          <div *ngIf="failured" style="height:30px;font-size: 1em">
+            <span>
+              <i class="pi pi-exclamation-triangle"></i>
+            </span>
+            <span>无法添加此，请查询公司是否已存在！</span>
+          </div>
+          <p-footer>
+            <button type="button" pButton (click)="return()" label="确定"></button>
+          </p-footer>
+        </p-dialog>
+
         <div class="col-md-15 col-md-offset-5" style="margin-top:20px;">
           <button type="submit" pButton label="提交" [disabled]="addForm.invalid" (click)="confirmBtnOnClick()"></button>
           <button type="reset" pButton label="取消" class="ui-button-secondary"></button>

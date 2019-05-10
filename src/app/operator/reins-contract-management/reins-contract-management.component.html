@@ -33,7 +33,7 @@
             <p><b>{{contract.companyName}}</b></p>
             <p><b>{{contract.contractTypeName}}</b></p>
             <div class="ui-g-12 ui-md-3 search-icon">
-              <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button>
+              <!-- <button pButton type="button" icon="pi pi-ellipsis-h" (click)="selectContract(contract)"></button> -->
               <button pButton type="button" icon="pi pi-pencil" (click)="modifyContract(contract)"></button>
               <button pButton type="button" class="ui-button-danger" icon="pi pi-trash"
                 (click)="delete($event, contract)"></button>
@@ -46,18 +46,16 @@
   <ng-template let-contract pTemplate="gridItem">
     <div style="padding:.5em" class="ui-g-12 ui-md-3">
       <p-panel [header]="contract.contractId" [style]="{'text-align':'left'}">
-        <div class="contract-detail">
+        <div class="">
           <div class="ui-n-3">
-            <p> 合同名称：</p>
-            <p>{{contract.contractName}}</p>
+            <p>合同名称：{{contract.contractName}}</p>
           </div>
           <div class="ui-n-3">
-            <p>合同类型：</p>
-            <p>{{ contract.contractType}}</p>
+            <p></p>
+            <p>合同类型： {{ contract.contractTypeName}}</p>
           </div>
           <div class="ui-n-3">
-            <p>再保公司：</p>
-            <p>{{ contract.companyName}}</p>
+            <p>再保公司：{{ contract.companyName}}</p>
           </div>
         </div>
         <div class="button">
@@ -71,81 +69,107 @@
   </ng-template>
 </p-dataView>
 
-<p-dialog header="合同详细信息" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
-  [style]="{width: 'auto'}" (onAfterHide)="onDialogHide()">
-  <div class="ui-g four_Twenty-eight" *ngIf="selectedContract">
-    <div class="list">
-      <span>合同编号:</span>
-      <span>{{selectedContract.contractId}}</span>
+<!-- <p-dialog header="合同详细信息" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  (onAfterHide)="onDialogHide()">
+  <div *ngIf="selectedContract">
+    <div class="ui-g">
+      合同编号:{{selectedContract.contractId}}
     </div>
-    <div class="list">
-      <span>合同名称:</span>
-      <span>{{selectedContract.contractName}}</span>
+    <div class="ui-g">
+      合同名称:{{selectedContract.contractName}}
     </div>
-    <div class="list">
-      <span>再保公司:</span>
-      <span>{{selectedContract.companyName}}</span>
+    <div class="ui-g">
+      再保公司:
+      {{selectedContract.companyName}}
     </div>
-    <div class="list">
-      <span>合同类型:</span>
-      <span>{{selectedContract.contractTypeName}}</span>
+    <div class="ui-g">
+      合同类型:
+      {{selectedContract.contractTypeName}}
     </div>
-    <div class="list">
-      <span>再保险种:</span>
-      <span>{{selectedContract.reinsTypeName}}</span>
+    <div class="ui-g">
+      再保险种:
+      {{selectedContract.reinsTypeName}}
     </div>
-    <div class="list">
-      <span>合同备注:</span>
-      <span>{{selectedContract.description}}</span>
+    <div class="ui-g">
+      合同备注:
+      {{selectedContract.description}}
     </div>
-    <div class="list">
-      <span>合同起期:</span>
-      <span>{{selectedContract.beginDate}}</span>
+    <div class="ui-g">
+      合同起期:
+      {{selectedContract.beginDate}}
     </div>
-    <div class="list">
-      <span>合同止期:</span>
-      <span>{{selectedContract.stopDate}}</span>
+    <div class="ui-g">
+      合同止期:
+      {{selectedContract.stopDate}}
     </div>
+    <div class="ui-g">
+      保险金额：
+      {{selectedContract.stopDate}}
+    </div>
+    <div class="ui-g">
+      保险费：
+      {{selectedContract.stopDate}}
+    </div>
+    <div class="ui-g">
+      赔款：
+      {{selectedContract.stopDate}}
+    </div>
+
   </div>
-</p-dialog>
+
+</p-dialog> -->
 
 <!-- 修改合同 -->
+<div>
+  <p-dialog header="网页提示" [modal]="true" [(visible)]="modifyRsDisplay" [style]="{width: '400px', height: '50px'}">
+    <div *ngIf="modifySuccess" style="height:30px;font-size: 1em">
+      <span>
+        <i class="pi pi-info-circle"></i>
+      </span>
+      <span>修改成功！</span>
+    </div>
+    <div *ngIf="modifyFailured" style="height:30px;font-size: 1em">
+      <span>
+        <i class="pi pi-exclamation-triangle"></i>
+      </span>
+      <span>修改失败！</span>
+    </div>
+    <p-footer>
+      <button type="button" pButton label="确定" (click)="modifyRsDisplay=false"></button>
+    </p-footer>
+  </p-dialog>
+</div>
+
 <p-dialog header="修改合同信息" [(visible)]="modifyDialog" [modal]="true" [responsive]="true"
   [style]="{width: 'auto', minWidth: 'auto'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
   <div class="ui-g" *ngIf="selectedContract">
     <div [formGroup]="contractForm" class="four_Twenty-eight update">
       <div class="list">
-        <p class="main">合同编号</p>
-        <input type="text" pInputText formControlName="contractId"
-          required="required" title="请输入4位及以上的字符" autofocus="autofocus">
-        <p-message severity="error" text="此项必填"
-          *ngIf="!contractForm.controls['contractId'].valid&&contractForm.controls['contractId'].dirty">
-        </p-message>
+        <p>合同编号</p>
+        <input type="text" pInputText formControlName="contractId">
       </div>
       <div class="list">
-        <p>合同名称</p>
+        <p>再保公司</p>
+        <input type="text" pInputText formControlName="companyName">
+      </div>
+      <div class="list">
+        <p class="main">合同名称</p>
         <input type="text" pInputText formControlName="contractName">
         <p-message severity="error" text="此项必填"
-          *ngIf="!contractForm.controls['contractName'].valid&&contractForm.controls['contractName'].dirty">
+          *ngIf="!contractForm.controls['contractName'].valid&&contractForm.controls['contractId'].dirty">
         </p-message>
       </div>
+
       <div class="list">
-        <p>险种类型</p>
+        <p class="main">险种类型</p>
         <p-dropdown formControlName="reinsTypeName" [options]="reinsTypeList" placeholder="请选择险种">
         </p-dropdown>
         <p-message style="position: relative;" severity="error" text="此项必填"
           *ngIf="!contractForm.controls['reinsTypeName'].valid&&contractForm.controls['reinsTypeName'].dirty">
         </p-message>
       </div>
-      <!-- <div class="list">
-        <p>再保公司</p>
-        <p-dropdown formControlName="companyName" [options]="companyList" placeholder="请选择再保公司"></p-dropdown>
-        <p-message severity="error" text="此项必填"
-          *ngIf="!contractForm.controls['companyName'].valid&&contractForm.controls['companyName'].dirty">
-        </p-message>
-      </div> -->
       <div class="list">
-        <p>分保类型</p>
+        <p class="main">分保类型</p>
         <p-dropdown formControlName="contractTypeName" [options]="contractTypeList" placeholder="请选择分保类型"
           (onChange)="contractTypeOnChange()">
         </p-dropdown>
@@ -154,7 +178,7 @@
         </p-message>
       </div>
       <div class="list">
-        <p>开始日期</p>
+        <p class="main">开始日期</p>
         <p-calendar formControlName="beginDate" yearRange="2000:2019" [yearNavigator]="true">
         </p-calendar>
         <p-message severity="error" text="此项必填"
@@ -162,7 +186,7 @@
         </p-message>
       </div>
       <div class="list">
-        <p>结束日期</p>
+        <p class="main">结束日期</p>
         <p-calendar formControlName="stopDate" yearRange="2000:2030" [yearNavigator]="true">
         </p-calendar>
         <p-message severity="error" text="此项必填"
@@ -171,31 +195,31 @@
       </div>
 
       <div class="list">
-        <p>保险金额</p>
-        <input type="text" pInputText formControlName="total">
+        <p class="number">保险金额</p>
+        <input type="number" pInputText formControlName="total">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['total'].valid&&contractForm.controls['total'].dirty">
         </p-message>
       </div>
 
       <div class="list">
-        <p>赔款金额</p>
-        <input type="text" pInputText formControlName="pay">
+        <p class="main">赔款金额</p>
+        <input type="number" pInputText formControlName="pay">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['pay'].valid&&contractForm.controls['pay'].dirty">
         </p-message>
       </div>
 
       <div class="list">
-        <p>保险费用</p>
-        <input type="text" pInputText formControlName="insurance_expence">
+        <p class="main">保险费用</p>
+        <input type="number" pInputText formControlName="insurance_expence">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['insurance_expence'].valid&&contractForm.controls['insurance_expence'].dirty">
         </p-message>
       </div>
 
       <div class="list" *ngIf="surplus">
-        <p>自留额</p>
+        <p class="number">自留额</p>
         <input type="text" pInputText formControlName="retention">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['retention'].valid&&contractForm.controls['retention'].dirty">
@@ -203,23 +227,24 @@
       </div>
 
       <div class="list" *ngIf="surplus">
-        <p>线数</p>
-        <input type="text" pInputText formControlName="line_num">
+        <p class="main">线数</p>
+        <input type="number" pInputText formControlName="line_num">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['line_num'].valid&&contractForm.controls['line_num'].dirty">
         </p-message>
       </div>
 
       <div class="list" *ngIf="quotaAshore">
-        <p>自留比例</p>
-        <input type="text" pInputText formControlName="retention_ratio">
+        <p class="main">分出比例</p>
+        <p-spinner size="17" formControlName="retention_ratio" [step]="0.1" [min]="0.1" [max]="1"></p-spinner>
+        <!-- <input type="text" pInputText formControlName="retention_ratio"> -->
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['retention_ratio'].valid&&contractForm.controls['retention_ratio'].dirty">
         </p-message>
       </div>
       <div class="list" *ngIf="quotaAshore">
-        <p>最高限额</p>
-        <input type="text" pInputText formControlName="ceiling_top">
+        <p class="main">最高限额</p>
+        <input type="number" pInputText formControlName="ceiling_top">
         <p-message severity="error" text="此项必填"
           *ngIf="!contractForm.controls['ceiling_top'].valid&&contractForm.controls['ceiling_top'].dirty">
         </p-message>

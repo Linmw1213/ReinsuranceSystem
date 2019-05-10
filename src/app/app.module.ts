@@ -32,7 +32,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { StepsModule } from 'primeng/steps';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TabMenuModule } from 'primeng/tabmenu';
-
+import { SpinnerModule } from 'primeng/spinner';
+import { InputMaskModule } from 'primeng/inputmask';
 
 /** native components */
 import { AppComponent } from './app.component';
@@ -130,6 +131,8 @@ import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
     StepsModule,
     ConfirmDialogModule,
     TabMenuModule,
+    InputMaskModule,
+    SpinnerModule
 
   ],
   providers: [],

@@ -43,6 +43,7 @@ export class ReinsClaimManagementComponent implements OnInit {
     this.service.delete(rowData).subscribe(
       (data) => {
         if (data == 1) {
+          console.log('删除成功');
           this.reinsClaimArr = this.reinsClaimArr.filter(reinsClaim => reinsClaim !== rowData);
         } else {
           console.log('删除失败');
@@ -92,5 +93,9 @@ export class ReinsClaimManagementComponent implements OnInit {
 
   addBtnOnClick() {
     this.add = true;
+  }
+
+  addEvents(event: ReinsClaim[]) {
+    this.reinsClaimArr = event;
   }
 }

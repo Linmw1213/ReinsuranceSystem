@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ReinsClaimService } from 'src/app/service/reins-claim.service';
 import { ContractService } from 'src/app/service/contract.service';
 import { CompanyService } from 'src/app/service/company.service';
 import { ReinsClaim } from 'src/app/VO/reinsClaim';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-claim',
@@ -13,11 +14,16 @@ import { ReinsClaim } from 'src/app/VO/reinsClaim';
 export class AddClaimComponent implements OnInit {
   reinsClaimForm: FormGroup;
   contractId = [];
+
+  @Output()
+  reinsClaim: EventEmitter<ReinsClaim[]> = new EventEmitter();
+
   constructor(
     private claimService: ReinsClaimService,
     private fb: FormBuilder,
     private contractService: ContractService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -109,7 +115,14 @@ export class AddClaimComponent implements OnInit {
       (data) => {
         if (data == 1) {
           console.log('新增理赔件成功');
-          this.claimService.getAll();
+          this.claimService.getAll().subscribe(
+            (data) => {
+              setInterval(() => {
+                this.reinsClaim.emit(data);
+              }, 1000);
+            }
+          )
+          // this.router.navigateByUrl('ReinsClaimManagement');
         } else {
           console.log('无法添加');
         }

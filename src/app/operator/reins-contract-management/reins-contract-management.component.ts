@@ -36,6 +36,10 @@ export class ReinsContractManagementComponent implements OnInit {
 
   currentUser: User;
 
+  modifyRsDisplay = false;
+  modifySuccess = false;
+  modifyFailured = false;
+
   constructor(
     private fb: FormBuilder,
     private service: ContractService,
@@ -54,10 +58,10 @@ export class ReinsContractManagementComponent implements OnInit {
   //创建响应式表单
   createForm() {
     this.contractForm = this.fb.group({
-      id:[''],
-      contractId: [''],
+      id: [''],
+      contractId: new FormControl({ value: '', disabled: true }),
       contractName: [''],
-      companyName: [''],
+      companyName: new FormControl({ value: '', disabled: true }),
       contractTypeName: [''],
       contractStatus: [''],
       reinsTypeName: [''],
@@ -95,7 +99,7 @@ export class ReinsContractManagementComponent implements OnInit {
   selectContract(contract: Contract) {
     this.selectedContract = contract;
     this.displayDialog = true;
-   
+
     event.preventDefault();
   }
 
@@ -131,7 +135,7 @@ export class ReinsContractManagementComponent implements OnInit {
   modifyContract(contract: Contract) {
     this.selectedContract = contract;
     this.modifyDialog = true;
-    console.log('begindate:'+contract.beginDate);
+    console.log('begindate:' + contract.beginDate);
     const date = contract.beginDate;
     this.contractForm.get('id').setValue(contract.id);
     this.contractForm.get('contractId').setValue(contract.contractId);
@@ -216,16 +220,20 @@ export class ReinsContractManagementComponent implements OnInit {
       ceiling_top: this.contractForm.get('ceiling_top').value,
       pay: this.contractForm.get('pay').value,
     }
-    
+
     this.service.modifyContract(contract as Contract).subscribe(
       (data) => {
         if (data == 1) {
           this.service.getContractMessages().subscribe((contracts => {
             this.contracts = contracts;
-            console.log('修改成功');
+            this.modifyRsDisplay = true;
+            this.modifySuccess = true;
+            this.modifyFailured = false;
           }));
         } else {
-          console.log('modify failured');
+          this.modifyRsDisplay = true;
+          this.modifySuccess = false;
+          this.modifyFailured = true;
         }
       }
     );

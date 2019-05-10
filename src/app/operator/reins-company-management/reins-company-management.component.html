@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  
+
   <div class="ui-n-3" *ngIf="modifyFailured">
     <div class="alert alert-error" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="modifyAlert=false"><span
@@ -202,7 +202,9 @@
               </div>
               <div class="col-md-3">
                 <label>公司电话</label>
-                <input type="text" class="form-control" formControlName="modifyCompanyPhone">
+                <p-inputMask mask="(999) 999-9999" size="32" formControlName="modifyCompanyPhone"
+                  placeholder="(999) 999-9999"></p-inputMask>
+                <!-- <input type="text" class="form-control" formControlName="modifyCompanyPhone"> -->
               </div>
               <div class="col-md-3">
                 <label>公司邮箱</label>

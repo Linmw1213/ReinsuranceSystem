@@ -30,21 +30,21 @@
     <div class="ui-g-2"></div>
     <div class="ui-g-3">
       <h4>保险金额</h4>
-      <input type="text" pInputText formControlName="total">
+      <input type="number" pInputText formControlName="total">
       <p-message severity="error" text="此项必填"
         *ngIf="!addContractForm.controls['total'].valid&&addContractForm.controls['total'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
       <h4>赔款</h4>
-      <input type="text" pInputText formControlName="pay">
+      <input type="number" pInputText formControlName="pay">
       <p-message severity="error" text="此项必填"
         *ngIf="!addContractForm.controls['pay'].valid&&addContractForm.controls['pay'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
-      <h4>保费</h4>
-      <input type="text" pInputText formControlName="insurance_expence">
+      <h4>保险费</h4>
+      <input type="number" pInputText formControlName="insurance_expence">
       <p-message severity="error" text="此项必填"
         *ngIf="!addContractForm.controls['insurance_expence'].valid&&addContractForm.controls['insurance_expence'].dirty">
       </p-message>
@@ -82,15 +82,16 @@
   <div class="ui-g" *ngIf="quotaAshore">
     <div class="ui-g-2"></div>
     <div class="ui-g-3">
-      <h4>自留比例</h4>
-      <input type="text" pInputText formControlName="retention_ratio">
+      <h4>分出比例</h4>
+      <p-spinner size="17" formControlName="retention_ratio" [step]="0.1" [min]="0.1" [max]="1"></p-spinner>
+      <!-- <input type="number" min="0.1" pInputText formControlName="retention_ratio"> -->
       <p-message severity="error" text="此项必填"
         *ngIf="!addContractForm.controls['retention_ratio'].valid&&addContractForm.controls['retention_ratio'].dirty">
       </p-message>
     </div>
     <div class="ui-g-3">
       <h4>最高限额</h4>
-      <input type="text" pInputText formControlName="ceiling_top">
+      <input type="number" pInputText formControlName="ceiling_top">
       <p-message severity="error" text="此项必填"
         *ngIf="!addContractForm.controls['ceiling_top'].valid&&addContractForm.controls['ceiling_top'].dirty">
       </p-message>
@@ -122,6 +123,23 @@
       <textarea formControlName="description" rows="3" cols="100" pInputTextarea></textarea>
     </div>
   </div>
+  <p-dialog header="网页提示" [modal]="true" [(visible)]="display" [style]="{width: '400px', height: '50px'}">
+    <div *ngIf="success" style="height:30px;font-size: 1em">
+      <span>
+        <i class="pi pi-info-circle"></i>
+      </span>
+      <span>录入合同信息成功！</span>
+    </div>
+    <div *ngIf="failured" style="height:30px;font-size: 1em">
+      <span>
+        <i class="pi pi-exclamation-triangle"></i>
+      </span>
+      <span>添加失败！请检查输入项或刷新页面重试！</span>
+    </div>
+    <p-footer>
+      <button type="button" pButton (click)="return()" label="确定"></button>
+    </p-footer>
+  </p-dialog>
   <div class="ui-g">
     <div class="ui-g-2"></div>
     <div class="ui-g-3"></div>

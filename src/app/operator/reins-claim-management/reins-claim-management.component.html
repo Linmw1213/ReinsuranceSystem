@@ -39,7 +39,7 @@
 
   <!-- 新增理赔件 -->
   <div class="ui-g-24" *ngIf="add">
-    <app-add-claim></app-add-claim>
+    <app-add-claim (reinsClaim)="addEvents($event)"></app-add-claim>
   </div>
 
 </div>

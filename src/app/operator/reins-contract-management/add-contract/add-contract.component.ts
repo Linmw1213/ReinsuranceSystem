@@ -21,6 +21,9 @@ export class AddContractComponent implements OnInit {
   contractTypeList = [];
   companyList = [];
   reinsTypeList = [];
+  display = false;
+  success = false;
+  failured = false;
 
   constructor(
     private router: Router,
@@ -52,26 +55,26 @@ export class AddContractComponent implements OnInit {
   private createForm() {
     this.addContractForm = this.fb.group({
       contractId: [''],
-      contractName: [''],
-      companyName: [''],
-      contractTypeName: [''],
-      contractStatus: [''],
-      reinsTypeName: [''],
-      description: [''],
+      contractName: ['', Validators.required],
+      companyName: ['', Validators.required],
+      contractTypeName: ['', Validators.required],
+      // contractStatus: [''],
+      reinsTypeName: ['', Validators.required],
+      description: ['', Validators.required],
       appendix: [''],
-      beginDate: [''],
-      stopDate: [''],
+      beginDate: ['', Validators.required],
+      stopDate: ['', Validators.required],
       operator: [''],
       create_time: [''],
       modify_time: [''],
 
-      total: [''],
-      insurance_expence: [''],
+      total: ['', Validators.required],
+      insurance_expence: ['', Validators.required],
       retention_ratio: [''],
       retention: [''],
       line_num: [''],
       ceiling_top: [''],
-      pay: [''],
+      pay: ['', Validators.required],
     });
   }
 
@@ -131,7 +134,7 @@ export class AddContractComponent implements OnInit {
       contractName: this.addContractForm.get('contractName').value,
       companyName: this.addContractForm.get('companyName').value,
       contractTypeName: this.addContractForm.get('contractTypeName').value,
-      contractStatus: this.addContractForm.get('contractStatus').value,
+      // contractStatus: this.addContractForm.get('contractStatus').value,
       reinsTypeName: this.addContractForm.get('reinsTypeName').value,
       description: this.addContractForm.get('description').value,
       beginDate: beginDate.valueOf(),
@@ -149,10 +152,14 @@ export class AddContractComponent implements OnInit {
 
     this.contractService.addContract(contract as Contract).subscribe(
       (data) => {
-        if(data == 1 ){
-          console.log('add contract succeessfully');
+        if (data == 1) {
+          this.display = true;
+          this.success = true;
+          this.failured = false;
         } else {
-          console.log('add failured');
+          this.display = true;
+          this.success = false;
+          this.failured = true;
         }
       }
     );

@@ -12,6 +12,9 @@ import { Company } from 'src/app/VO/company';
 export class AddReinsCompanyComponent implements OnInit {
 
   addForm: FormGroup;
+  display = false;
+  success = false;
+  failured = false;
   constructor(private router: Router, private fb: FormBuilder, private companyService: CompanyService) { }
 
   ngOnInit() {
@@ -67,7 +70,16 @@ export class AddReinsCompanyComponent implements OnInit {
 
     this.companyService.addCompany(company as Company).subscribe(
       (data) => {
-        console.log(data + 'add successfully');
+        // console.log(data + 'add successfully');
+        if (data == 1) {
+          this.display = true;
+          this.success = true;
+          this.failured = false;
+        } else {
+          this.display = true;
+          this.success = false;
+          this.failured = true;
+        }
       }
     );
   }
